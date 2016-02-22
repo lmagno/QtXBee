@@ -26,7 +26,7 @@ public:
     unsigned getFrameId();
     unsigned getChecksum();
     void createChecksum(QByteArray array);
-    void assemblePacket();
+    virtual void assemblePacket();
     QByteArray packet;
 
 

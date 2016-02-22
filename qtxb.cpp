@@ -36,21 +36,11 @@ QTXB::QTXB(QSerialPort *ser){
 
     connect(serial, SIGNAL(readyRead()), SLOT(readData()));
 
-    if (serial->open(QIODevice::ReadWrite))
+    if (serial->open(QIODevice::ReadWrite) && serial->isOpen())
     {
-        if(serial->setBaudRate(QSerialPort::Baud115200) &&
-                serial->setDataBits(QSerialPort::Data8) &&
-                serial->setParity(QSerialPort::NoParity) &&
-                serial->setStopBits(QSerialPort::OneStop) &&
-                serial->setFlowControl(QSerialPort::NoFlowControl))
-        {
-            if(serial->isOpen())
-            {
-                qDebug() << "XBEE: Connected successfully";
-                qDebug() << "XBEE: Serial Port Name: " << serial->portName();
-                xbeeFound = true;
-            }
-        }
+        qDebug() << "XBEE: Connected successfully";
+        qDebug() << "XBEE: Serial Port Name: " << serial->portName();
+        xbeeFound = true;
     }
     else
     {
@@ -69,7 +59,10 @@ QTXB::~QTXB()
     }
 }
 void QTXB::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
+    ATCommandResponse *response = new ATCommandResponse(this);
+    response->readPacket(digiMeshPacket->getPacket());
     qDebug() << "Received ATCommandResponse: " << digiMeshPacket->getPacket().toHex();
+    qDebug() << "Received ATCommandResponse (data): " << response->getData().toHex();
 }
 void QTXB::displayModemStatus(ModemStatus *digiMeshPacket){
     qDebug() << "Received ModemStatus: " << digiMeshPacket->getPacket().toHex();
@@ -90,7 +83,7 @@ void QTXB::displayRemoteCommandResponse(RemoteCommandResponse *digiMeshPacket){
     qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->getPacket().toHex();
 }
 
-void QTXB::send(TXRequest *request)
+void QTXB::send(DigiMeshPacket *request)
 {
     request->assemblePacket();
     if(xbeeFound && serial->isOpen())

@@ -61,3 +61,5 @@ void DigiMeshPacket::createChecksum(QByteArray array){
 QByteArray DigiMeshPacket::getPacket(){
     return packet;
 }
+
+void DigiMeshPacket::assemblePacket() {};

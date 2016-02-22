@@ -26,7 +26,7 @@ class QTXB : public QObject
 public:
     explicit QTXB(QObject *parent = 0);
     QTXB(QSerialPort *ser);
-    void send(TXRequest *request);
+    void send(DigiMeshPacket *request);
     void broadcast(QString data);
     void unicast(QByteArray address, QString data);
     ~QTXB();
