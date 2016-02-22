@@ -50,3 +50,6 @@ unsigned ATCommandResponse::getCommandStatus(){
     return commandStatus;
 }
 
+QByteArray ATCommandResponse::getData() {
+    return data;
+}
