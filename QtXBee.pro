@@ -67,4 +67,3 @@ LIBS            += \
                 -L/usr/lib \
                 -lQtSerialPort \
 }
-

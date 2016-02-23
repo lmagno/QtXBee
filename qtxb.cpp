@@ -62,7 +62,7 @@ void QTXB::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
     ATCommandResponse *response = new ATCommandResponse(this);
     response->readPacket(digiMeshPacket->getPacket());
     qDebug() << "Received ATCommandResponse: " << digiMeshPacket->getPacket().toHex();
-    qDebug() << "Received ATCommandResponse (data): " << response->getData().toHex();
+    //qDebug() << "Received ATCommandResponse (data): " << response->getData().toHex();
 }
 void QTXB::displayModemStatus(ModemStatus *digiMeshPacket){
     qDebug() << "Received ModemStatus: " << digiMeshPacket->getPacket().toHex();
@@ -113,24 +113,35 @@ void QTXB::unicast(QByteArray address, QString data){
 
 void QTXB::readData()
 {
-    unsigned startDelimiter = 0x7E;
+    const char startDelimiter = 0x7E;
+    int length;
 
     buffer.append(serial->readAll());
 
     QByteArray packet;
 
-    while((unsigned char)buffer.at(0) != (unsigned char)startDelimiter){
-        buffer.remove(0, 1);
+    // Clean buffer
+    for (length = 0; length < buffer.length(); length++) {
+        if ((buffer.at(length) == startDelimiter) && length > 0) {
+            buffer.remove(0,length);
+            break;
+        }
     }
-    if(buffer.size() > 2){
-        unsigned length = buffer.at(2)+4;
-        if((unsigned char)buffer.size() >= (unsigned char)length){
+
+    // If we have a data frame
+    if (buffer.length() > 2) {
+        // Get packet size
+        length = (int)buffer.at(1) << 8;
+        length += buffer.at(2)+4;
+        // Fetch packet
+        if(buffer.size() >= length){
             packet.append(buffer.left(length));
             processPacket(packet);
             buffer.remove(0, length);
         }
     }
 }
+
 void QTXB::processPacket(QByteArray packet){
 
     unsigned packetType = (unsigned char)packet.at(3);

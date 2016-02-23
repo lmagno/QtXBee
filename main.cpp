@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     QSerialPort *serial = new QSerialPort();
-    serial->setPortName("/dev/ttyUSB0");
+    serial->setPortName("/dev/tty.usbserial-A600e0VF");
     serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 
     ATCommand *teste = new ATCommand(xb);
     teste->setFrameId(0x52);
-    teste->setATCommand("HV");
+    teste->setATCommand("ND");
 
     xb->send(teste);
 
