@@ -62,8 +62,6 @@ void QTXB::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
     ATCommandResponse *response = new ATCommandResponse(this);
     response->readPacket(digiMeshPacket->getPacket());
     qDebug() << "Received ATCommandResponse: " << digiMeshPacket->getPacket().toHex();
-    qDebug() << "Received ATCommandResponse: " << digiMeshPacket->getChecksum();
-    // qDebug() << "Received ATCommandResponse (data): " << response->getData().toHex();
 }
 void QTXB::displayModemStatus(ModemStatus *digiMeshPacket){
     qDebug() << "Received ModemStatus: " << digiMeshPacket->getPacket().toHex();
@@ -115,7 +113,8 @@ void QTXB::unicast(QByteArray address, QString data){
 void QTXB::readData()
 {
     const char startDelimiter = 0x7E;
-    int sd, length;
+    int i, sd, length;
+    unsigned char chksm;
 
     buffer.append(serial->readAll());
 
@@ -137,8 +136,18 @@ void QTXB::readData()
             // Fetch packet
             if(buffer.size() >= length){
                 packet.append(buffer.left(length));
-                processPacket(packet);
-                buffer.remove(0, length);
+
+                // Verify checksum and process packet if correct
+                chksm = 0;
+                for (i = 3; i < length-1; i++) chksm += packet.at(i);
+                chksm = 0xFF - chksm;
+
+                if (chksm == (unsigned char)packet.at(length-1)) {
+                    processPacket(packet);
+                    buffer.remove(0, length);
+                } else
+                    // Remove probable wrong start delimiter
+                    buffer.remove(0, 1);
             } else
                 break;
         } else
