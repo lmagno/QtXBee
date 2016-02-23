@@ -121,12 +121,10 @@ void QTXB::readData()
     QByteArray packet;
 
     // Clean buffer
-    for (length = 0; length < buffer.length(); length++) {
-        if ((buffer.at(length) == startDelimiter) && length > 0) {
-            buffer.remove(0,length);
-            break;
-        }
-    }
+    for (length = 0; length < buffer.length(); length++)
+        if ((buffer.at(length) == startDelimiter) && length > 0) break;
+        
+    buffer.remove(0,length);
 
     // If we have a data frame
     if (buffer.length() > 2) {
