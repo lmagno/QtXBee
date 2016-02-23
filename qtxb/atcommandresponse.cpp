@@ -23,7 +23,7 @@ void ATCommandResponse::readPacket(QByteArray rx){
             data.append(rx.at(count));
             count++;
         }
-        setChecksum(rx.at(count));
+        setChecksum((unsigned char)rx.at(count));
     }else{
 
         qDebug()<< "Invalid Packet Received!";
