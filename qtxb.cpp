@@ -62,7 +62,8 @@ void QTXB::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
     ATCommandResponse *response = new ATCommandResponse(this);
     response->readPacket(digiMeshPacket->getPacket());
     qDebug() << "Received ATCommandResponse: " << digiMeshPacket->getPacket().toHex();
-    //qDebug() << "Received ATCommandResponse (data): " << response->getData().toHex();
+    qDebug() << "Received ATCommandResponse: " << digiMeshPacket->getChecksum();
+    // qDebug() << "Received ATCommandResponse (data): " << response->getData().toHex();
 }
 void QTXB::displayModemStatus(ModemStatus *digiMeshPacket){
     qDebug() << "Received ModemStatus: " << digiMeshPacket->getPacket().toHex();
@@ -114,29 +115,34 @@ void QTXB::unicast(QByteArray address, QString data){
 void QTXB::readData()
 {
     const char startDelimiter = 0x7E;
-    int length;
+    int sd, length;
 
     buffer.append(serial->readAll());
 
     QByteArray packet;
+    while (buffer.size() > 0) {
+        packet.clear();
 
-    // Clean buffer
-    for (length = 0; length < buffer.length(); length++)
-        if ((buffer.at(length) == startDelimiter) && length > 0) break;
-        
-    buffer.remove(0,length);
+        // Clean buffer
+        for (sd = 0; sd < buffer.size(); sd++)
+            if (buffer.at(sd) == startDelimiter) break;
 
-    // If we have a data frame
-    if (buffer.length() > 2) {
-        // Get packet size
-        length = (int)buffer.at(1) << 8;
-        length += buffer.at(2)+4;
-        // Fetch packet
-        if(buffer.size() >= length){
-            packet.append(buffer.left(length));
-            processPacket(packet);
-            buffer.remove(0, length);
-        }
+        buffer.remove(0, sd);
+
+        // If we have a data frame
+        if (buffer.size() > 2) {
+            // Get packet size
+            length = (int)buffer.at(1) << 8;
+            length += buffer.at(2)+4;
+            // Fetch packet
+            if(buffer.size() >= length){
+                packet.append(buffer.left(length));
+                processPacket(packet);
+                buffer.remove(0, length);
+            } else
+                break;
+        } else
+            break;
     }
 }
 

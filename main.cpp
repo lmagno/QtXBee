@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     QSerialPort *serial = new QSerialPort();
-    serial->setPortName("/dev/tty.usbserial-A600e0VF");
+    serial->setPortName("/dev/ttyUSB0");
     serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
