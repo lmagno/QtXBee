@@ -115,43 +115,38 @@ void QTXB::readData()
     const char startDelimiter = 0x7E;
     int i, sd, length;
     unsigned char chksm;
+    QByteArray packet;
 
     buffer.append(serial->readAll());
 
-    QByteArray packet;
     while (buffer.size() > 0) {
-        packet.clear();
 
         // Clean buffer
         for (sd = 0; sd < buffer.size(); sd++)
             if (buffer.at(sd) == startDelimiter) break;
-
         buffer.remove(0, sd);
 
-        // If we have a data frame
-        if (buffer.size() > 2) {
-            // Get packet size
-            length = (int)buffer.at(1) << 8;
-            length += buffer.at(2)+4;
-            // Fetch packet
-            if(buffer.size() >= length){
-                packet.append(buffer.left(length));
+        // Leave if we don't have the minimum possible size of one frame.
+        if (buffer.size() < 5) break;
 
-                // Verify checksum and process packet if correct
-                chksm = 0;
-                for (i = 3; i < length-1; i++) chksm += packet.at(i);
-                chksm = 0xFF - chksm;
+        // Calculate packet length
+        length = (int)buffer.at(1) << 8;
+        length += buffer.at(2)+4;
 
-                if (chksm == (unsigned char)packet.at(length-1)) {
-                    processPacket(packet);
-                    buffer.remove(0, length);
-                } else
-                    // Remove probable wrong start delimiter
-                    buffer.remove(0, 1);
-            } else
-                break;
-        } else
-            break;
+        // Leave if we don't have a full packet
+        if(buffer.size() < length) break;
+
+        // Save packet
+        packet = buffer.left(length);
+        buffer.remove(0, length);
+
+        // Verify checksum and process packet if correct
+        chksm = 0;
+        for (i = 3; i < length-1; i++) chksm += packet.at(i);
+        chksm = 0xFF - chksm;
+
+        if (chksm == (unsigned char)packet.at(length-1))
+            processPacket(packet);
     }
 }
 
