@@ -33,14 +33,24 @@ QTXB::QTXB(QSerialPort *ser){
 
     xbeeFound = false;
     serial = ser;
-
-    connect(serial, SIGNAL(readyRead()), SLOT(readData()));
+    QByteArray data;
 
     if (serial->open(QIODevice::ReadWrite) && serial->isOpen())
     {
         qDebug() << "XBEE: Connected successfully";
         qDebug() << "XBEE: Serial Port Name: " << serial->portName();
+
+        serial->write("+++");
+        if (! serial->waitForReadyRead(3000)) return; // Melhorar
+        data = serial->readAll();
+        if (data == "OK") serial->write("ATAP\n");
+        if (! serial->waitForReadyRead(3000)) return; // melhorar
+        data = serial->readAll();
+
+        qDebug() << "Modo de operação: " << data;
+
         xbeeFound = true;
+        connect(serial, SIGNAL(readyRead()), SLOT(readData()));
     }
     else
     {
