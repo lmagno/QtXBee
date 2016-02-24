@@ -42,25 +42,19 @@ QTXB::QTXB(QSerialPort *ser){
         serial->write("+++");
 
         // Wait for OK
-        startTime = time(0);
-        while (!data.startsWith("OK")) {
-            serial->waitForReadyRead(100);
-            data.append(serial->readAll());
-            elapsedTime = time(0) - startTime;
-            if (elapsedTime >= 3) break;
-        }
+        while (serial->waitForReadyRead(2000)) data.append(serial->readAll());
 
-        // Request protocol mode
         if (data.startsWith("OK")) {
+            data.clear();
+            // Request protocol mode
             serial->write("ATAP\r");
-            serial->waitForReadyRead(3000);
-            data = serial->readAll();
-            protocolMode = data.at(0)-'0';
+            // Wait for answer
+            while (serial->waitForReadyRead(2000)) data.append(serial->readAll());
+            if (data.length() > 0) protocolMode = data.at(0)-'0';
             qDebug() << "Protocol mode: " << protocolMode;
+            // Exit AT command mode
+            serial->write("ATCN\r");
         }
-
-        // Exit AT command mode
-        serial->write("ATCN\r");
 
         if (protocolMode > 0) {
             xbeeFound = true;
