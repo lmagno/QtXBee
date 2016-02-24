@@ -69,6 +69,7 @@ private:
     bool xbeeFound;
     QByteArray buffer;
     void processPacket(QByteArray packet);
+    unsigned short int protocolMode;
 };
 
 #endif

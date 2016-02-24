@@ -30,27 +30,46 @@ QTXB::QTXB(QObject *parent) :
 {
 }
 QTXB::QTXB(QSerialPort *ser){
-
+    time_t startTime, elapsedTime;
     xbeeFound = false;
     serial = ser;
     QByteArray data;
+    protocolMode = 0;
 
     if (serial->open(QIODevice::ReadWrite) && serial->isOpen())
     {
-        qDebug() << "XBEE: Connected successfully";
-        qDebug() << "XBEE: Serial Port Name: " << serial->portName();
-
+        // Enter AT command mode
         serial->write("+++");
-        if (! serial->waitForReadyRead(3000)) return; // Melhorar
-        data = serial->readAll();
-        if (data == "OK") serial->write("ATAP\n");
-        if (! serial->waitForReadyRead(3000)) return; // melhorar
-        data = serial->readAll();
 
-        qDebug() << "Modo de operação: " << data;
+        // Wait for OK
+        startTime = time(0);
+        while (!data.startsWith("OK")) {
+            serial->waitForReadyRead(100);
+            data.append(serial->readAll());
+            elapsedTime = time(0) - startTime;
+            if (elapsedTime >= 3) break;
+        }
 
-        xbeeFound = true;
-        connect(serial, SIGNAL(readyRead()), SLOT(readData()));
+        // Request protocol mode
+        if (data.startsWith("OK")) {
+            serial->write("ATAP\r");
+            serial->waitForReadyRead(3000);
+            data = serial->readAll();
+            protocolMode = data.at(0)-'0';
+            qDebug() << "Protocol mode: " << protocolMode;
+        }
+
+        // Exit AT command mode
+        serial->write("ATCN\r");
+
+        if (protocolMode > 0) {
+            xbeeFound = true;
+            connect(serial, SIGNAL(readyRead()), SLOT(readData()));
+            qDebug() << "XBEE: Connected successfully";
+            qDebug() << "XBEE: Serial Port Name: " << serial->portName();
+        } else {
+            qDebug() << "XBEE: Device not in API protocol mode";
+        }
     }
     else
     {
