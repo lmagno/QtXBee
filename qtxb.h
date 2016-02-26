@@ -54,7 +54,6 @@ signals:
     void receivedRemoteCommandResponse(RemoteCommandResponse *response);
 
 public slots:
-    void readData();
     void displayATCommandResponse(ATCommandResponse *digiMeshPacket);
     void displayModemStatus(ModemStatus *digiMeshPacket);
     void displayTransmitStatus(TransmitStatus *digiMeshPacket);
@@ -63,13 +62,15 @@ public slots:
     void displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket);
     void displayRemoteCommandResponse(RemoteCommandResponse *digiMeshPacket);
 
+private slots:
+    void readData();
 
 private:
     QSerialPort *serial;
     bool xbeeFound;
+    unsigned char protocolMode;
     QByteArray buffer;
     void processPacket(QByteArray packet);
-    unsigned short int protocolMode;
 };
 
 #endif
