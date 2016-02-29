@@ -8,3 +8,7 @@ RemoteCommandResponse::RemoteCommandResponse(QObject *parent) :
 void RemoteCommandResponse::readPacket(QByteArray rx){
 
 }
+
+void RemoteCommandResponse::assemblePacket() {
+
+}

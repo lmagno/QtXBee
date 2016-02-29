@@ -53,3 +53,7 @@ unsigned ATCommandResponse::getCommandStatus(){
 QByteArray ATCommandResponse::getData() {
     return data;
 }
+
+void ATCommandResponse::assemblePacket() {
+
+}

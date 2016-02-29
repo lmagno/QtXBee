@@ -48,3 +48,7 @@ unsigned TransmitStatus:: getDiscoveryStatus(){
 QByteArray TransmitStatus:: getReserved(){
     return reserved;
 }
+
+void TransmitStatus::assemblePacket() {
+
+}

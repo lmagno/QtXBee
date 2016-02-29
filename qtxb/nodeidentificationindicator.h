@@ -9,7 +9,7 @@ class NodeIdentificationIndicator : public DigiMeshPacket
 public:
     explicit NodeIdentificationIndicator(QObject *parent = 0);
     void readPacket(QByteArray rx);
-    
+	void assemblePacket();
 signals:
     
 public slots:

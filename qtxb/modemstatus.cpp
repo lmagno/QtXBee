@@ -28,3 +28,7 @@ void ModemStatus::setStatus(unsigned s){
 unsigned ModemStatus::getStatus(){
     return status;
 }
+
+void ModemStatus::assemblePacket() {
+
+}

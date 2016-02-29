@@ -65,3 +65,7 @@ void RXIndicator::readPacket(QByteArray rx){
         packet.clear();
     }
 }
+
+void RXIndicator::assemblePacket() {
+
+}

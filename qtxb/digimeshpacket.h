@@ -26,11 +26,8 @@ public:
     unsigned getFrameId();
     unsigned getChecksum();
     void createChecksum(QByteArray array);
-    virtual void assemblePacket();
+	virtual void assemblePacket() = 0;
     QByteArray packet;
-
-
-
 };
 
 #endif // DIGIMESHPACKET_H

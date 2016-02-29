@@ -13,7 +13,7 @@ public:
     void readPacket(QByteArray rx);
     void setStatus(unsigned s);
     unsigned getStatus();
-    
+	void assemblePacket();
 };
 
 #endif // MODEMSTATUS_H

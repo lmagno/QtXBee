@@ -7,3 +7,7 @@ NodeIdentificationIndicator::NodeIdentificationIndicator(QObject *parent) :
 void NodeIdentificationIndicator::readPacket(QByteArray rx){
 
 }
+
+void NodeIdentificationIndicator::assemblePacket() {
+
+}

@@ -19,8 +19,8 @@ public:
      unsigned getDeliveryStatus();
      unsigned getTransmitRetryCount();
      unsigned getDiscoveryStatus();
-     QByteArray getReserved();
-    
+	 QByteArray getReserved();
+	 void assemblePacket();
 };
 
 #endif // TRANSMITSTATUS_H

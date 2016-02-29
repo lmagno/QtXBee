@@ -11,7 +11,7 @@ class RemoteCommandResponse : public DigiMeshPacket
 public:
     explicit RemoteCommandResponse(QObject *parent = 0);
     void readPacket(QByteArray rx);
-    
+	void assemblePacket();
 signals:
     
 public slots:

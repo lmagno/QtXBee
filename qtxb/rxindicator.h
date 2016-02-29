@@ -22,7 +22,7 @@ public:
     unsigned getReceiveOptions();
     QByteArray getData();
     void readPacket(QByteArray rx);
-
+	void assemblePacket();
 };
 
 #endif // RXINDICATOR_H

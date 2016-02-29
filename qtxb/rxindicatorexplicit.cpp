@@ -7,3 +7,7 @@ RXIndicatorExplicit::RXIndicatorExplicit(QObject *parent) :
 void RXIndicatorExplicit::readPacket(QByteArray rx){
 
 }
+
+void RXIndicatorExplicit::assemblePacket() {
+
+}

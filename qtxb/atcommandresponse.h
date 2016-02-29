@@ -22,7 +22,7 @@ public:
     void readPacket(QByteArray rx);
     void setData(QByteArray d);
     QByteArray getData();
-
+	void assemblePacket();
 };
 
 #endif // ATCOMMANDRESPONSE_H
