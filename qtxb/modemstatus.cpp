@@ -2,20 +2,21 @@
 #include "digimeshpacket.h"
 #include <QDebug>
 
-ModemStatus::ModemStatus(QObject *parent) : DigiMeshPacket(parent) {
+ModemStatus::ModemStatus() {
 }
 
 unsigned char ModemStatus::getStatus(){
-    return status;
+	return status;
 }
 
 void ModemStatus::setStatus(unsigned char st) {
 	status = st;
 }
 
-void ModemStatus::update() {
-	if (frameData.size() > 1) {
-		setApiID(frameData[0]);
-		setStatus(frameData[1]);
+void ModemStatus::setFrameData(QByteArray data) {
+	if (data.size() > 1) {
+		setApiID(data[0]);
+		setStatus(data[1]);
 	}
+
 }

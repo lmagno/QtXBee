@@ -10,7 +10,7 @@
 #include "qtxb/atcommandqueueparam.h"
 #include "qtxb/txrequest.h"
 #include "qtxb/txrequestexplicit.h"
-#include "qtxb/remotecommandrequest.h"
+#include "qtxb/atcommandremote.h"
 
 #include "qtxb/atcommandresponse.h"
 #include "qtxb/modemstatus.h"
@@ -18,7 +18,7 @@
 #include "qtxb/rxindicator.h"
 #include "qtxb/rxindicatorexplicit.h"
 #include "qtxb/nodeidentificationindicator.h"
-#include "qtxb/remotecommandresponse.h"
+#include "qtxb/atcommandremoteresponse.h"
 
 class QTXB : public QObject
 {

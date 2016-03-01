@@ -4,18 +4,15 @@
 #include <QObject>
 
 
-class DigiMeshPacket : public QObject
+class DigiMeshPacket
 {
-    Q_OBJECT
 	unsigned char apiID;
-	QByteArray frameData;
-	virtual void update() = 0;
 public:
-    explicit DigiMeshPacket(QObject *parent = 0);
+	DigiMeshPacket();
 	void setApiID(unsigned char);
-	void setFrameData(QByteArray);
+	virtual void setFrameData(QByteArray) = 0;
 	unsigned char getApiID();
-	QByteArray getFrameData();
+	virtual QByteArray getFrameData() = 0;
 };
 
 #endif // DIGIMESHPACKET_H

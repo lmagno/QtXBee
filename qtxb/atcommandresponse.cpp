@@ -2,8 +2,7 @@
 #include "atcommand.h"
 #include <QDebug>
 
-ATCommandResponse::ATCommandResponse(QObject *parent) :
-    DigiMeshPacket(parent)
+ATCommandResponse::ATCommandResponse()
 {
 }
 

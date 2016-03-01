@@ -8,14 +8,11 @@ class TXRequestExplicit : public TXRequest
 {
 
 public:
-    explicit TXRequestExplicit(QObject *parent = 0);
-    QByteArray sourceEndpoint;
-    QByteArray destinationEndpoint;
-    QByteArray clusterID;
-    QByteArray profileID;
-
-
-    
+	TXRequestExplicit();
+	QByteArray sourceEndpoint;
+	QByteArray destinationEndpoint;
+	QByteArray clusterID;
+	QByteArray profileID;
 };
 
 #endif // TXREQUESTEXPLICIT_H

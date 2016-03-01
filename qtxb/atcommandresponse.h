@@ -14,8 +14,9 @@ class ATCommandResponse : public DigiMeshPacket
 	void setATCommand(QString);
 	void setCommandStatus(unsigned char);
 	void setCommandData(QByteArray);
+	void update();
 public:
-    explicit ATCommandResponse(QObject *parent);
+	ATCommandResponse();
 	unsigned char getFrameID();
 	QString getATCommand();
 	unsigned char getCommandStatus();

@@ -1,6 +1,6 @@
 #include "digimeshpacket.h"
 
-DigiMeshPacket::DigiMeshPacket(QObject *parent) : QObject(parent) {
+DigiMeshPacket::DigiMeshPacket() {
 	setApiID(0);
 }
 
@@ -10,7 +10,6 @@ void DigiMeshPacket::setApiID(unsigned char id) {
 
 void DigiMeshPacket::setFrameData(QByteArray data) {
 	frameData = data;
-	this->update();
 }
 
 unsigned char DigiMeshPacket::getApiID() {
@@ -18,6 +17,5 @@ unsigned char DigiMeshPacket::getApiID() {
 }
 
 QByteArray DigiMeshPacket::getFrameData() {
-	this->update();
 	return frameData;
 }

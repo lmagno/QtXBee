@@ -1,10 +1,9 @@
 #include "rxindicatorexplicit.h"
 
-RXIndicatorExplicit::RXIndicatorExplicit(QObject *parent) :
-    DigiMeshPacket(parent)
-{
+RXIndicatorExplicit::RXIndicatorExplicit() {
 }
-void RXIndicatorExplicit::readPacket(QByteArray rx){
+
+void RXIndicatorExplicit::readPacket(QByteArray rx) {
 
 }
 

@@ -1,8 +1,7 @@
-#include "remotecommandresponse.h"
+#include "atcommandremoteresponse.h"
 #include "digimeshpacket.h"
 
-RemoteCommandResponse::RemoteCommandResponse(QObject *parent) :
-    DigiMeshPacket(parent)
+RemoteCommandResponse::RemoteCommandResponse()
 {
 }
 void RemoteCommandResponse::readPacket(QByteArray rx){

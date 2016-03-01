@@ -1,6 +1,6 @@
 #include "nodeidentificationindicator.h"
 
-NodeIdentificationIndicator::NodeIdentificationIndicator(QObject *parent) : DigiMeshPacket(parent) {
+NodeIdentificationIndicator::NodeIdentificationIndicator() {
 }
 
 QByteArray NodeIdentificationIndicator::getSourceAddress() {

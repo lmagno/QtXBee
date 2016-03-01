@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     QSerialPort *serial = new QSerialPort();
-    serial->setPortName("/dev/ttyUSB0");
+    serial->setPortName("/dev/tty.usbserial-A600e0VF");
     serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
     // QByteArray address = QByteArray::fromHex("0013a20040a53581");
     // QString data = "Hello World";
 
-    ATCommand *teste = new ATCommand(xb);
-    teste->setFrameId(0x52);
+	ATCommand *teste = new ATCommand;
+	teste->setFrameID(0x52);
     teste->setATCommand("ND");
 
     xb->send(teste);

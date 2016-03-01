@@ -1,8 +1,7 @@
 #include "txrequest.h"
 #include "digimeshpacket.h"
 
-TXRequest::TXRequest(QObject *parent) :
-    DigiMeshPacket(parent)
+TXRequest::TXRequest()
 {
     unsigned zero = 0x00;
     unsigned oxff = 0xFF;

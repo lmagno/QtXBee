@@ -12,7 +12,7 @@ class RXIndicator : public DigiMeshPacket
     QByteArray data;
 
 public:
-    explicit RXIndicator(QObject *parent);
+	RXIndicator();
     void setSrcAddr64(QByteArray sa64);
     void setSrcAddr16(QByteArray sa16);
     void setReceiveOptions(unsigned ro);

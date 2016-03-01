@@ -25,8 +25,9 @@ class NodeIdentificationIndicator : public DigiMeshPacket
 	void setManufacturerID(QByteArray);
 	void setDDValue(QByteArray);
 	void setRSSI(unsigned char);
+	void update();
 public:
-    explicit NodeIdentificationIndicator(QObject *parent = 0);
+	NodeIdentificationIndicator();
 	QByteArray getSourceAddress();
 	unsigned char getReceiveOptions();
 	QByteArray getRemoteAddress();

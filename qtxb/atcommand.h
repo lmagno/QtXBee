@@ -11,14 +11,15 @@ class ATCommand : public DigiMeshPacket
     QByteArray atCommand;
     QByteArray parameter;
 public:
-    explicit ATCommand(QObject *parent);
+	ATCommand();
 	void setFrameID(unsigned char);
 	void setATCommand(QString);
 	void setParameter(QByteArray array);
+	void setFrameData(QByteArray);
 	unsigned char getFrameID();
     QByteArray getATCommand();
     QByteArray getParameter();
-    void assemblePacket();
+	QByteArray getFrameData();
 };
 
 #endif // ATCOMMANDPACKET_H

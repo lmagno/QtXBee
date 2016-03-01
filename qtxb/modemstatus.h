@@ -8,9 +8,11 @@ class ModemStatus : public DigiMeshPacket
 {
 	unsigned char status;
 	void setStatus(unsigned char);
+	void setFrameData(QByteArray);
 public:
-    explicit ModemStatus(QObject *parent);
+	ModemStatus();
 	unsigned char getStatus();
+	QByteArray getFrameData();
 };
 
 #endif // MODEMSTATUS_H

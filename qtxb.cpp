@@ -6,7 +6,7 @@
 #include "qtxb/atcommandqueueparam.h"
 #include "qtxb/txrequest.h"
 #include "qtxb/txrequestexplicit.h"
-#include "qtxb/remotecommandrequest.h"
+#include "qtxb/atcommandremote.h"
 
 #include "qtxb/atcommandresponse.h"
 #include "qtxb/modemstatus.h"
@@ -14,7 +14,7 @@
 #include "qtxb/rxindicator.h"
 #include "qtxb/rxindicatorexplicit.h"
 #include "qtxb/nodeidentificationindicator.h"
-#include "qtxb/remotecommandresponse.h"
+#include "qtxb/atcommandremoteresponse.h"
 
 
 #include <QDebug>
@@ -78,28 +78,26 @@ QTXB::~QTXB()
 		qDebug() << "XBEE: Serial Port closed successfully";
 	}
 }
-void QTXB::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
-	ATCommandResponse *response = new ATCommandResponse(this);
-	response->readPacket(digiMeshPacket->getPacket());
-	qDebug() << "Received ATCommandResponse: " << digiMeshPacket->getPacket().toHex();
+void QTXB::displayATCommandResponse(ATCommandResponse *packet){
+	qDebug() << "Received ATCommandResponse: " << packet->getFrameData().toHex();
 }
 void QTXB::displayModemStatus(ModemStatus *digiMeshPacket){
-	qDebug() << "Received ModemStatus: " << digiMeshPacket->getPacket().toHex();
+	qDebug() << "Received ModemStatus: " << digiMeshPacket->getFrameData().toHex();
 }
 void QTXB::displayTransmitStatus(TransmitStatus *digiMeshPacket){
-	qDebug() << "Received TransmitStatus: " << digiMeshPacket->getPacket().toHex();
+	qDebug() << "Received TransmitStatus: " << digiMeshPacket->getFrameData().toHex();
 }
 void QTXB::displayRXIndicator(RXIndicator *digiMeshPacket){
-	qDebug() << "Received RXIndicator: " << digiMeshPacket->getData().toHex();
+	qDebug() << "Received RXIndicator: " << digiMeshPacket->getFrameData().toHex();
 }
 void QTXB::displayRXIndicatorExplicit(RXIndicatorExplicit *digiMeshPacket){
-	qDebug() << "Received RXIndicatorExplicit: " << digiMeshPacket->getPacket().toHex();
+	qDebug() << "Received RXIndicatorExplicit: " << digiMeshPacket->getFrameData().toHex();
 }
 void QTXB::displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket){
-	qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->getPacket().toHex();
+	qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->getFrameData().toHex();
 }
 void QTXB::displayRemoteCommandResponse(RemoteCommandResponse *digiMeshPacket){
-	qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->getPacket().toHex();
+	qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->getFrameData().toHex();
 }
 
 void QTXB::send(DigiMeshPacket *request)

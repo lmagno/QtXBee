@@ -6,15 +6,10 @@
 
 class RXIndicatorExplicit : public DigiMeshPacket
 {
-
 public:
-    explicit RXIndicatorExplicit(QObject *parent = 0);
+	RXIndicatorExplicit();
     void readPacket(QByteArray rx);
 	void assemblePacket();
-signals:
-    
-public slots:
-    
 };
 
 #endif // RXINDICATOREXPLICIT_H
