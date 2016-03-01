@@ -9,17 +9,17 @@ TransmitStatus::TransmitStatus(QObject *parent) :
 void TransmitStatus::readPacket(QByteArray rx){
     packet.clear();
     packet.append(rx);
-    setStartDelimiter(rx.at(0));
-    setLength(rx.at(2));
-    if(rx.size() == rx.at(2)+4){
-        setFrameType(rx.at(3));
-        setFrameId(rx.at(4));
-        reserved.append(rx.at(5));
-        reserved.append(rx.at(6));
-        setTransmitRetryCount(rx.at(7));
-        setDeliveryStatus(rx.at(8));
-        setDiscoveryStatus(rx.at(9));
-        setChecksum(rx.at(10));
+    setStartDelimiter(rx[0]);
+    setLength(rx[2]);
+    if(rx.size() == rx[2]+4){
+        setFrameType(rx[3]);
+        setFrameId(rx[4]);
+        reserved.append(rx[5]);
+        reserved.append(rx[6]);
+        setTransmitRetryCount(rx[7]);
+        setDeliveryStatus(rx[8]);
+        setDiscoveryStatus(rx[9]);
+        setChecksum(rx[10]);
     }else{
 
         qDebug()<< "Invalid Packet Received!";

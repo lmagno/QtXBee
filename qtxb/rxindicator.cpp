@@ -37,27 +37,27 @@ void RXIndicator::readPacket(QByteArray rx){
 
     packet.clear();
     packet.append(rx);
-    setStartDelimiter(rx.at(0));
-    setLength(rx.at(2));
-    if(rx.size() == rx.at(2)+4 && rx.size() > 15){
-        setFrameType(rx.at(3));
-        srcAddr64.append(rx.at(4));
-        srcAddr64.append(rx.at(5));
-        srcAddr64.append(rx.at(6));
-        srcAddr64.append(rx.at(7));
-        srcAddr64.append(rx.at(8));
-        srcAddr64.append(rx.at(9));
-        srcAddr64.append(rx.at(10));
-        srcAddr64.append(rx.at(11));
-        srcAddr16.append(rx.at(12));
-        srcAddr16.append(rx.at(13));
-        setReceiveOptions(rx.at(14));
+    setStartDelimiter(rx[0]);
+    setLength(rx[2]);
+    if(rx.size() == rx[2]+4 && rx.size() > 15){
+        setFrameType(rx[3]);
+        srcAddr64.append(rx[4]);
+        srcAddr64.append(rx[5]);
+        srcAddr64.append(rx[6]);
+        srcAddr64.append(rx[7]);
+        srcAddr64.append(rx[8]);
+        srcAddr64.append(rx[9]);
+        srcAddr64.append(rx[10]);
+        srcAddr64.append(rx[11]);
+        srcAddr16.append(rx[12]);
+        srcAddr16.append(rx[13]);
+        setReceiveOptions(rx[14]);
         int count = 15;
         while(count < rx.size()-1){
-            data.append(rx.at(count));
+            data.append(rx[count]);
             count++;
         }
-        setChecksum(rx.at(count));
+        setChecksum(rx[count]);
     }else{
 
         qDebug()<< "Invalid Packet Received!";

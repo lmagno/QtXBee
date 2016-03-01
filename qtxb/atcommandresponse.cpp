@@ -38,10 +38,10 @@ void ATCommandResponse::setCommandData(QByteArray data) {
 
 void ATCommandResponse::update() {
 	if (!frameData.isEmpty()) {
-		setApiID(frameData.at(0));
-		setFrameID(frameData.at(1));
+		setApiID(frameData[0]);
+		setFrameID(frameData[1]);
 		setATCommand(frameData.mid(2, 2));
-		setCommandStatus(frameData.at(4));
+		setCommandStatus(frameData[4]);
 		setCommandData(frameData.mid(5));
 	}
 }

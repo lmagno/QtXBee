@@ -15,7 +15,7 @@ void ModemStatus::setStatus(unsigned char st) {
 
 void ModemStatus::update() {
 	if (frameData.size() > 1) {
-		setApiID(frameData.at(0));
-		setStatus(frameData.at(1));
+		setApiID(frameData[0]);
+		setStatus(frameData[1]);
 	}
 }

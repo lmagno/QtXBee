@@ -86,9 +86,9 @@ void NodeIdentificationIndicator::setRSSI(unsigned char rssi) {
 void NodeIdentificationIndicator::update() {
 	int index = 0;
 	if (!frameData.isEmpty()) {
-		setApiID(frameData.at(0));
+		setApiID(frameData[0]);
 		setSourceAddress(frameData.mid(1,8));
-		setReceiveOptions(frameData.at(11));
+		setReceiveOptions(frameData[11]);
 		setRemoteAddress(frameData.mid(14,8));
 		index = frameData.indexOf((char)0x00, 22);
 		setNIString(frameData.mid(22,index-21));
