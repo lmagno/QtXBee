@@ -3,19 +3,22 @@
 
 #include "digimeshpacket.h"
 #include <QByteArray>
+#include <QString>
 
 class ATCommand : public DigiMeshPacket
 {
+	unsigned char frameID;
     QByteArray atCommand;
     QByteArray parameter;
 public:
     explicit ATCommand(QObject *parent);
-    void setATCommand(QString command);
-    void setParameter(QByteArray array);
+	void setFrameID(unsigned char);
+	void setATCommand(QString);
+	void setParameter(QByteArray array);
+	unsigned char getFrameID();
     QByteArray getATCommand();
     QByteArray getParameter();
     void assemblePacket();
-      
 };
 
 #endif // ATCOMMANDPACKET_H

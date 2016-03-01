@@ -39,14 +39,14 @@ QTXB::QTXB(QSerialPort *ser){
 		serial->write("+++");
 
 		// Wait for OK
-		while (serial->waitForReadyRead(5000)) data.append(serial->readAll());
+		while (serial->waitForReadyRead(2000)) data.append(serial->readAll());
 
 		if (data.startsWith("OK")) {
 			data.clear();
 			// Request protocol mode
 			serial->write("ATAP\r");
 			// Wait for answer
-			while (serial->waitForReadyRead(5000)) data.append(serial->readAll());
+			while (serial->waitForReadyRead(2000)) data.append(serial->readAll());
 			if (data.length() > 0) protocolMode = data.at(0)-'0';
 			qDebug() << "Protocol mode: " << protocolMode;
 			// Exit AT command mode
@@ -134,11 +134,11 @@ void QTXB::readData()
 {
 	const char startDelimiter = 0x7E;
 	const char escapeCharacter = 0x7D;
-	int i, frameIndex, frameLength;
+	int i, frameIndex, frameLength, packetLength;
 	unsigned char chksm;
 	QByteArray frame;
 
-	i = frameIndex = frameLength = 0;
+	i = frameIndex = frameLength = packetLength = 0;
 
 	buffer.append(serial->readAll());
 
@@ -171,8 +171,9 @@ void QTXB::readData()
 		case 2:
 			frameIndex = 1;
 			// Calculate frame length
-			if (buffer.at(frameIndex) == escapeCharacter)
+			if (buffer.at(frameIndex) == escapeCharacter) {
 				frameLength = (int)(buffer.at(++frameIndex)^0x20) << 8;
+			}
 			else
 				frameLength = (int)buffer.at(frameIndex) << 8;
 			if (buffer.at(++frameIndex) == escapeCharacter)
@@ -184,25 +185,28 @@ void QTXB::readData()
 			if(buffer.size() < (frameLength+frameIndex-2)) return;
 
 			// Remove escaped characters and save frame
-			while ((buffer.size() >= ++frameIndex) || (frame.size() != frameLength)) {
+			packetLength = frameLength - 3;
+			while ((buffer.size() > ++frameIndex) && (frame.size() != packetLength)) {
 				if (buffer.at(frameIndex) != escapeCharacter) {
 					frame.append(buffer.at(frameIndex));
-				} else
+				} else {
 					if (buffer.size() < ++frameIndex) return; // exit if not enough bytes
 					frame.append(buffer.at(frameIndex)^0x20);
 				}
 			}
+			if (frame.size() != packetLength) return;
 			buffer.remove(0, frameIndex);
 		}
+	}
 
-		// Verify packet checksum
-		chksm = 0;
-		for (i = 3; i < frameLength-1; i++) chksm += frame.at(i);
-		chksm = 0xFF - chksm;
+	// Verify packet checksum
+	chksm = 0;
+	for (i = 3; i < frameLength-1; i++) chksm += frame.at(i);
+	chksm = 0xFF - chksm;
 
-		// Process packet
-		if (chksm == (unsigned char)frame.at(frameLength-1))
-			processPacket(frame);
+	// Process packet
+	if (chksm == (unsigned char)frame.at(frameLength-1))
+		processPacket(frame);
 }
 
 void QTXB::processPacket(QByteArray packet){

@@ -6,12 +6,14 @@
 
 class ATCommandRemote : public ATCommand
 {
-
+	unsigned char commandOptions;
+	QByteArray destAddress;
 public:
     explicit ATCommandRemote(QObject *parent);
-    QByteArray remoteCommandOptions;
-
-    
+	QByteArray getDestinationAdress();
+	unsigned char getCommandOptions();
+	void setDestinationAddress(QByteArray);
+	void setCommandOptions(unsigned char);
 };
 
 #endif // ATCOMMANDREMOTE_H

@@ -4,17 +4,14 @@
 ATCommand::ATCommand(QObject *parent) :
     DigiMeshPacket(parent)
 {
-    setFrameType(0x08);
-    setFrameId(0x00);
+	setApiID(0x08);
+	setFrameID(0);
 }
 void ATCommand::setATCommand(QString command){
-    atCommand.clear();
-    atCommand.append(command.at(0));
-    atCommand.append(command.at(1));
+	atCommand = command;
 }
 void ATCommand::setParameter(QByteArray array){
-    parameter.clear();
-    parameter.append(array);
+	parameter = array;
 }
 QByteArray ATCommand::getATCommand(){
     return atCommand;
@@ -22,16 +19,11 @@ QByteArray ATCommand::getATCommand(){
 QByteArray ATCommand::getParameter(){
     return parameter;
 }
-void ATCommand::assemblePacket(){
-    packet.clear();
-    packet.append(getFrameType());
-    packet.append(getFrameId());
-    packet.append(getATCommand());
-    packet.append(getParameter());
-    setLength(packet.size());
-    createChecksum(packet);
-    packet.append(getChecksum());
-    packet.insert(0, getStartDelimiter());
-    packet.insert(1, getLength());
+void ATCommand::update(){
+	frameData.clear();
+	frameData.append(getApiID());
+	frameData.append(getFrameID());
+	frameData.append(getATCommand());
+	frameData.append(getParameter());
 }
 

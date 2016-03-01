@@ -2,33 +2,20 @@
 #include "digimeshpacket.h"
 #include <QDebug>
 
-ModemStatus::ModemStatus(QObject *parent) :
-    DigiMeshPacket(parent)
-{
+ModemStatus::ModemStatus(QObject *parent) : DigiMeshPacket(parent) {
 }
-void ModemStatus::readPacket(QByteArray rx){
-    packet.clear();
-    packet.append(rx);
-    setStartDelimiter(rx.at(0));
-    setLength(rx.at(2));
-    if(rx.size() == rx.at(2)+4){
-        setFrameType(rx.at(3));
-        setStatus(rx.at(4));
-        setChecksum(rx.at(5));
-    }else{
 
-        qDebug()<< "Invalid Packet Received!";
-        qDebug()<< packet.toHex();
-        packet.clear();
-    }
-}
-void ModemStatus::setStatus(unsigned s){
-    status = s;
-}
-unsigned ModemStatus::getStatus(){
+unsigned char ModemStatus::getStatus(){
     return status;
 }
 
-void ModemStatus::assemblePacket() {
+void ModemStatus::setStatus(unsigned char st) {
+	status = st;
+}
 
+void ModemStatus::update() {
+	if (frameData.size() > 1) {
+		setApiID(frameData.at(0));
+		setStatus(frameData.at(1));
+	}
 }

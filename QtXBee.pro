@@ -45,7 +45,6 @@ HEADERS += \
     qtxb/atcommand.h \
     qtxb/txrequest.h \
     qtxb/txrequestexplicit.h \
-    qtxb/atcommandremote.h \
     qtxb/atcommandresponse.h \
     qtxb/modemstatus.h \
     qtxb/transmitstatus.h \
@@ -53,7 +52,8 @@ HEADERS += \
     qtxb/remotecommandrequest.h \
     qtxb/rxindicatorexplicit.h \
     qtxb/nodeidentificationindicator.h \
-    qtxb/remotecommandresponse.h
+    qtxb/remotecommandresponse.h \
+    qtxb/atcommandremote.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 

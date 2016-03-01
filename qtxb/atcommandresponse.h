@@ -6,23 +6,20 @@
 
 class ATCommandResponse : public DigiMeshPacket
 {
-    unsigned atCommand1;
-    unsigned atCommand2;
-    unsigned commandStatus;
-    QByteArray data;
+	unsigned char frameID;
+	QByteArray atCommand;
+	unsigned char commandStatus;
+	QByteArray commandData;
+	void setFrameID(unsigned char);
+	void setATCommand(QString);
+	void setCommandStatus(unsigned char);
+	void setCommandData(QByteArray);
 public:
     explicit ATCommandResponse(QObject *parent);
-
-    void setATCommand1(unsigned atc1);
-    void setATCommand2(unsigned atc2);
-    void setCommandStatus(unsigned cs);
-    unsigned getATCommand1();
-    unsigned getATCommand2();
-    unsigned getCommandStatus();
-    void readPacket(QByteArray rx);
-    void setData(QByteArray d);
-    QByteArray getData();
-	void assemblePacket();
+	unsigned char getFrameID();
+	QString getATCommand();
+	unsigned char getCommandStatus();
+	QByteArray getCommandData();
 };
 
 #endif // ATCOMMANDRESPONSE_H

@@ -6,14 +6,11 @@
 
 class ModemStatus : public DigiMeshPacket
 {
-
-    unsigned status;
+	unsigned char status;
+	void setStatus(unsigned char);
 public:
     explicit ModemStatus(QObject *parent);
-    void readPacket(QByteArray rx);
-    void setStatus(unsigned s);
-    unsigned getStatus();
-	void assemblePacket();
+	unsigned char getStatus();
 };
 
 #endif // MODEMSTATUS_H
