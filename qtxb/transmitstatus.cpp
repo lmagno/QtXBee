@@ -8,14 +8,14 @@ TransmitStatus::TransmitStatus(QObject *parent) :
 }
 void TransmitStatus::readPacket(QByteArray rx){
     packet.clear();
-    packet.append(rx);
+    packet += rx;
     setStartDelimiter(rx[0]);
     setLength(rx[2]);
     if(rx.size() == rx[2]+4){
         setFrameType(rx[3]);
         setFrameId(rx[4]);
-        reserved.append(rx[5]);
-        reserved.append(rx[6]);
+        reserved += rx[5];
+        reserved += rx[6];
         setTransmitRetryCount(rx[7]);
         setDeliveryStatus(rx[8]);
         setDiscoveryStatus(rx[9]);

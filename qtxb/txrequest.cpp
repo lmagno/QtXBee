@@ -7,16 +7,16 @@ TXRequest::TXRequest(QObject *parent) :
     unsigned zero = 0x00;
     unsigned oxff = 0xFF;
     unsigned oxfe = 0xFE;
-    destAddr16.append(oxff);
-    destAddr16.append(oxfe);
-    destAddr64.append(zero);
-    destAddr64.append(zero);
-    destAddr64.append(zero);
-    destAddr64.append(zero);
-    destAddr64.append(zero);
-    destAddr64.append(zero);
-    destAddr64.append(oxff);
-    destAddr64.append(oxff);
+    destAddr16 += oxff;
+    destAddr16 += oxfe;
+    destAddr64 += zero;
+    destAddr64 += zero;
+    destAddr64 += zero;
+    destAddr64 += zero;
+    destAddr64 += zero;
+    destAddr64 += zero;
+    destAddr64 += oxff;
+    destAddr64 += oxff;
 
     broadcastRadius = 1;
     transmitOptions = 0x00;
@@ -31,15 +31,15 @@ void TXRequest::setTransmitOptions(unsigned to){
 }
 void TXRequest::setDestAddr64(QByteArray da64){
     destAddr64.clear();
-    destAddr64.append(da64);
+    destAddr64 += da64;
 }
 void TXRequest::setDestAddr16(QByteArray da16){
     destAddr16.clear();
-    destAddr16.append(da16);
+    destAddr16 += da16;
 }
 void TXRequest::setData(QByteArray d){
     data.clear();
-    data.append(d);
+    data += d;
 }
 QByteArray TXRequest::getDestAddr64(){
     return destAddr64;
@@ -58,16 +58,16 @@ QByteArray TXRequest::getData(){
 }
 void TXRequest::assemblePacket(){
     packet.clear();
-    packet.append(getFrameType());
-    packet.append(getFrameId());
-    packet.append(getDestAddr64());
-    packet.append(getDestAddr16());
-    packet.append(getBroadcastRadius());
-    packet.append(getTransmitOptions());
-    packet.append(getData());
+    packet += getFrameType();
+    packet += getFrameId();
+    packet += getDestAddr64();
+    packet += getDestAddr16();
+    packet += getBroadcastRadius();
+    packet += getTransmitOptions();
+    packet += getData();
     setLength(packet.size());
     createChecksum(packet);
-    packet.append(getChecksum());
+    packet += getChecksum();
     packet.insert(0, getStartDelimiter());
     packet.insert(1, getLength());
 

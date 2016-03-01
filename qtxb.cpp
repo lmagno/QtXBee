@@ -39,14 +39,14 @@ QTXB::QTXB(QSerialPort *ser){
 		serial->write("+++");
 
 		// Wait for OK
-		while (serial->waitForReadyRead(2000)) data.append(serial->readAll());
+		while (serial->waitForReadyRead(2000)) data += serial->readAll();
 
 		if (data.startsWith("OK")) {
 			data.clear();
 			// Request protocol mode
 			serial->write("ATAP\r");
 			// Wait for answer
-			while (serial->waitForReadyRead(2000)) data.append(serial->readAll());
+			while (serial->waitForReadyRead(2000)) data += serial->readAll();
 			if (data.length() > 0) protocolMode = data[0]-'0';
 			qDebug() << "Protocol mode: " << protocolMode;
 			// Exit AT command mode
@@ -140,7 +140,7 @@ void QTXB::readData()
 
 	i = frameIndex = frameLength = packetLength = 0;
 
-	buffer.append(serial->readAll());
+	buffer += serial->readAll();
 
 	// Clean buffer
 	for (i = 0; i < buffer.size(); i++)
@@ -188,10 +188,10 @@ void QTXB::readData()
 			packetLength = frameLength - 3;
 			while ((buffer.size() > ++frameIndex) && (frame.size() != packetLength)) {
 				if (buffer[frameIndex] != escapeCharacter) {
-					frame.append(buffer[frameIndex]);
+					frame += buffer[frameIndex];
 				} else {
 					if (buffer.size() < ++frameIndex) return; // exit if not enough bytes
-					frame.append(buffer[frameIndex]^0x20);
+					frame += buffer[frameIndex]^0x20;
 				}
 			}
 			if (frame.size() != packetLength) return;

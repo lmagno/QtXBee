@@ -26,11 +26,11 @@ void ATCommandRemote::setCommandOptions(unsigned char options) {
 
 void ATCommandRemote::update() {
 	frameData.clear();
-	frameData.append(getApiID());
-	frameData.append(getFrameID());
-	frameData.append(getDestinationAdress());
-	frameData.append(0xFFFE);
-	frameData.append(getCommandOptions());
-	frameData.append(getATCommand());
-	frameData.append(getParameter());
+	frameData += getApiID();
+	frameData += getFrameID();
+	frameData += getDestinationAdress();
+	frameData += 0xFFFE;
+	frameData += getCommandOptions();
+	frameData += getATCommand();
+	frameData += getParameter();
 }

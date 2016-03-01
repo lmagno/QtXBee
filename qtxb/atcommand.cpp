@@ -21,9 +21,9 @@ QByteArray ATCommand::getParameter(){
 }
 void ATCommand::update(){
 	frameData.clear();
-	frameData.append(getApiID());
-	frameData.append(getFrameID());
-	frameData.append(getATCommand());
-	frameData.append(getParameter());
+	frameData += getApiID();
+	frameData += getFrameID();
+	frameData += getATCommand();
+	frameData += getParameter();
 }
 

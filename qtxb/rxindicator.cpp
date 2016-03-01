@@ -8,15 +8,15 @@ RXIndicator::RXIndicator(QObject *parent) :
 }
 void RXIndicator::setSrcAddr64(QByteArray sa64){
     srcAddr64.clear();
-    srcAddr64.append(sa64);
+    srcAddr64 += sa64;
 }
 void RXIndicator::setSrcAddr16(QByteArray sa16){
     srcAddr16.clear();
-    srcAddr16.append(sa16);
+    srcAddr16 += sa16;
 }
 void RXIndicator::setData(QByteArray d){
     data.clear();
-    data.append(d);
+    data += d;
 }
 QByteArray RXIndicator::getSrcAddr64(){
     return srcAddr64;
@@ -36,25 +36,25 @@ QByteArray RXIndicator::getData(){
 void RXIndicator::readPacket(QByteArray rx){
 
     packet.clear();
-    packet.append(rx);
+    packet += rx;
     setStartDelimiter(rx[0]);
     setLength(rx[2]);
     if(rx.size() == rx[2]+4 && rx.size() > 15){
         setFrameType(rx[3]);
-        srcAddr64.append(rx[4]);
-        srcAddr64.append(rx[5]);
-        srcAddr64.append(rx[6]);
-        srcAddr64.append(rx[7]);
-        srcAddr64.append(rx[8]);
-        srcAddr64.append(rx[9]);
-        srcAddr64.append(rx[10]);
-        srcAddr64.append(rx[11]);
-        srcAddr16.append(rx[12]);
-        srcAddr16.append(rx[13]);
+        srcAddr64 += rx[4];
+        srcAddr64 += rx[5];
+        srcAddr64 += rx[6];
+        srcAddr64 += rx[7];
+        srcAddr64 += rx[8];
+        srcAddr64 += rx[9];
+        srcAddr64 += rx[10];
+        srcAddr64 += rx[11];
+        srcAddr16 += rx[12];
+        srcAddr16 += rx[13];
         setReceiveOptions(rx[14]);
         int count = 15;
         while(count < rx.size()-1){
-            data.append(rx[count]);
+            data += rx[count];
             count++;
         }
         setChecksum(rx[count]);
