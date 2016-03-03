@@ -3,19 +3,20 @@
 
 #include <QByteArray>
 
+#include "../typedef.h"
 #include "XBeeFrame.h"
 
 class TransmitStatus : public XBeeFrame
 {
-	unsigned char deliveryStatus;
-	unsigned char transmitRetryCount;
-	unsigned char discoveryStatus;
+	byte deliveryStatus;
+	byte transmitRetryCount;
+	byte discoveryStatus;
 public:
 	TransmitStatus();
-	virtual unsigned char getFrameType() const { return pTransmitStatus; }
-	unsigned char getDeliveryStatus();
-	unsigned char getTransmitRetryCount();
-	unsigned char getDiscoveryStatus();
+	virtual byte getFrameType() const { return pTransmitStatus; }
+	byte getDeliveryStatus();
+	byte getTransmitRetryCount();
+	byte getDiscoveryStatus();
 	QByteArray getFrameData();
 	void setDeliveryStatus(unsigned ds);
 	void setTransmitRetryCount(unsigned trc);

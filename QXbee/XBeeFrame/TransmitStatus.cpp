@@ -36,13 +36,13 @@ void TransmitStatus:: setTransmitRetryCount(unsigned trc){
 void TransmitStatus:: setDiscoveryStatus(unsigned ds){
 	discoveryStatus = ds;
 }
-unsigned char TransmitStatus:: getDeliveryStatus(){
+byte TransmitStatus:: getDeliveryStatus(){
 	return deliveryStatus;
 }
-unsigned char TransmitStatus:: getTransmitRetryCount(){
+byte TransmitStatus:: getTransmitRetryCount(){
 	return transmitRetryCount;
 }
-unsigned char TransmitStatus:: getDiscoveryStatus(){
+byte TransmitStatus:: getDiscoveryStatus(){
 	return discoveryStatus;
 }
 

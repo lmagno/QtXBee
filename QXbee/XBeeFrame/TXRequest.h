@@ -3,11 +3,12 @@
 
 #include <QByteArray>
 
+#include "../typedef.h"
 #include "XBeeFrame.h"
 
 class TXRequest : public XBeeFrame
 {
-	unsigned char frameID;
+	byte frameID;
 	QByteArray destAddr64;
 	QByteArray destAddr16;
 	unsigned broadcastRadius;
@@ -15,15 +16,15 @@ class TXRequest : public XBeeFrame
 	QByteArray data;
 public:
 	TXRequest();
-	virtual unsigned char getFrameType() const { return pTXRequest; }
-	unsigned char getFrameID();
+	virtual byte getFrameType() const { return pTXRequest; }
+	byte getFrameID();
 	QByteArray getDestAddr64();
 	QByteArray getDestAddr16();
 	unsigned getBroadcastRadius();
 	unsigned getTransmitOptions();
 	QByteArray getData();
 	QByteArray getFrameData();
-	void setFrameID(unsigned char);
+	void setFrameID(byte);
 	void setBroadcastRadius(int rad);
 	void setTransmitOptions(unsigned to);
 	void setDestAddr64(QByteArray da64);

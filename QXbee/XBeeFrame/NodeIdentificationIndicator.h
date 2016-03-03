@@ -4,44 +4,45 @@
 #include <QByteArray>
 #include <QString>
 
+#include "../typedef.h"
 #include "XBeeFrame.h"
 
 class NodeIdentificationIndicator : public XBeeFrame
 {
 	QByteArray sourceAddress;
-	unsigned char receiveOptions;
+	byte receiveOptions;
 	QByteArray remoteAddress;
 	QString niString;
-	unsigned char deviceType;
-	unsigned char sourceEvent;
+	byte deviceType;
+	byte sourceEvent;
 	QByteArray profileID;
 	QByteArray manufaccturerID;
 	QByteArray ddValue;
-	unsigned char rssiValue;
+	byte rssiValue;
 protected:
 	void setSourceAddress(QByteArray);
-	void setReceiveOptions(unsigned char);
+	void setReceiveOptions(byte);
 	void setRemoteAddress(QByteArray);
 	void setNIString(QString);
-	void setDeviceType(unsigned char);
-	void setSourceEvent(unsigned char);
+	void setDeviceType(byte);
+	void setSourceEvent(byte);
 	void setProfileID(QByteArray);
 	void setManufacturerID(QByteArray);
 	void setDDValue(QByteArray);
-	void setRSSI(unsigned char);
+	void setRSSI(byte);
 public:
-	virtual unsigned char getFrameType() const { return pNodeIdentificationIndicator; }
+	virtual byte getFrameType() const { return pNodeIdentificationIndicator; }
 	NodeIdentificationIndicator();
 	QByteArray getSourceAddress();
-	unsigned char getReceiveOptions();
+	byte getReceiveOptions();
 	QByteArray getRemoteAddress();
 	QString getNIString();
-	unsigned char getDeviceType();
-	unsigned char getSourceEvent();
+	byte getDeviceType();
+	byte getSourceEvent();
 	QByteArray getProfileID();
 	QByteArray getManufacturerID();
 	QByteArray getDDValue();
-	unsigned char getRSSI();
+	byte getRSSI();
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);
 };

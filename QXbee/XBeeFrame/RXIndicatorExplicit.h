@@ -3,13 +3,14 @@
 
 #include <QByteArray>
 
+#include "../typedef.h"
 #include "XBeeFrame.h"
 
 class RXIndicatorExplicit : public XBeeFrame
 {
 public:
 	RXIndicatorExplicit();
-	virtual unsigned char getFrameType() const { return pRXIndicatorExplicit; }
+	virtual byte getFrameType() const { return pRXIndicatorExplicit; }
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);
 };

@@ -3,6 +3,7 @@
 
 #include <QByteArray>
 
+#include "../typedef.h"
 #include "TXRequest.h"
 
 class TXRequestExplicit : public TXRequest
@@ -13,7 +14,7 @@ class TXRequestExplicit : public TXRequest
 	QByteArray profileID;
 public:
 	TXRequestExplicit();
-	virtual unsigned char getFrameType() const { return pTXRequestExplicit; }
+	virtual byte getFrameType() const { return pTXRequestExplicit; }
 };
 
 #endif // TXREQUESTEXPLICIT_H

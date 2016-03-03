@@ -88,17 +88,17 @@ void QXbee::send(XBeeFrame *request)
 {
 	union {
 		unsigned short value;
-		unsigned char byte[2];
+		byte bytes[2];
 	} frameLength;
-	unsigned char chksm = 0;
+	byte chksm = 0;
 	QByteArray frame;
 
 	// Assemble frame
 	frame[0] = 0x7E;
 	frame.insert(3, request->getFrameData());
 	frameLength.value = frame.length() + 1;
-	frame[1] = frameLength.byte[1];
-	frame[2] = frameLength.byte[0];
+	frame[1] = frameLength.bytes[1];
+	frame[2] = frameLength.bytes[0];
 	// Calculate checksum
 	for (int i = 3; i < frameLength.value-1; i++) chksm += frame[i];
 	chksm = 0xFF - chksm;
@@ -135,7 +135,7 @@ void QXbee::readData()
 	const char startDelimiter = 0x7E;
 	const char escapeCharacter = 0x7D;
 	int i, frameIndex, frameLength, packetLength;
-	unsigned char chksm;
+	byte chksm;
 	QByteArray frame;
 
 	i = frameIndex = frameLength = packetLength = 0;
@@ -205,7 +205,7 @@ void QXbee::readData()
 	chksm = 0xFF - chksm;
 
 	// Process packet
-	if (chksm == (unsigned char)frame[frameLength-1])
+	if (chksm == (byte)frame[frameLength-1])
 		processPacket(frame);
 }
 

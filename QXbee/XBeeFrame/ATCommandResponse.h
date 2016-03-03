@@ -3,25 +3,26 @@
 
 #include <QByteArray>
 
+#include "../typedef.h"
 #include "XBeeFrame.h"
 
 class ATCommandResponse : public XBeeFrame
 {
-	unsigned char frameID;
+	byte frameID;
 	QByteArray atCommand;
-	unsigned char commandStatus;
+	byte commandStatus;
 	QByteArray commandData;
 protected:
-	void setFrameID(unsigned char);
+	void setFrameID(byte);
 	void setATCommand(QString);
-	void setCommandStatus(unsigned char);
+	void setCommandStatus(byte);
 	void setCommandData(QByteArray);
 public:
 	ATCommandResponse();
-	virtual unsigned char getFrameType() const { return pATCommandResponse; }
-	unsigned char getFrameID();
+	virtual byte getFrameType() const { return pATCommandResponse; }
+	byte getFrameID();
 	QString getATCommand();
-	unsigned char getCommandStatus();
+	byte getCommandStatus();
 	QByteArray getCommandData();
 	virtual QByteArray getFrameData();
 	virtual void setFrameData(QByteArray);

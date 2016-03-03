@@ -3,17 +3,18 @@
 
 #include <QByteArray>
 
+#include "../typedef.h"
 #include "XBeeFrame.h"
 
 class ModemStatus : public XBeeFrame
 {
-	unsigned char status;
+	byte status;
 protected:
-	void setStatus(unsigned char);
+	void setStatus(byte);
 public:
 	ModemStatus();
-	virtual unsigned char getFrameType() const { return pModemStatus; }
-	unsigned char getStatus();
+	virtual byte getFrameType() const { return pModemStatus; }
+	byte getStatus();
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);
 };

@@ -7,7 +7,7 @@ ATCommand::ATCommand()
 	setFrameID(0);
 }
 
-unsigned char ATCommand::getFrameID() {
+byte ATCommand::getFrameID() {
 	return frameID;
 }
 
@@ -36,7 +36,7 @@ void ATCommand::setATParameter(QByteArray parameter){
 	atParameter = parameter;
 }
 
-void ATCommand::setFrameID(unsigned char id) {
+void ATCommand::setFrameID(byte id) {
 	frameID = id;
 }
 

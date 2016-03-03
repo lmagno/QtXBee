@@ -5,20 +5,21 @@
 #include <QString>
 
 #include "XBeeFrame.h"
+#include "../typedef.h"
 
 class ATCommand : public XBeeFrame
 {
-	unsigned char frameID;
+	byte frameID;
     QByteArray atCommand;
 	QByteArray atParameter;
 public:
 	ATCommand();
-	virtual unsigned char getFrameType() const { return pATCommand; }
-	unsigned char getFrameID();
+	virtual byte getFrameType() const { return pATCommand; }
+	byte getFrameID();
     QByteArray getATCommand();
 	QByteArray getATParameter();
 	virtual QByteArray getFrameData();
-	void setFrameID(unsigned char);
+	void setFrameID(byte);
 	void setATCommand(QString);
 	void setATParameter(QByteArray array);
 	virtual void setFrameData(QByteArray);

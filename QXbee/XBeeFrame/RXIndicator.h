@@ -3,6 +3,7 @@
 
 #include <QByteArray>
 
+#include "../typedef.h"
 #include "XBeeFrame.h"
 
 class RXIndicator : public XBeeFrame
@@ -13,7 +14,7 @@ class RXIndicator : public XBeeFrame
 	QByteArray data;
 public:
 	RXIndicator();
-	virtual unsigned char getFrameType() const { return pRXIndicator; }
+	virtual byte getFrameType() const { return pRXIndicator; }
 	QByteArray getSrcAddr64();
 	QByteArray getSrcAddr16();
 	unsigned getReceiveOptions();

@@ -7,7 +7,7 @@ QByteArray NodeIdentificationIndicator::getSourceAddress() {
 	return sourceAddress;
 }
 
-unsigned char NodeIdentificationIndicator::getReceiveOptions() {
+byte NodeIdentificationIndicator::getReceiveOptions() {
 	return receiveOptions;
 }
 
@@ -19,11 +19,11 @@ QString NodeIdentificationIndicator::getNIString() {
 	return niString;
 }
 
-unsigned char NodeIdentificationIndicator::getDeviceType() {
+byte NodeIdentificationIndicator::getDeviceType() {
 	return deviceType;
 }
 
-unsigned char NodeIdentificationIndicator::getSourceEvent() {
+byte NodeIdentificationIndicator::getSourceEvent() {
 	return sourceEvent;
 }
 
@@ -39,7 +39,7 @@ QByteArray NodeIdentificationIndicator::getDDValue() {
 	return ddValue;
 }
 
-unsigned char NodeIdentificationIndicator::getRSSI() {
+byte NodeIdentificationIndicator::getRSSI() {
 	return rssiValue;
 }
 
@@ -52,7 +52,7 @@ void NodeIdentificationIndicator::setSourceAddress(QByteArray address) {
 	sourceAddress = address;
 }
 
-void NodeIdentificationIndicator::setReceiveOptions(unsigned char options) {
+void NodeIdentificationIndicator::setReceiveOptions(byte options) {
 	receiveOptions = options;
 }
 
@@ -64,11 +64,11 @@ void NodeIdentificationIndicator::setNIString(QString ni) {
 	niString = ni;
 }
 
-void NodeIdentificationIndicator::setDeviceType(unsigned char type) {
+void NodeIdentificationIndicator::setDeviceType(byte type) {
 	deviceType = type;
 }
 
-void NodeIdentificationIndicator::setSourceEvent(unsigned char event) {
+void NodeIdentificationIndicator::setSourceEvent(byte event) {
 	sourceEvent = event;
 }
 
@@ -84,7 +84,7 @@ void NodeIdentificationIndicator::setDDValue(QByteArray dd) {
 	ddValue = dd;
 }
 
-void NodeIdentificationIndicator::setRSSI(unsigned char rssi) {
+void NodeIdentificationIndicator::setRSSI(byte rssi) {
 	rssiValue = rssi;
 }
 

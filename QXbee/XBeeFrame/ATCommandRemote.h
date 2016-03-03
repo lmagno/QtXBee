@@ -3,20 +3,21 @@
 
 #include <QByteArray>
 
+#include "../typedef.h"
 #include "ATCommand.h"
 
 class ATCommandRemote : public ATCommand
 {
 	QByteArray destinationAddress;
-	unsigned char commandOptions;
+	byte commandOptions;
 public:
 	ATCommandRemote();
-	virtual unsigned char getFrameType() const { return pATCommandRemote; }
+	virtual byte getFrameType() const { return pATCommandRemote; }
 	QByteArray getDestinationAdress();
-	unsigned char getCommandOptions();
+	byte getCommandOptions();
 	QByteArray getFrameData();
 	void setDestinationAddress(QByteArray);
-	void setCommandOptions(unsigned char);
+	void setCommandOptions(byte);
 	void setFrameData(QByteArray);
 };
 

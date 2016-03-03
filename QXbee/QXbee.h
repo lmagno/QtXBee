@@ -5,6 +5,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 
+#include "typedef.h"
 #include "XBeeFrame/XBeeFrame.h"
 #include "XBeeFrame/ATCommand.h"
 #include "XBeeFrame/ATCommandQueue.h"
@@ -54,7 +55,7 @@ private slots:
 private:
     QSerialPort *serial;
     bool xbeeFound;
-    unsigned char protocolMode;
+    byte protocolMode;
     QByteArray buffer;
     void processPacket(QByteArray packet);
 };
