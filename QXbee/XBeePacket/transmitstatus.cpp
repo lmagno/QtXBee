@@ -1,5 +1,4 @@
 #include "transmitstatus.h"
-#include "../QXbee.h"
 
 #include <QDebug>
 
@@ -8,7 +7,7 @@ TransmitStatus::TransmitStatus()
 }
 
 unsigned char TransmitStatus::getApiID() const {
-	return QXbee::pTransmitStatus;
+	return pTransmitStatus;
 }
 
 void TransmitStatus::setFrameData(QByteArray data){

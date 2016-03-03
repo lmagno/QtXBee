@@ -1,5 +1,4 @@
 #include "atcommand.h"
-#include "../QXbee.h"
 
 ATCommand::ATCommand()
 {
@@ -7,7 +6,7 @@ ATCommand::ATCommand()
 }
 
 unsigned char ATCommand::getApiID() const {
-	return QXbee::pATCommand;
+	return pATCommand;
 }
 
 unsigned char ATCommand::getFrameID() {

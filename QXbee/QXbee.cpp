@@ -211,43 +211,43 @@ void QXbee::readData()
 
 void QXbee::processPacket(QByteArray packet){
 	switch (packet[0]) {
-	case pATCommandResponse:{
+	case XBeePacket::pATCommandResponse:{
 		ATCommandResponse *response = new ATCommandResponse;
 		response->setFrameData(packet);
 		emit receivedATCommandResponse(response);
 		break;
 	}
-	case pModemStatus:{
+	case XBeePacket::pModemStatus:{
 		ModemStatus *response = new ModemStatus;
 		response->setFrameData(packet);
 		emit receivedModemStatus(response);
 		break;
 	}
-	case pTransmitStatus:{
+	case XBeePacket::pTransmitStatus:{
 		TransmitStatus *response = new TransmitStatus;
 		response->setFrameData(packet);
 		emit receivedTransmitStatus(response);
 		break;
 	}
-	case pRXIndicator:{
+	case XBeePacket::pRXIndicator:{
 		RXIndicator *response = new RXIndicator;
 		response->setFrameData(packet);
 		emit receivedRXIndicator(response);
 		break;
 	}
-	case pRXIndicatorExplicit:{
+	case XBeePacket::pRXIndicatorExplicit:{
 		RXIndicatorExplicit *response = new RXIndicatorExplicit;
 		response->setFrameData(packet);
 		emit receivedRXIndicatorExplicit(response);
 		break;
 	}
-	case pNodeIdentificationIndicator:{
+	case XBeePacket::pNodeIdentificationIndicator:{
 		NodeIdentificationIndicator *response = new NodeIdentificationIndicator;
 		response->setFrameData(packet);
 		emit receivedNodeIdentificationIndicator(response);
 		break;
 	}
-	case pATCommandResponseRemote:{
+	case XBeePacket::pATCommandResponseRemote:{
 		ATCommandResponseRemote *response = new ATCommandResponseRemote;
 		response->setFrameData(packet);
 		emit receivedRemoteCommandResponse(response);

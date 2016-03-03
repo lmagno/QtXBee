@@ -1,5 +1,4 @@
 #include "rxindicator.h"
-#include "../QXbee.h"
 
 #include <QDebug>
 
@@ -8,7 +7,7 @@ RXIndicator::RXIndicator()
 }
 
 unsigned char RXIndicator::getApiID() const {
-	return QXbee::pRXIndicator;
+	return pRXIndicator;
 }
 
 QByteArray RXIndicator::getSrcAddr64(){

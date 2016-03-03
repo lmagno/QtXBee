@@ -1,5 +1,4 @@
 #include "atcommandresponse.h"
-#include "../QXbee.h"
 
 #include <QDebug>
 
@@ -8,7 +7,7 @@ ATCommandResponse::ATCommandResponse()
 }
 
 unsigned char ATCommandResponse::getApiID() const {
-	return QXbee::pATCommandResponse;
+	return pATCommandResponse;
 }
 
 unsigned char ATCommandResponse::getFrameID() {

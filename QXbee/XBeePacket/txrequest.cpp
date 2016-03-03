@@ -1,5 +1,4 @@
 #include "txrequest.h"
-#include "../QXbee.h"
 
 #include <QDebug>
 
@@ -25,7 +24,7 @@ TXRequest::TXRequest()
 }
 
 unsigned char TXRequest::getApiID() const {
-	return QXbee::pTXRequest;
+	return pTXRequest;
 }
 
 void TXRequest::setFrameID(unsigned char id) {

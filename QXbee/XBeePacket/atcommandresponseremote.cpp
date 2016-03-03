@@ -1,12 +1,11 @@
 #include "atcommandresponseremote.h"
-#include "../QXbee.h"
 
 ATCommandResponseRemote::ATCommandResponseRemote()
 {
 }
 
 unsigned char ATCommandResponseRemote::getApiID() const {
-	return QXbee::pATCommandResponseRemote;
+	return pATCommandResponseRemote;
 }
 
 void ATCommandResponseRemote::setRemoteAddress(QByteArray address) {

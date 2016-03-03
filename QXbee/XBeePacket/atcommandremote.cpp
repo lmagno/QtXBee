@@ -1,5 +1,4 @@
 #include "atcommandremote.h"
-#include "../QXbee.h"
 
 ATCommandRemote::ATCommandRemote() {
 	//unsigned char broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
@@ -9,7 +8,7 @@ ATCommandRemote::ATCommandRemote() {
 }
 
 unsigned char ATCommandRemote::getApiID() const {
-	return QXbee::pATCommandRemote;
+	return pATCommandRemote;
 }
 
 QByteArray ATCommandRemote::getDestinationAdress() {
