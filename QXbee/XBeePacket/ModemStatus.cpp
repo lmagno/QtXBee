@@ -5,10 +5,6 @@
 ModemStatus::ModemStatus() {
 }
 
-unsigned char ModemStatus::getApiID() const {
-	return pModemStatus;
-}
-
 unsigned char ModemStatus::getStatus(){
 	return status;
 }

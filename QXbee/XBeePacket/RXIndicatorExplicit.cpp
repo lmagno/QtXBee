@@ -5,10 +5,6 @@
 RXIndicatorExplicit::RXIndicatorExplicit() {
 }
 
-unsigned char RXIndicatorExplicit::getApiID() const {
-	return pRXIndicatorExplicit;
-}
-
 void RXIndicatorExplicit::setFrameData(QByteArray data) {
 	qDebug() << data.toHex();
 }

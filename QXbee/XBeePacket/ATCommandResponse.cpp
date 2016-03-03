@@ -6,10 +6,6 @@ ATCommandResponse::ATCommandResponse()
 {
 }
 
-unsigned char ATCommandResponse::getApiID() const {
-	return pATCommandResponse;
-}
-
 unsigned char ATCommandResponse::getFrameID() {
 	return frameID;
 }

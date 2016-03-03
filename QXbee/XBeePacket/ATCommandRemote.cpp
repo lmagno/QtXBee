@@ -7,10 +7,6 @@ ATCommandRemote::ATCommandRemote() {
 	setDestinationAddress(QByteArray((char *)((const unsigned char[]){0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF}), 8)); // Broadcast by default
 }
 
-unsigned char ATCommandRemote::getApiID() const {
-	return pATCommandRemote;
-}
-
 QByteArray ATCommandRemote::getDestinationAdress() {
 	return destinationAddress;
 }

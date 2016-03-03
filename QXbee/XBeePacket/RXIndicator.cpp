@@ -6,10 +6,6 @@ RXIndicator::RXIndicator()
 {
 }
 
-unsigned char RXIndicator::getApiID() const {
-	return pRXIndicator;
-}
-
 QByteArray RXIndicator::getSrcAddr64(){
 	return srcAddr64;
 }

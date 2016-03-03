@@ -24,7 +24,6 @@ TEMPLATE = app
 SOURCES += main.cpp \
 	QXbee/QXbee.cpp \
     QXbee/XBeePacket/ATCommand.cpp \
-    QXbee/XBeePacket/ATCommandQueue.cpp \
     QXbee/XBeePacket/ATCommandRemote.cpp \
     QXbee/XBeePacket/ATCommandResponse.cpp \
     QXbee/XBeePacket/ATCommandResponseRemote.cpp \

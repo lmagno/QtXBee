@@ -6,10 +6,6 @@ TransmitStatus::TransmitStatus()
 {
 }
 
-unsigned char TransmitStatus::getApiID() const {
-	return pTransmitStatus;
-}
-
 void TransmitStatus::setFrameData(QByteArray data){
 	setDeliveryStatus(data[0]);
 /*	packet.clear();

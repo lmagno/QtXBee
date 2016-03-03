@@ -10,7 +10,7 @@ class ATCommandRemote : public ATCommand
 	unsigned char commandOptions;
 public:
 	ATCommandRemote();
-	virtual unsigned char getApiID() const;
+	virtual unsigned char getApiID() const { return pATCommandRemote; }
 	QByteArray getDestinationAdress();
 	unsigned char getCommandOptions();
 	QByteArray getFrameData();

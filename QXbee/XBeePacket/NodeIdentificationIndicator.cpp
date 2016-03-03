@@ -3,10 +3,6 @@
 NodeIdentificationIndicator::NodeIdentificationIndicator() {
 }
 
-unsigned char NodeIdentificationIndicator::getApiID() const {
-	return pNodeIdentificationIndicator;
-}
-
 QByteArray NodeIdentificationIndicator::getSourceAddress() {
 	return sourceAddress;
 }

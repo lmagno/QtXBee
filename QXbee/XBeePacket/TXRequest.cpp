@@ -23,10 +23,6 @@ TXRequest::TXRequest()
 	setFrameID(0x01);
 }
 
-unsigned char TXRequest::getApiID() const {
-	return pTXRequest;
-}
-
 void TXRequest::setFrameID(unsigned char id) {
 	frameID = id;
 }

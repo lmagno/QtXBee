@@ -12,7 +12,7 @@ class RXIndicator : public XBeePacket
 	QByteArray data;
 public:
 	RXIndicator();
-	virtual unsigned char getApiID() const;
+	virtual unsigned char getApiID() const { return pRXIndicator; }
 	QByteArray getSrcAddr64();
 	QByteArray getSrcAddr16();
 	unsigned getReceiveOptions();

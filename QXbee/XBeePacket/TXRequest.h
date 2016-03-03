@@ -14,7 +14,7 @@ class TXRequest : public XBeePacket
 	QByteArray data;
 public:
 	TXRequest();
-	virtual unsigned char getApiID() const;
+	virtual unsigned char getApiID() const { return pTXRequest; }
 	unsigned char getFrameID();
 	QByteArray getDestAddr64();
 	QByteArray getDestAddr16();

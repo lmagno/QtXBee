@@ -4,10 +4,6 @@ ATCommandResponseRemote::ATCommandResponseRemote()
 {
 }
 
-unsigned char ATCommandResponseRemote::getApiID() const {
-	return pATCommandResponseRemote;
-}
-
 void ATCommandResponseRemote::setRemoteAddress(QByteArray address) {
 	remoteAddress = address;
 }

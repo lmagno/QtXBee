@@ -6,7 +6,7 @@
 class ATCommandQueue : public ATCommand
 {
 public:
-	virtual unsigned char getApiID() const;
+	virtual unsigned char getApiID() const { return pATCommandQueue; }
 };
 
 #endif // ATCOMMANDQUEUE_H

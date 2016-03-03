@@ -5,10 +5,6 @@ ATCommand::ATCommand()
 	setFrameID(0);
 }
 
-unsigned char ATCommand::getApiID() const {
-	return pATCommand;
-}
-
 unsigned char ATCommand::getFrameID() {
 	return frameID;
 }
