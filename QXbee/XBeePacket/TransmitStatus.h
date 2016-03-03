@@ -12,7 +12,7 @@ class TransmitStatus : public XBeePacket
 	unsigned char discoveryStatus;
 public:
 	TransmitStatus();
-	virtual unsigned char getApiID() const { return pTransmitStatus; }
+	virtual unsigned char getFrameType() const { return pTransmitStatus; }
 	unsigned char getDeliveryStatus();
 	unsigned char getTransmitRetryCount();
 	unsigned char getDiscoveryStatus();

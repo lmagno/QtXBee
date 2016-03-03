@@ -9,7 +9,7 @@ unsigned char ModemStatus::getStatus(){
 
 QByteArray ModemStatus::getFrameData() {
 	QByteArray frameData;
-	frameData.append(getApiID());
+	frameData.append(getFrameType());
 	frameData += getStatus();
 	return frameData;
 }
@@ -19,6 +19,6 @@ void ModemStatus::setStatus(unsigned char st) {
 }
 
 void ModemStatus::setFrameData(QByteArray data) {
-	if ((data.size() < 2) && (data.at(0) != (char)0x8A)) return;
+	if ((data.size() < 2) && (data.at(0) != getFrameType())) return;
 	setStatus(data[1]);
 }

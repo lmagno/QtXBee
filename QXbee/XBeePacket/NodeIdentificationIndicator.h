@@ -30,7 +30,7 @@ protected:
 	void setDDValue(QByteArray);
 	void setRSSI(unsigned char);
 public:
-	virtual unsigned char getApiID() const { return pNodeIdentificationIndicator; }
+	virtual unsigned char getFrameType() const { return pNodeIdentificationIndicator; }
 	NodeIdentificationIndicator();
 	QByteArray getSourceAddress();
 	unsigned char getReceiveOptions();

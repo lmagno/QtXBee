@@ -12,7 +12,7 @@ protected:
 	void setStatus(unsigned char);
 public:
 	ModemStatus();
-	virtual unsigned char getApiID() const { return pModemStatus; }
+	virtual unsigned char getFrameType() const { return pModemStatus; }
 	unsigned char getStatus();
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);

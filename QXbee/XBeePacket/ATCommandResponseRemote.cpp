@@ -9,7 +9,7 @@ void ATCommandResponseRemote::setRemoteAddress(QByteArray address) {
 }
 
 void ATCommandResponseRemote::setFrameData(QByteArray data) {
-	if (data.size() < 15 && data.at(0) != getApiID()) return;
+	if (data.size() < 15 && data.at(0) != getFrameType()) return;
 	setFrameID(data[1]);
 	setRemoteAddress(data.mid(2,8));
 	setATCommand(data.mid(12,2));
@@ -23,10 +23,11 @@ QByteArray ATCommandResponseRemote::getRemoteAddress() {
 
 QByteArray ATCommandResponseRemote::getFrameData() {
 	QByteArray frameData;
-	frameData.append(getApiID());
+	static const unsigned char reserved[] = {0xFF,0xFE};
+	frameData.append(getFrameType());
 	frameData += getFrameID();
 	frameData += getRemoteAddress();
-	frameData += (char *)((unsigned char[]){0xFF,0xFE});
+	frameData.append((char *)reserved, 2);
 	frameData += getATCommand();
 	frameData += getCommandStatus();
 	frameData += getCommandData();

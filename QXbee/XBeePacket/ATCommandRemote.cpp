@@ -1,7 +1,7 @@
 #include "ATCommandRemote.h"
 
 ATCommandRemote::ATCommandRemote() {
-	const unsigned char broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
+	static const unsigned char broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
 	setFrameID(0);
 	setCommandOptions(0x02);
 	setDestinationAddress(QByteArray((char *)broadcast, 8)); // Broadcast by default
@@ -25,10 +25,11 @@ void ATCommandRemote::setCommandOptions(unsigned char options) {
 
 QByteArray ATCommandRemote::getFrameData() {
 	QByteArray frameData;
-	frameData.append(getApiID());
+	static const unsigned char reserved[] = {0xFF,0xFE};
+	frameData.append(getFrameType());
 	frameData += getFrameID();
 	frameData += getDestinationAdress();
-	frameData.append((char *)((unsigned char[]){0xFF,0xFE}), 2);
+	frameData.append((char *)reserved, 2);
 	frameData += getCommandOptions();
 	frameData += getATCommand();
 	frameData += getATParameter();
@@ -36,7 +37,7 @@ QByteArray ATCommandRemote::getFrameData() {
 }
 
 void ATCommandRemote::setFrameData(QByteArray data) {
-	if (data.size() < 15 && data.at(0) != getApiID()) return;
+	if (data.size() < 15 && data.at(0) != getFrameType()) return;
 	setFrameID(data[1]);
 	setDestinationAddress(data.mid(2,8));
 	setCommandOptions(data[12]);

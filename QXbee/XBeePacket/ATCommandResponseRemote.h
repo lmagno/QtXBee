@@ -13,7 +13,7 @@ protected:
 	void setRemoteAddress(QByteArray);
 public:
 	ATCommandResponseRemote();
-	virtual unsigned char getApiID() const { return pATCommandResponseRemote; }
+	virtual unsigned char getFrameType() const { return pATCommandResponseRemote; }
 	QByteArray getRemoteAddress();
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);

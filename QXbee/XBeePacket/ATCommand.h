@@ -13,7 +13,7 @@ class ATCommand : public XBeePacket
 	QByteArray atParameter;
 public:
 	ATCommand();
-	virtual unsigned char getApiID() const { return pATCommand; }
+	virtual unsigned char getFrameType() const { return pATCommand; }
 	unsigned char getFrameID();
     QByteArray getATCommand();
 	QByteArray getATParameter();

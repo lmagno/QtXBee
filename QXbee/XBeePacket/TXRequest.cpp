@@ -71,7 +71,7 @@ QByteArray TXRequest::getData(){
 }
 QByteArray TXRequest::getFrameData(){
 	QByteArray frameData;
-	frameData.append(getApiID());
+	frameData.append(getFrameType());
 	frameData += getFrameID();
 /*
     packet += getDestAddr64();

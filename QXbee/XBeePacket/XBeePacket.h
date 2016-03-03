@@ -20,7 +20,7 @@ public:
 	static const unsigned char pNodeIdentificationIndicator = 0x95;
 	static const unsigned char pATCommandResponseRemote = 0x97;
 
-	virtual unsigned char getApiID() const = 0;
+	virtual unsigned char getFrameType() const = 0;
 	virtual QByteArray getFrameData() = 0;
 	virtual void setFrameData(QByteArray) = 0;
 };

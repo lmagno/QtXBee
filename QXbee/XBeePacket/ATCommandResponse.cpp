@@ -24,7 +24,7 @@ QByteArray ATCommandResponse::getCommandData() {
 
 QByteArray ATCommandResponse::getFrameData() {
 	QByteArray frameData;
-	frameData.append(getApiID());
+	frameData.append(getFrameType());
 	frameData += getFrameID();
 	frameData += getATCommand();
 	frameData += getCommandStatus();
@@ -46,7 +46,7 @@ void ATCommandResponse::setCommandData(QByteArray data) {
 }
 
 void ATCommandResponse::setFrameData(QByteArray data) {
-	if (data.size() < 8 && data.at(0) != getApiID()) return;
+	if (data.size() < 8 && data.at(0) != getFrameType()) return;
 	setFrameID(data[1]);
 	setATCommand(data.mid(2,2));
 	setCommandStatus(data[4]);
