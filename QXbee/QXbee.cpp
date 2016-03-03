@@ -97,8 +97,8 @@ void QXbee::send(XBeeFrame *request)
 	frame[0] = 0x7E;
 	frame.insert(3, request->getFrameData());
 	frameLength.value = frame.length() + 1;
-	frame[1] = frameLength.byte[2];
-	frame[2] = frameLength.byte[1];
+	frame[1] = frameLength.byte[1];
+	frame[2] = frameLength.byte[0];
 	// Calculate checksum
 	for (int i = 3; i < frameLength.value-1; i++) chksm += frame[i];
 	chksm = 0xFF - chksm;
