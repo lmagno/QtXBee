@@ -2,14 +2,14 @@
 #include "atcommand.h"
 
 ATCommandRemote::ATCommandRemote() {
-	setApiID(0x17);
+	//unsigned char broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
 	setFrameID(0);
 	setCommandOptions(0x02);
-	setDestinationAddress((unsigned char [])0x000000000000FFFF); // Broadcast by default
+	setDestinationAddress(QByteArray((char *)((const unsigned char[]){0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF}), 8)); // Broadcast by default
 }
 
 QByteArray ATCommandRemote::getDestinationAdress() {
-	return destAddress;
+	return destinationAddress;
 }
 
 unsigned char ATCommandRemote::getCommandOptions() {
@@ -17,7 +17,7 @@ unsigned char ATCommandRemote::getCommandOptions() {
 }
 
 void ATCommandRemote::setDestinationAddress(QByteArray address) {
-	if (address.length() >= 8) destAddress = address.left(8);
+	if (address.length() >= 8) destinationAddress = address.left(8);
 }
 
 void ATCommandRemote::setCommandOptions(unsigned char options) {
@@ -26,22 +26,21 @@ void ATCommandRemote::setCommandOptions(unsigned char options) {
 
 QByteArray ATCommandRemote::getFrameData() {
 	QByteArray frameData;
-	frameData = getApiID();
+	frameData.append(getApiID());
 	frameData += getFrameID();
 	frameData += getDestinationAdress();
-	frameData += (unsigned char[])0xFFFE;
+	frameData.append((char *)((unsigned char[]){0xFF,0xFE}), 2);
 	frameData += getCommandOptions();
 	frameData += getATCommand();
-	frameData += getParameter();
+	frameData += getATParameter();
 	return frameData;
 }
 
 void ATCommandRemote::setFrameData(QByteArray data) {
-	if (data.size() < 15) return;
-	setApiID(data[0]);
+	if (data.size() < 15 && data.at(0) != getApiID()) return;
 	setFrameID(data[1]);
 	setDestinationAddress(data.mid(2,8));
 	setCommandOptions(data[12]);
 	setATCommand(data.mid(13,2));
-	if (data.size() > 15) setParameter(data.mid(15));
+	if (data.size() > 15) setATParameter(data.mid(15));
 }

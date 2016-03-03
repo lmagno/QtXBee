@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
     // QString data = "Hello World";
 
 	ATCommand *teste = new ATCommand;
-	teste->setFrameID(0x52);
     teste->setATCommand("ND");
 
     xb->send(teste);

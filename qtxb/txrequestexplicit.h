@@ -6,13 +6,13 @@
 
 class TXRequestExplicit : public TXRequest
 {
-
-public:
-	TXRequestExplicit();
 	QByteArray sourceEndpoint;
 	QByteArray destinationEndpoint;
 	QByteArray clusterID;
 	QByteArray profileID;
+public:
+	TXRequestExplicit();
+	virtual unsigned char getApiID() const { return QTXB::pTXRequestExplicit; }
 };
 
 #endif // TXREQUESTEXPLICIT_H

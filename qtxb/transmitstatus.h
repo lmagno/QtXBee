@@ -1,25 +1,24 @@
 #ifndef TRANSMITSTATUS_H
 #define TRANSMITSTATUS_H
-#include "digimeshpacket.h"
+#include "xbeepacket.h"
 #include <QByteArray>
 
-class TransmitStatus : public DigiMeshPacket
+class TransmitStatus : public XBeePacket
 {
-	QByteArray reserved;
-	unsigned deliveryStatus;
-	unsigned transmitRetryCount;
-	unsigned discoveryStatus;
+	unsigned char deliveryStatus;
+	unsigned char transmitRetryCount;
+	unsigned char discoveryStatus;
 public:
 	TransmitStatus();
-	void readPacket(QByteArray rx);
+	virtual unsigned char getApiID() const { return QTXB::pTransmitStatus; }
+	unsigned char getDeliveryStatus();
+	unsigned char getTransmitRetryCount();
+	unsigned char getDiscoveryStatus();
+	QByteArray getFrameData();
 	void setDeliveryStatus(unsigned ds);
 	void setTransmitRetryCount(unsigned trc);
 	void setDiscoveryStatus(unsigned ds);
-	unsigned getDeliveryStatus();
-	unsigned getTransmitRetryCount();
-	unsigned getDiscoveryStatus();
-	QByteArray getReserved();
-	void assemblePacket();
+	void setFrameData(QByteArray);
 };
 
 #endif // TRANSMITSTATUS_H

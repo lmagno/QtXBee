@@ -1,12 +1,14 @@
 #include "rxindicatorexplicit.h"
+#include <QDebug>
 
 RXIndicatorExplicit::RXIndicatorExplicit() {
 }
 
-void RXIndicatorExplicit::readPacket(QByteArray rx) {
-
+void RXIndicatorExplicit::setFrameData(QByteArray data) {
+	qDebug() << data.toHex();
 }
 
-void RXIndicatorExplicit::assemblePacket() {
-
+QByteArray RXIndicatorExplicit::getFrameData() {
+	QByteArray frameData;
+	return frameData;
 }

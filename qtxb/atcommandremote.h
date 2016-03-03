@@ -6,10 +6,11 @@
 
 class ATCommandRemote : public ATCommand
 {
+	QByteArray destinationAddress;
 	unsigned char commandOptions;
-	QByteArray destAddress;
 public:
 	ATCommandRemote();
+	virtual unsigned char getApiID() const { return QTXB::pATCommandRemote; }
 	QByteArray getDestinationAdress();
 	unsigned char getCommandOptions();
 	QByteArray getFrameData();

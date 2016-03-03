@@ -1,12 +1,14 @@
 #include "txrequest.h"
-#include "digimeshpacket.h"
+#include "xbeepacket.h"
+
+#include <QDebug>
 
 TXRequest::TXRequest()
 {
     unsigned zero = 0x00;
     unsigned oxff = 0xFF;
     unsigned oxfe = 0xFE;
-    destAddr16 += oxff;
+	destAddr16 += oxff;
     destAddr16 += oxfe;
     destAddr64 += zero;
     destAddr64 += zero;
@@ -19,9 +21,13 @@ TXRequest::TXRequest()
 
     broadcastRadius = 1;
     transmitOptions = 0x00;
-    setFrameType(0x10);
-    setFrameId(0x01);
+	setFrameID(0x01);
 }
+
+void TXRequest::setFrameID(unsigned char id) {
+	frameID = id;
+}
+
 void TXRequest::setBroadcastRadius(int rad){
     broadcastRadius = rad;
 }
@@ -40,6 +46,15 @@ void TXRequest::setData(QByteArray d){
     data.clear();
     data += d;
 }
+
+void TXRequest::setFrameData(QByteArray data) {
+	qDebug() << data.toHex();
+}
+
+unsigned char TXRequest::getFrameID() {
+	return frameID;
+}
+
 QByteArray TXRequest::getDestAddr64(){
     return destAddr64;
 }
@@ -55,10 +70,11 @@ unsigned TXRequest::getTransmitOptions(){
 QByteArray TXRequest::getData(){
     return data;
 }
-void TXRequest::assemblePacket(){
-    packet.clear();
-    packet += getFrameType();
-    packet += getFrameId();
+QByteArray TXRequest::getFrameData(){
+	QByteArray frameData;
+	frameData.append(getApiID());
+	frameData += getFrameID();
+/*
     packet += getDestAddr64();
     packet += getDestAddr16();
     packet += getBroadcastRadius();
@@ -69,6 +85,7 @@ void TXRequest::assemblePacket(){
     packet += getChecksum();
     packet.insert(0, getStartDelimiter());
     packet.insert(1, getLength());
-
+	*/
+	return frameData;
 }
 

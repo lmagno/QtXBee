@@ -1,9 +1,9 @@
 #include "qtxb.h"
 
-#include "qtxb/digimeshpacket.h"
+#include "qtxb/xbeepacket.h"
 
 #include "qtxb/atcommand.h"
-#include "qtxb/atcommandqueueparam.h"
+#include "qtxb/atcommandqueue.h"
 #include "qtxb/txrequest.h"
 #include "qtxb/txrequestexplicit.h"
 #include "qtxb/atcommandremote.h"
@@ -14,7 +14,7 @@
 #include "qtxb/rxindicator.h"
 #include "qtxb/rxindicatorexplicit.h"
 #include "qtxb/nodeidentificationindicator.h"
-#include "qtxb/atcommandremoteresponse.h"
+#include "qtxb/atcommandresponseremote.h"
 
 
 #include <QDebug>
@@ -96,18 +96,34 @@ void QTXB::displayRXIndicatorExplicit(RXIndicatorExplicit *digiMeshPacket){
 void QTXB::displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket){
 	qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->getFrameData().toHex();
 }
-void QTXB::displayRemoteCommandResponse(RemoteCommandResponse *digiMeshPacket){
+void QTXB::displayRemoteCommandResponse(ATCommandResponseRemote *digiMeshPacket){
 	qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->getFrameData().toHex();
 }
 
-void QTXB::send(DigiMeshPacket *request)
+void QTXB::send(XBeePacket *request)
 {
-	request->assemblePacket();
+	union {
+		unsigned short value;
+		unsigned char byte[2];
+	} frameLength;
+	unsigned char chksm = 0;
+	QByteArray frame;
+
+	// Assemble frame
+	frame[0] = 0x7E;
+	frame.insert(3, request->getFrameData());
+	frameLength.value = frame.length() + 1;
+	frame[1] = frameLength.byte[2];
+	frame[2] = frameLength.byte[1];
+	// Calculate checksum
+	for (int i = 3; i < frameLength.value-1; i++) chksm += frame[i];
+	chksm = 0xFF - chksm;
+	frame[frame.length()] = chksm;
+
 	if(xbeeFound && serial->isOpen())
 	{
-		qDebug() << "Transmit: " << request->getPacket().toHex();
-		serial->write(request->getPacket());
-
+		qDebug() << "Transmit: " << frame.toHex();
+		serial->write(frame);
 		serial->flush();
 	}
 	else
@@ -115,14 +131,15 @@ void QTXB::send(DigiMeshPacket *request)
 		qDebug() << "XBEE: Cannot write to Serial Port - closed";
 	}
 }
+
 void QTXB::broadcast(QString data)
 {
-	TXRequest *request = new TXRequest(this);
+	TXRequest *request = new TXRequest;
 	request->setData(data.toLatin1());
 	send(request);
 }
 void QTXB::unicast(QByteArray address, QString data){
-	TXRequest *request = new TXRequest(this);
+	TXRequest *request = new TXRequest;
 	request->setDestAddr64(address);
 	request->setData(data.toLatin1());
 	send(request);
@@ -208,48 +225,46 @@ void QTXB::readData()
 }
 
 void QTXB::processPacket(QByteArray packet){
-
-	unsigned packetType = (unsigned char)packet[3];
-	switch (packetType) {
+	switch (packet[0]) {
 	case pATCommandResponse:{
-		ATCommandResponse *response = new ATCommandResponse(this);
-		response->readPacket(packet);
+		ATCommandResponse *response = new ATCommandResponse;
+		response->setFrameData(packet);
 		emit receivedATCommandResponse(response);
 		break;
 	}
 	case pModemStatus:{
-		ModemStatus *response = new ModemStatus(this);
-		response->readPacket(packet);
+		ModemStatus *response = new ModemStatus;
+		response->setFrameData(packet);
 		emit receivedModemStatus(response);
 		break;
 	}
 	case pTransmitStatus:{
-		TransmitStatus *response = new TransmitStatus(this);
-		response->readPacket(packet);
+		TransmitStatus *response = new TransmitStatus;
+		response->setFrameData(packet);
 		emit receivedTransmitStatus(response);
 		break;
 	}
 	case pRXIndicator:{
-		RXIndicator *response = new RXIndicator(this);
-		response->readPacket(packet);
+		RXIndicator *response = new RXIndicator;
+		response->setFrameData(packet);
 		emit receivedRXIndicator(response);
 		break;
 	}
 	case pRXIndicatorExplicit:{
-		RXIndicatorExplicit *response = new RXIndicatorExplicit(this);
-		response->readPacket(packet);
+		RXIndicatorExplicit *response = new RXIndicatorExplicit;
+		response->setFrameData(packet);
 		emit receivedRXIndicatorExplicit(response);
 		break;
 	}
 	case pNodeIdentificationIndicator:{
-		NodeIdentificationIndicator *response = new NodeIdentificationIndicator(this);
-		response->readPacket(packet);
+		NodeIdentificationIndicator *response = new NodeIdentificationIndicator;
+		response->setFrameData(packet);
 		emit receivedNodeIdentificationIndicator(response);
 		break;
 	}
-	case pRemoteCommandResponse:{
-		RemoteCommandResponse *response = new RemoteCommandResponse(this);
-		response->readPacket(packet);
+	case pATCommandResponseRemote:{
+		ATCommandResponseRemote *response = new ATCommandResponseRemote;
+		response->setFrameData(packet);
 		emit receivedRemoteCommandResponse(response);
 		break;
 	}

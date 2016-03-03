@@ -43,6 +43,11 @@ unsigned char NodeIdentificationIndicator::getRSSI() {
 	return rssiValue;
 }
 
+QByteArray NodeIdentificationIndicator::getFrameData() {
+	QByteArray frameData;
+	return frameData;
+}
+
 void NodeIdentificationIndicator::setSourceAddress(QByteArray address) {
 	sourceAddress = address;
 }
@@ -83,7 +88,8 @@ void NodeIdentificationIndicator::setRSSI(unsigned char rssi) {
 	rssiValue = rssi;
 }
 
-void NodeIdentificationIndicator::update() {
+void NodeIdentificationIndicator::setFrameData(QByteArray) {
+	/*
 	int index = 0;
 	if (!frameData.isEmpty()) {
 		setApiID(frameData[0]);
@@ -94,4 +100,5 @@ void NodeIdentificationIndicator::update() {
 		setNIString(frameData.mid(22,index-21));
 		index++;
 	}
+	*/
 }

@@ -1,13 +1,12 @@
 #ifndef TXREQUEST_H
 #define TXREQUEST_H
 
-#include "digimeshpacket.h"
-
-
+#include "xbeepacket.h"
 #include <QByteArray>
 
-class TXRequest : public DigiMeshPacket
+class TXRequest : public XBeePacket
 {
+	unsigned char frameID;
 	QByteArray destAddr64;
 	QByteArray destAddr16;
 	unsigned broadcastRadius;
@@ -15,22 +14,21 @@ class TXRequest : public DigiMeshPacket
 	QByteArray data;
 public:
 	TXRequest();
-	void setBroadcastRadius(int rad);
-	void setTransmitOptions(unsigned to);
-	void setDestAddr64(QByteArray da64);
-	void setDestAddr16(QByteArray da16);
-	void setData(QByteArray d);
+	virtual unsigned char getApiID() const { return QTXB::pTXRequest; }
+	unsigned char getFrameID();
 	QByteArray getDestAddr64();
 	QByteArray getDestAddr16();
 	unsigned getBroadcastRadius();
 	unsigned getTransmitOptions();
 	QByteArray getData();
-	void assemblePacket();
-
-
-
-
-
+	QByteArray getFrameData();
+	void setFrameID(unsigned char);
+	void setBroadcastRadius(int rad);
+	void setTransmitOptions(unsigned to);
+	void setDestAddr64(QByteArray da64);
+	void setDestAddr16(QByteArray da16);
+	void setData(QByteArray d);
+	void setFrameData(QByteArray);
 };
 
 #endif // TXREQUEST_H

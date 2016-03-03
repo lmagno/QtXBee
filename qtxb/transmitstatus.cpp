@@ -1,12 +1,13 @@
 #include "transmitstatus.h"
-#include "digimeshpacket.h"
+#include "xbeepacket.h"
 #include <QDebug>
 
 TransmitStatus::TransmitStatus()
 {
 }
-void TransmitStatus::readPacket(QByteArray rx){
-	packet.clear();
+void TransmitStatus::setFrameData(QByteArray data){
+	setDeliveryStatus(data[0]);
+/*	packet.clear();
 	packet += rx;
 	setStartDelimiter(rx[0]);
 	setLength(rx[2]);
@@ -25,6 +26,7 @@ void TransmitStatus::readPacket(QByteArray rx){
 		qDebug()<< packet.toHex();
 		packet.clear();
 	}
+	*/
 }
 void TransmitStatus:: setDeliveryStatus(unsigned ds){
 	deliveryStatus = ds;
@@ -35,19 +37,18 @@ void TransmitStatus:: setTransmitRetryCount(unsigned trc){
 void TransmitStatus:: setDiscoveryStatus(unsigned ds){
 	discoveryStatus = ds;
 }
-unsigned TransmitStatus:: getDeliveryStatus(){
+unsigned char TransmitStatus:: getDeliveryStatus(){
 	return deliveryStatus;
 }
-unsigned TransmitStatus:: getTransmitRetryCount(){
+unsigned char TransmitStatus:: getTransmitRetryCount(){
 	return transmitRetryCount;
 }
-unsigned TransmitStatus:: getDiscoveryStatus(){
+unsigned char TransmitStatus:: getDiscoveryStatus(){
 	return discoveryStatus;
 }
-QByteArray TransmitStatus:: getReserved(){
-	return reserved;
-}
 
-void TransmitStatus::assemblePacket() {
 
+QByteArray TransmitStatus::getFrameData() {
+	QByteArray frameData;
+	return frameData;
 }

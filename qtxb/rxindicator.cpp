@@ -1,5 +1,5 @@
 #include "rxindicator.h"
-#include "digimeshpacket.h"
+#include "xbeepacket.h"
 #include <QDebug>
 
 RXIndicator::RXIndicator()
@@ -32,8 +32,9 @@ unsigned RXIndicator::getReceiveOptions(){
 QByteArray RXIndicator::getData(){
 	return data;
 }
-void RXIndicator::readPacket(QByteArray rx){
-
+void RXIndicator::setFrameData(QByteArray data){
+	setReceiveOptions(data[0]);
+/*
 	packet.clear();
 	packet += rx;
 	setStartDelimiter(rx[0]);
@@ -63,8 +64,10 @@ void RXIndicator::readPacket(QByteArray rx){
 		qDebug()<< packet.toHex();
 		packet.clear();
 	}
+	*/
 }
 
-void RXIndicator::assemblePacket() {
-
+QByteArray RXIndicator::getFrameData() {
+	QByteArray frameData;
+	return frameData;
 }

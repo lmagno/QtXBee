@@ -1,25 +1,27 @@
 #ifndef ATCOMMAND_H
 #define ATCOMMAND_H
 
-#include "digimeshpacket.h"
+#include "qtxb.h"
+#include "xbeepacket.h"
 #include <QByteArray>
 #include <QString>
 
-class ATCommand : public DigiMeshPacket
+class ATCommand : public XBeePacket
 {
 	unsigned char frameID;
     QByteArray atCommand;
-    QByteArray parameter;
+	QByteArray atParameter;
 public:
 	ATCommand();
-	void setFrameID(unsigned char);
-	void setATCommand(QString);
-	void setParameter(QByteArray array);
-	void setFrameData(QByteArray);
+	virtual unsigned char getApiID() const { return QTXB::pATCommand; }
 	unsigned char getFrameID();
     QByteArray getATCommand();
-    QByteArray getParameter();
-	QByteArray getFrameData();
+	QByteArray getATParameter();
+	virtual QByteArray getFrameData();
+	void setFrameID(unsigned char);
+	void setATCommand(QString);
+	void setATParameter(QByteArray array);
+	virtual void setFrameData(QByteArray);
 };
 
 #endif // ATCOMMANDPACKET_H

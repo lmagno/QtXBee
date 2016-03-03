@@ -1,15 +1,17 @@
 #ifndef RXINDICATOREXPLICIT_H
 #define RXINDICATOREXPLICIT_H
-#include "digimeshpacket.h"
+
+#include "xbeepacket.h"
 #include <QByteArray>
 
 
-class RXIndicatorExplicit : public DigiMeshPacket
+class RXIndicatorExplicit : public XBeePacket
 {
 public:
 	RXIndicatorExplicit();
-    void readPacket(QByteArray rx);
-	void assemblePacket();
+	virtual unsigned char getApiID() const { return QTXB::pRXIndicatorExplicit; }
+	QByteArray getFrameData();
+	void setFrameData(QByteArray);
 };
 
 #endif // RXINDICATOREXPLICIT_H

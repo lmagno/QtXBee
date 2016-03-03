@@ -22,11 +22,21 @@ QByteArray ATCommandResponse::getCommandData() {
 	return commandData;
 }
 
+QByteArray ATCommandResponse::getFrameData() {
+	QByteArray frameData;
+	frameData.append(getApiID());
+	frameData += getFrameID();
+	frameData += getATCommand();
+	frameData += getCommandStatus();
+	frameData += getCommandData();
+	return frameData;
+}
+
 void ATCommandResponse::setFrameID(unsigned char id) {
 	frameID = id;
 }
 void ATCommandResponse::setATCommand(QString command) {
-	atCommand = command;
+	atCommand = command.toLocal8Bit();
 }
 void ATCommandResponse::setCommandStatus(unsigned char status) {
 	commandStatus = status;
@@ -35,12 +45,10 @@ void ATCommandResponse::setCommandData(QByteArray data) {
 	commandData = data;
 }
 
-void ATCommandResponse::update() {
-	if (!frameData.isEmpty()) {
-		setApiID(frameData[0]);
-		setFrameID(frameData[1]);
-		setATCommand(frameData.mid(2, 2));
-		setCommandStatus(frameData[4]);
-		setCommandData(frameData.mid(5));
-	}
+void ATCommandResponse::setFrameData(QByteArray data) {
+	if (data.size() < 8 && data.at(0) != getApiID()) return;
+	setFrameID(data[1]);
+	setATCommand(data.mid(2,2));
+	setCommandStatus(data[4]);
+	if (data.size() > 8) setCommandData(data.mid(5));
 }

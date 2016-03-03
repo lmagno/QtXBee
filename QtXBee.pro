@@ -23,7 +23,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     qtxb.cpp \
-    qtxb/digimeshpacket.cpp \
     qtxb/atcommand.cpp \
     qtxb/txrequest.cpp \
     qtxb/txrequestexplicit.cpp \
@@ -32,15 +31,12 @@ SOURCES += main.cpp \
     qtxb/rxindicator.cpp \
     qtxb/rxindicatorexplicit.cpp \
     qtxb/nodeidentificationindicator.cpp \
-    qtxb/atcommandqueueparam.cpp \
     qtxb/atcommandremote.cpp \
-    qtxb/atcommandremoteresponse.cpp \
-    qtxb/atcommandresponse.cpp
+    qtxb/atcommandresponse.cpp \
+    qtxb/atcommandresponseremote.cpp
 
 HEADERS += \
     qtxb.h \
-    qtxb/digimeshpacket.h \
-    qtxb/atcommandqueueparam.h \
     qtxb/atcommand.h \
     qtxb/txrequest.h \
     qtxb/txrequestexplicit.h \
@@ -51,7 +47,9 @@ HEADERS += \
     qtxb/rxindicatorexplicit.h \
     qtxb/nodeidentificationindicator.h \
     qtxb/atcommandremote.h \
-    qtxb/atcommandremoteresponse.h
+    qtxb/xbeepacket.h \
+    qtxb/atcommandresponseremote.h \
+    qtxb/atcommandqueue.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 

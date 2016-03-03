@@ -1,9 +1,11 @@
 #ifndef NODEIDENTIFICATIONINDICATOR_H
 #define NODEIDENTIFICATIONINDICATOR_H
-#include "digimeshpacket.h"
-#include <QByteArray>
 
-class NodeIdentificationIndicator : public DigiMeshPacket
+#include "xbeepacket.h"
+#include <QByteArray>
+#include <QString>
+
+class NodeIdentificationIndicator : public XBeePacket
 {
 	QByteArray sourceAddress;
 	unsigned char receiveOptions;
@@ -15,6 +17,7 @@ class NodeIdentificationIndicator : public DigiMeshPacket
 	QByteArray manufaccturerID;
 	QByteArray ddValue;
 	unsigned char rssiValue;
+protected:
 	void setSourceAddress(QByteArray);
 	void setReceiveOptions(unsigned char);
 	void setRemoteAddress(QByteArray);
@@ -25,8 +28,8 @@ class NodeIdentificationIndicator : public DigiMeshPacket
 	void setManufacturerID(QByteArray);
 	void setDDValue(QByteArray);
 	void setRSSI(unsigned char);
-	void update();
 public:
+	virtual unsigned char getApiID() const { return QTXB::pNodeIdentificationIndicator; }
 	NodeIdentificationIndicator();
 	QByteArray getSourceAddress();
 	unsigned char getReceiveOptions();
@@ -38,6 +41,8 @@ public:
 	QByteArray getManufacturerID();
 	QByteArray getDDValue();
 	unsigned char getRSSI();
+	QByteArray getFrameData();
+	void setFrameData(QByteArray);
 };
 
 #endif // NODEIDENTIFICATIONINDICATOR_H
