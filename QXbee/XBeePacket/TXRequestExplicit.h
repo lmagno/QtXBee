@@ -1,7 +1,7 @@
 #ifndef TXREQUESTEXPLICIT_H
 #define TXREQUESTEXPLICIT_H
 
-#include "txrequest.h"
+#include "TXRequest.h"
 #include <QByteArray>
 
 class TXRequestExplicit : public TXRequest

@@ -23,34 +23,34 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
 	QXbee/QXbee.cpp \
-	QXbee/XBeePacket/atcommand.cpp \
-	QXbee/XBeePacket/txrequest.cpp \
-	QXbee/XBeePacket/txrequestexplicit.cpp \
-	QXbee/XBeePacket/modemstatus.cpp \
-	QXbee/XBeePacket/transmitstatus.cpp \
-	QXbee/XBeePacket/rxindicator.cpp \
-	QXbee/XBeePacket/rxindicatorexplicit.cpp \
-	QXbee/XBeePacket/nodeidentificationindicator.cpp \
-	QXbee/XBeePacket/atcommandremote.cpp \
-	QXbee/XBeePacket/atcommandresponse.cpp \
-	QXbee/XBeePacket/atcommandresponseremote.cpp \
-	QXbee/XBeePacket/atcommandqueue.cpp
+    QXbee/XBeePacket/ATCommand.cpp \
+    QXbee/XBeePacket/ATCommandQueue.cpp \
+    QXbee/XBeePacket/ATCommandRemote.cpp \
+    QXbee/XBeePacket/ATCommandResponse.cpp \
+    QXbee/XBeePacket/ATCommandResponseRemote.cpp \
+    QXbee/XBeePacket/ModemStatus.cpp \
+    QXbee/XBeePacket/NodeIdentificationIndicator.cpp \
+    QXbee/XBeePacket/RXIndicator.cpp \
+    QXbee/XBeePacket/RXIndicatorExplicit.cpp \
+    QXbee/XBeePacket/TransmitStatus.cpp \
+    QXbee/XBeePacket/TXRequest.cpp \
+    QXbee/XBeePacket/TXRequestExplicit.cpp
 
 HEADERS += \
 	QXbee/QXbee.h \
-	QXbee/XBeePacket/atcommand.h \
-	QXbee/XBeePacket/txrequest.h \
-	QXbee/XBeePacket/txrequestexplicit.h \
-	QXbee/XBeePacket/atcommandresponse.h \
-	QXbee/XBeePacket/modemstatus.h \
-	QXbee/XBeePacket/transmitstatus.h \
-	QXbee/XBeePacket/rxindicator.h \
-	QXbee/XBeePacket/rxindicatorexplicit.h \
-	QXbee/XBeePacket/nodeidentificationindicator.h \
-	QXbee/XBeePacket/atcommandremote.h \
-	QXbee/XBeePacket/xbeepacket.h \
-	QXbee/XBeePacket/atcommandresponseremote.h \
-	QXbee/XBeePacket/atcommandqueue.h
+    QXbee/XBeePacket/ATCommand.h \
+    QXbee/XBeePacket/ATCommandQueue.h \
+    QXbee/XBeePacket/ATCommandRemote.h \
+    QXbee/XBeePacket/ATCommandResponse.h \
+    QXbee/XBeePacket/ATCommandResponseRemote.h \
+    QXbee/XBeePacket/ModemStatus.h \
+    QXbee/XBeePacket/NodeIdentificationIndicator.h \
+    QXbee/XBeePacket/RXIndicator.h \
+    QXbee/XBeePacket/RXIndicatorExplicit.h \
+    QXbee/XBeePacket/TransmitStatus.h \
+    QXbee/XBeePacket/TXRequest.h \
+    QXbee/XBeePacket/TXRequestExplicit.h \
+    QXbee/XBeePacket/XBeePacket.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 

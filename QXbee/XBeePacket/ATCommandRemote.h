@@ -1,7 +1,7 @@
 #ifndef ATCOMMANDREMOTE_H
 #define ATCOMMANDREMOTE_H
 
-#include "atcommand.h"
+#include "ATCommand.h"
 #include <QByteArray>
 
 class ATCommandRemote : public ATCommand

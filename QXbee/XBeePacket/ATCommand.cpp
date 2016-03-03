@@ -1,4 +1,4 @@
-#include "atcommand.h"
+#include "ATCommand.h"
 
 ATCommand::ATCommand()
 {

@@ -1,4 +1,4 @@
-#include "atcommandresponse.h"
+#include "ATCommandResponse.h"
 
 #include <QDebug>
 

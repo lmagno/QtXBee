@@ -1,4 +1,4 @@
-#include "rxindicator.h"
+#include "RXIndicator.h"
 
 #include <QDebug>
 

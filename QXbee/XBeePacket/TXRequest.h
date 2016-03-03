@@ -1,7 +1,7 @@
 #ifndef TXREQUEST_H
 #define TXREQUEST_H
 
-#include "xbeepacket.h"
+#include "XBeePacket.h"
 #include <QByteArray>
 
 class TXRequest : public XBeePacket

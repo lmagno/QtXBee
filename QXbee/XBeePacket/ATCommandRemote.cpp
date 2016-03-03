@@ -1,4 +1,4 @@
-#include "atcommandremote.h"
+#include "ATCommandRemote.h"
 
 ATCommandRemote::ATCommandRemote() {
 	//unsigned char broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};

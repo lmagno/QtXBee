@@ -1,4 +1,4 @@
-#include "txrequest.h"
+#include "TXRequest.h"
 
 #include <QDebug>
 

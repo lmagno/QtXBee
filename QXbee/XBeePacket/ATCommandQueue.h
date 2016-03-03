@@ -1,7 +1,7 @@
 #ifndef ATCOMMANDQUEUE_H
 #define ATCOMMANDQUEUE_H
 
-#include "atcommand.h"
+#include "ATCommand.h"
 
 class ATCommandQueue : public ATCommand
 {

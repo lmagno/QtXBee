@@ -1,7 +1,7 @@
 #ifndef NODEIDENTIFICATIONINDICATOR_H
 #define NODEIDENTIFICATIONINDICATOR_H
 
-#include "xbeepacket.h"
+#include "XBeePacket.h"
 #include <QByteArray>
 #include <QString>
 

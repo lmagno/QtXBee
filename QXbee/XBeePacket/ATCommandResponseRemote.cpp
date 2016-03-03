@@ -1,4 +1,4 @@
-#include "atcommandresponseremote.h"
+#include "ATCommandResponseRemote.h"
 
 ATCommandResponseRemote::ATCommandResponseRemote()
 {

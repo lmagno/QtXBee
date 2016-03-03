@@ -1,4 +1,4 @@
-#include "transmitstatus.h"
+#include "TransmitStatus.h"
 
 #include <QDebug>
 

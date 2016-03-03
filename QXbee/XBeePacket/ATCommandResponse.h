@@ -1,7 +1,7 @@
 #ifndef ATCOMMANDRESPONSE_H
 #define ATCOMMANDRESPONSE_H
 
-#include "xbeepacket.h"
+#include "XBeePacket.h"
 #include <QByteArray>
 
 class ATCommandResponse : public XBeePacket

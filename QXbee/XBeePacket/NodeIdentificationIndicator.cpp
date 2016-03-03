@@ -1,4 +1,4 @@
-#include "nodeidentificationindicator.h"
+#include "NodeIdentificationIndicator.h"
 
 NodeIdentificationIndicator::NodeIdentificationIndicator() {
 }

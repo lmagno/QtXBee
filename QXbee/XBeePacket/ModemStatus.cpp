@@ -1,4 +1,4 @@
-#include "modemstatus.h"
+#include "ModemStatus.h"
 
 #include <QDebug>
 

@@ -1,7 +1,7 @@
 #ifndef RXINDICATOREXPLICIT_H
 #define RXINDICATOREXPLICIT_H
 
-#include "xbeepacket.h"
+#include "XBeePacket.h"
 #include <QByteArray>
 
 

@@ -1,6 +1,6 @@
 #ifndef TRANSMITSTATUS_H
 #define TRANSMITSTATUS_H
-#include "xbeepacket.h"
+#include "XBeePacket.h"
 #include <QByteArray>
 
 class TransmitStatus : public XBeePacket

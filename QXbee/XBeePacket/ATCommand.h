@@ -1,7 +1,7 @@
 #ifndef ATCOMMAND_H
 #define ATCOMMAND_H
 
-#include "xbeepacket.h"
+#include "XBeePacket.h"
 #include <QByteArray>
 #include <QString>
 
