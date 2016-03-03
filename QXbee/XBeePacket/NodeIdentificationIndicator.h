@@ -1,9 +1,10 @@
 #ifndef NODEIDENTIFICATIONINDICATOR_H
 #define NODEIDENTIFICATIONINDICATOR_H
 
-#include "XBeePacket.h"
 #include <QByteArray>
 #include <QString>
+
+#include "XBeePacket.h"
 
 class NodeIdentificationIndicator : public XBeePacket
 {

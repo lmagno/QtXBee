@@ -1,6 +1,6 @@
-#include "RXIndicatorExplicit.h"
-
 #include <QDebug>
+
+#include "RXIndicatorExplicit.h"
 
 RXIndicatorExplicit::RXIndicatorExplicit() {
 }

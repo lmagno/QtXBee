@@ -1,9 +1,10 @@
 #ifndef ATCOMMAND_H
 #define ATCOMMAND_H
 
-#include "XBeePacket.h"
 #include <QByteArray>
 #include <QString>
+
+#include "XBeePacket.h"
 
 class ATCommand : public XBeePacket
 {
@@ -23,4 +24,4 @@ public:
 	virtual void setFrameData(QByteArray);
 };
 
-#endif // ATCOMMANDPACKET_H
+#endif // ATCOMMAND_H

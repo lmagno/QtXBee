@@ -1,11 +1,12 @@
-#ifndef DIGIMESHPACKET_H
-#define DIGIMESHPACKET_H
+#ifndef XBEEPACKET_H
+#define XBEEPACKET_H
 
 #include <QByteArray>
 
 class XBeePacket
 {
 public:
+	// Packet types (API ID)
 	static const unsigned char pATCommand = 0x08;
 	static const unsigned char pATCommandQueue = 0x09;
 	static const unsigned char pTXRequest = 0x10;
@@ -18,9 +19,10 @@ public:
 	static const unsigned char pRXIndicatorExplicit = 0x91;
 	static const unsigned char pNodeIdentificationIndicator = 0x95;
 	static const unsigned char pATCommandResponseRemote = 0x97;
+
 	virtual unsigned char getApiID() const = 0;
 	virtual QByteArray getFrameData() = 0;
 	virtual void setFrameData(QByteArray) = 0;
 };
 
-#endif // DIGIMESHPACKET_H
+#endif // XBEEPACKET_H

@@ -1,10 +1,10 @@
 #include "ATCommandRemote.h"
 
 ATCommandRemote::ATCommandRemote() {
-	//unsigned char broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
+	const unsigned char broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
 	setFrameID(0);
 	setCommandOptions(0x02);
-	setDestinationAddress(QByteArray((char *)((const unsigned char[]){0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF}), 8)); // Broadcast by default
+	setDestinationAddress(QByteArray((char *)broadcast, 8)); // Broadcast by default
 }
 
 QByteArray ATCommandRemote::getDestinationAdress() {

@@ -1,8 +1,9 @@
 #ifndef MODEMSTATUS_H
 #define MODEMSTATUS_H
 
-#include "XBeePacket.h"
 #include <QByteArray>
+
+#include "XBeePacket.h"
 
 class ModemStatus : public XBeePacket
 {

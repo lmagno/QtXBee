@@ -1,6 +1,6 @@
-#include "ATCommandResponse.h"
+#include <QString>
 
-#include <QDebug>
+#include "ATCommandResponse.h"
 
 ATCommandResponse::ATCommandResponse()
 {

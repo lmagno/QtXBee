@@ -1,10 +1,10 @@
-#include "QXbee.h"
-
 #include <QDebug>
 #include <QList>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include <QCoreApplication>
+
+#include "QXbee.h"
 
 QXbee::QXbee(QObject *parent) :
 	QObject(parent)

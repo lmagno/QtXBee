@@ -12,9 +12,11 @@ unsigned char ATCommand::getFrameID() {
 QByteArray ATCommand::getATCommand(){
     return atCommand;
 }
+
 QByteArray ATCommand::getATParameter(){
 	return atParameter;
 }
+
 QByteArray ATCommand::getFrameData() {
 	QByteArray frameData;
 	frameData.append(getApiID());

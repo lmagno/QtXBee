@@ -1,7 +1,5 @@
 #include "TransmitStatus.h"
 
-#include <QDebug>
-
 TransmitStatus::TransmitStatus()
 {
 }

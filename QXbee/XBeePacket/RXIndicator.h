@@ -1,8 +1,9 @@
 #ifndef RXINDICATOR_H
 #define RXINDICATOR_H
 
-#include "XBeePacket.h"
 #include <QByteArray>
+
+#include "XBeePacket.h"
 
 class RXIndicator : public XBeePacket
 {

@@ -1,7 +1,5 @@
 #include "RXIndicator.h"
 
-#include <QDebug>
-
 RXIndicator::RXIndicator()
 {
 }

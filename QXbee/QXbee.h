@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+
 #include "XBeePacket/XBeePacket.h"
 #include "XBeePacket/ATCommand.h"
 #include "XBeePacket/ATCommandQueue.h"

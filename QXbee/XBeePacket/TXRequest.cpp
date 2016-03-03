@@ -1,6 +1,6 @@
-#include "TXRequest.h"
-
 #include <QDebug>
+
+#include "TXRequest.h"
 
 TXRequest::TXRequest()
 {
