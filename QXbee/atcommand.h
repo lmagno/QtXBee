@@ -1,7 +1,6 @@
 #ifndef ATCOMMAND_H
 #define ATCOMMAND_H
 
-#include "qtxb.h"
 #include "xbeepacket.h"
 #include <QByteArray>
 #include <QString>
@@ -13,7 +12,7 @@ class ATCommand : public XBeePacket
 	QByteArray atParameter;
 public:
 	ATCommand();
-	virtual unsigned char getApiID() const { return QTXB::pATCommand; }
+	virtual unsigned char getApiID() const;
 	unsigned char getFrameID();
     QByteArray getATCommand();
 	QByteArray getATParameter();

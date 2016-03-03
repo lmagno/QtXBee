@@ -1,5 +1,6 @@
 #include "txrequest.h"
 #include "xbeepacket.h"
+#include "QXbee.h"
 
 #include <QDebug>
 
@@ -22,6 +23,10 @@ TXRequest::TXRequest()
     broadcastRadius = 1;
     transmitOptions = 0x00;
 	setFrameID(0x01);
+}
+
+unsigned char TXRequest::getApiID() const {
+	return QXbee::pTXRequest;
 }
 
 void TXRequest::setFrameID(unsigned char id) {

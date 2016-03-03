@@ -29,7 +29,7 @@ protected:
 	void setDDValue(QByteArray);
 	void setRSSI(unsigned char);
 public:
-	virtual unsigned char getApiID() const { return QTXB::pNodeIdentificationIndicator; }
+	virtual unsigned char getApiID() const;
 	NodeIdentificationIndicator();
 	QByteArray getSourceAddress();
 	unsigned char getReceiveOptions();

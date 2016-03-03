@@ -1,10 +1,16 @@
 #include "transmitstatus.h"
 #include "xbeepacket.h"
+#include "QXbee.h"
 #include <QDebug>
 
 TransmitStatus::TransmitStatus()
 {
 }
+
+unsigned char TransmitStatus::getApiID() const {
+	return QXbee::pTransmitStatus;
+}
+
 void TransmitStatus::setFrameData(QByteArray data){
 	setDeliveryStatus(data[0]);
 /*	packet.clear();

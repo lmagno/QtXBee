@@ -6,7 +6,7 @@
 class ATCommandQueue : public ATCommand
 {
 public:
-	virtual unsigned char getApiID() const { return QTXB::pATCommandQueue; }
+	virtual unsigned char getApiID() const;
 };
 
 #endif // ATCOMMANDQUEUE_H

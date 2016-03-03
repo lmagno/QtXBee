@@ -22,34 +22,35 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    qtxb.cpp \
-    qtxb/atcommand.cpp \
-    qtxb/txrequest.cpp \
-    qtxb/txrequestexplicit.cpp \
-    qtxb/modemstatus.cpp \
-    qtxb/transmitstatus.cpp \
-    qtxb/rxindicator.cpp \
-    qtxb/rxindicatorexplicit.cpp \
-    qtxb/nodeidentificationindicator.cpp \
-    qtxb/atcommandremote.cpp \
-    qtxb/atcommandresponse.cpp \
-    qtxb/atcommandresponseremote.cpp
+	QXbee/QXbee.cpp \
+	QXbee/atcommand.cpp \
+	QXbee/txrequest.cpp \
+	QXbee/txrequestexplicit.cpp \
+	QXbee/modemstatus.cpp \
+	QXbee/transmitstatus.cpp \
+	QXbee/rxindicator.cpp \
+	QXbee/rxindicatorexplicit.cpp \
+	QXbee/nodeidentificationindicator.cpp \
+	QXbee/atcommandremote.cpp \
+	QXbee/atcommandresponse.cpp \
+	QXbee/atcommandresponseremote.cpp \
+    QXbee/atcommandqueue.cpp
 
 HEADERS += \
-    qtxb.h \
-    qtxb/atcommand.h \
-    qtxb/txrequest.h \
-    qtxb/txrequestexplicit.h \
-    qtxb/atcommandresponse.h \
-    qtxb/modemstatus.h \
-    qtxb/transmitstatus.h \
-    qtxb/rxindicator.h \
-    qtxb/rxindicatorexplicit.h \
-    qtxb/nodeidentificationindicator.h \
-    qtxb/atcommandremote.h \
-    qtxb/xbeepacket.h \
-    qtxb/atcommandresponseremote.h \
-    qtxb/atcommandqueue.h
+	QXbee/QXbee.h \
+	QXbee/atcommand.h \
+	QXbee/txrequest.h \
+	QXbee/txrequestexplicit.h \
+	QXbee/atcommandresponse.h \
+	QXbee/modemstatus.h \
+	QXbee/transmitstatus.h \
+	QXbee/rxindicator.h \
+	QXbee/rxindicatorexplicit.h \
+	QXbee/nodeidentificationindicator.h \
+	QXbee/atcommandremote.h \
+	QXbee/xbeepacket.h \
+	QXbee/atcommandresponseremote.h \
+	QXbee/atcommandqueue.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 

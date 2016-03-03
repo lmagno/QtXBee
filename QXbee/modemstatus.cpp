@@ -1,8 +1,13 @@
 #include "modemstatus.h"
 #include "xbeepacket.h"
+#include "QXbee.h"
 #include <QDebug>
 
 ModemStatus::ModemStatus() {
+}
+
+unsigned char ModemStatus::getApiID() const {
+	return QXbee::pModemStatus;
 }
 
 unsigned char ModemStatus::getStatus(){

@@ -1,9 +1,15 @@
 #include "atcommand.h"
 #include "xbeepacket.h"
 
+#include "QXbee.h"
+
 ATCommand::ATCommand()
 {
 	setFrameID(0);
+}
+
+unsigned char ATCommand::getApiID() const {
+	return QXbee::pATCommand;
 }
 
 unsigned char ATCommand::getFrameID() {

@@ -1,33 +1,33 @@
-#ifndef QTXB_H
-#define QTXB_H
+#ifndef QXBEE_H
+#define QXBEE_H
 
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "qtxb/xbeepacket.h"
-#include "qtxb/atcommand.h"
-#include "qtxb/atcommandqueue.h"
-#include "qtxb/txrequest.h"
-#include "qtxb/txrequestexplicit.h"
-#include "qtxb/atcommandremote.h"
-#include "qtxb/atcommandresponse.h"
-#include "qtxb/modemstatus.h"
-#include "qtxb/transmitstatus.h"
-#include "qtxb/rxindicator.h"
-#include "qtxb/rxindicatorexplicit.h"
-#include "qtxb/nodeidentificationindicator.h"
-#include "qtxb/atcommandresponseremote.h"
+#include "xbeepacket.h"
+#include "atcommand.h"
+#include "atcommandqueue.h"
+#include "txrequest.h"
+#include "txrequestexplicit.h"
+#include "atcommandremote.h"
+#include "atcommandresponse.h"
+#include "modemstatus.h"
+#include "transmitstatus.h"
+#include "rxindicator.h"
+#include "rxindicatorexplicit.h"
+#include "nodeidentificationindicator.h"
+#include "atcommandresponseremote.h"
 
-class QTXB : public QObject
+class QXbee : public QObject
 {
     Q_OBJECT
 public:
-    explicit QTXB(QObject *parent = 0);
-    QTXB(QSerialPort *ser);
+	explicit QXbee(QObject *parent = 0);
+	QXbee(QSerialPort *ser);
 	void send(XBeePacket *request);
     void broadcast(QString data);
     void unicast(QByteArray address, QString data);
-    ~QTXB();
+	~QXbee();
 	static const unsigned char pATCommand = 0x08;
 	static const unsigned char pATCommandQueue = 0x09;
 	static const unsigned char pTXRequest = 0x10;

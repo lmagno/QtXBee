@@ -12,7 +12,7 @@ class TXRequestExplicit : public TXRequest
 	QByteArray profileID;
 public:
 	TXRequestExplicit();
-	virtual unsigned char getApiID() const { return QTXB::pTXRequestExplicit; }
+	virtual unsigned char getApiID() const;
 };
 
 #endif // TXREQUESTEXPLICIT_H

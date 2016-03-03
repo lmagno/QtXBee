@@ -10,7 +10,7 @@ class TransmitStatus : public XBeePacket
 	unsigned char discoveryStatus;
 public:
 	TransmitStatus();
-	virtual unsigned char getApiID() const { return QTXB::pTransmitStatus; }
+	virtual unsigned char getApiID() const;
 	unsigned char getDeliveryStatus();
 	unsigned char getTransmitRetryCount();
 	unsigned char getDiscoveryStatus();

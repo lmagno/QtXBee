@@ -1,6 +1,11 @@
 #include "nodeidentificationindicator.h"
+#include "QXbee.h"
 
 NodeIdentificationIndicator::NodeIdentificationIndicator() {
+}
+
+unsigned char NodeIdentificationIndicator::getApiID() const {
+	return QXbee::pNodeIdentificationIndicator;
 }
 
 QByteArray NodeIdentificationIndicator::getSourceAddress() {

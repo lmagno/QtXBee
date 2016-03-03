@@ -1,11 +1,16 @@
 #include "atcommandremote.h"
 #include "atcommand.h"
+#include "QXbee.h"
 
 ATCommandRemote::ATCommandRemote() {
 	//unsigned char broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
 	setFrameID(0);
 	setCommandOptions(0x02);
 	setDestinationAddress(QByteArray((char *)((const unsigned char[]){0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF}), 8)); // Broadcast by default
+}
+
+unsigned char ATCommandRemote::getApiID() const {
+	return QXbee::pATCommandRemote;
 }
 
 QByteArray ATCommandRemote::getDestinationAdress() {

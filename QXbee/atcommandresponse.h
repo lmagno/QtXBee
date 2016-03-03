@@ -17,7 +17,7 @@ protected:
 	void setCommandData(QByteArray);
 public:
 	ATCommandResponse();
-	virtual unsigned char getApiID() const { return QTXB::pATCommandResponse; }
+	virtual unsigned char getApiID() const;
 	unsigned char getFrameID();
 	QString getATCommand();
 	unsigned char getCommandStatus();

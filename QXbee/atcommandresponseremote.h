@@ -12,7 +12,7 @@ protected:
 	void setRemoteAddress(QByteArray);
 public:
 	ATCommandResponseRemote();
-	virtual unsigned char getApiID() const { return QTXB::pATCommandResponseRemote; }
+	virtual unsigned char getApiID() const;
 	QByteArray getRemoteAddress();
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);

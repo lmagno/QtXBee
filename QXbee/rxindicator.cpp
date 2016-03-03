@@ -1,10 +1,41 @@
 #include "rxindicator.h"
 #include "xbeepacket.h"
+#include "QXbee.h"
 #include <QDebug>
 
 RXIndicator::RXIndicator()
 {
 }
+
+unsigned char RXIndicator::getApiID() const {
+	return QXbee::pRXIndicator;
+}
+
+QByteArray RXIndicator::getSrcAddr64(){
+	return srcAddr64;
+}
+
+QByteArray RXIndicator::getSrcAddr16(){
+	return srcAddr16;
+}
+
+unsigned RXIndicator::getReceiveOptions(){
+	return receiveOptions;
+}
+
+QByteArray RXIndicator::getData(){
+	return data;
+}
+
+QByteArray RXIndicator::getFrameData() {
+	QByteArray frameData;
+	return frameData;
+}
+
+void RXIndicator::setReceiveOptions(unsigned ro){
+	receiveOptions = ro;
+}
+
 void RXIndicator::setSrcAddr64(QByteArray sa64){
 	srcAddr64.clear();
 	srcAddr64 += sa64;
@@ -17,21 +48,7 @@ void RXIndicator::setData(QByteArray d){
 	data.clear();
 	data += d;
 }
-QByteArray RXIndicator::getSrcAddr64(){
-	return srcAddr64;
-}
-QByteArray RXIndicator::getSrcAddr16(){
-	return srcAddr16;
-}
-void RXIndicator::setReceiveOptions(unsigned ro){
-	receiveOptions = ro;
-}
-unsigned RXIndicator::getReceiveOptions(){
-	return receiveOptions;
-}
-QByteArray RXIndicator::getData(){
-	return data;
-}
+
 void RXIndicator::setFrameData(QByteArray data){
 	setReceiveOptions(data[0]);
 /*
@@ -65,9 +82,4 @@ void RXIndicator::setFrameData(QByteArray data){
 		packet.clear();
 	}
 	*/
-}
-
-QByteArray RXIndicator::getFrameData() {
-	QByteArray frameData;
-	return frameData;
 }

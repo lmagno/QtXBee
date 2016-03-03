@@ -9,7 +9,7 @@ class RXIndicatorExplicit : public XBeePacket
 {
 public:
 	RXIndicatorExplicit();
-	virtual unsigned char getApiID() const { return QTXB::pRXIndicatorExplicit; }
+	virtual unsigned char getApiID() const;
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);
 };
