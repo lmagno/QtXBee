@@ -4,7 +4,7 @@
 #include <QByteArray>
 #include <QString>
 
-#include "XBeePacket.h"
+#include "XBeeFrame.h"
 
 class ATCommand : public XBeePacket
 {

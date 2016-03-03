@@ -3,7 +3,7 @@
 
 #include <QByteArray>
 
-#include "XBeePacket.h"
+#include "XBeeFrame.h"
 
 class TransmitStatus : public XBeePacket
 {

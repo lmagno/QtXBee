@@ -3,7 +3,7 @@
 
 #include <QByteArray>
 
-#include "XBeePacket.h"
+#include "XBeeFrame.h"
 
 class ModemStatus : public XBeePacket
 {

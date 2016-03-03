@@ -3,7 +3,7 @@
 
 #include <QByteArray>
 
-#include "XBeePacket.h"
+#include "XBeeFrame.h"
 
 class RXIndicator : public XBeePacket
 {

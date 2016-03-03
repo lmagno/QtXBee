@@ -5,7 +5,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 
-#include "XBeePacket/XBeePacket.h"
+#include "XBeePacket/XBeeFrame.h"
 #include "XBeePacket/ATCommand.h"
 #include "XBeePacket/ATCommandQueue.h"
 #include "XBeePacket/TXRequest.h"
