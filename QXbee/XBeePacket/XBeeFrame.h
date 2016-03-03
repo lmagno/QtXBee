@@ -1,12 +1,12 @@
-#ifndef XBEEPACKET_H
-#define XBEEPACKET_H
+#ifndef XBEEFRAME_H
+#define XBEEFRAME_H
 
 #include <QByteArray>
 
-class XBeePacket
+class XBeeFrame
 {
 public:
-	// Packet types (API ID)
+	// Frame types (API ID)
 	static const unsigned char pATCommand = 0x08;
 	static const unsigned char pATCommandQueue = 0x09;
 	static const unsigned char pTXRequest = 0x10;
@@ -25,4 +25,4 @@ public:
 	virtual void setFrameData(QByteArray) = 0;
 };
 
-#endif // XBEEPACKET_H
+#endif // XBEEFRAME_H

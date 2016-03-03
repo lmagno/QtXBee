@@ -49,7 +49,7 @@ HEADERS += \
     QXbee/XBeePacket/TransmitStatus.h \
     QXbee/XBeePacket/TXRequest.h \
     QXbee/XBeePacket/TXRequestExplicit.h \
-    QXbee/XBeePacket/XBeePacket.h
+    QXbee/XBeePacket/XBeeFrame.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 
