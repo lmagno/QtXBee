@@ -4,19 +4,19 @@
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "xbeepacket.h"
-#include "atcommand.h"
-#include "atcommandqueue.h"
-#include "txrequest.h"
-#include "txrequestexplicit.h"
-#include "atcommandremote.h"
-#include "atcommandresponse.h"
-#include "modemstatus.h"
-#include "transmitstatus.h"
-#include "rxindicator.h"
-#include "rxindicatorexplicit.h"
-#include "nodeidentificationindicator.h"
-#include "atcommandresponseremote.h"
+#include "XBeePacket/xbeepacket.h"
+#include "XBeePacket/atcommand.h"
+#include "XBeePacket/atcommandqueue.h"
+#include "XBeePacket/txrequest.h"
+#include "XBeePacket/txrequestexplicit.h"
+#include "XBeePacket/atcommandremote.h"
+#include "XBeePacket/atcommandresponse.h"
+#include "XBeePacket/modemstatus.h"
+#include "XBeePacket/transmitstatus.h"
+#include "XBeePacket/rxindicator.h"
+#include "XBeePacket/rxindicatorexplicit.h"
+#include "XBeePacket/nodeidentificationindicator.h"
+#include "XBeePacket/atcommandresponseremote.h"
 
 class QXbee : public QObject
 {

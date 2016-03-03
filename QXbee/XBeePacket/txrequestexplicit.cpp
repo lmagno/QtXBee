@@ -1,6 +1,5 @@
 #include "txrequestexplicit.h"
-#include "txrequest.h"
-#include "QXbee.h"
+#include "../QXbee.h"
 
 TXRequestExplicit::TXRequestExplicit()
 {

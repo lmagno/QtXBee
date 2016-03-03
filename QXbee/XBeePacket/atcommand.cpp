@@ -1,7 +1,5 @@
 #include "atcommand.h"
-#include "xbeepacket.h"
-
-#include "QXbee.h"
+#include "../QXbee.h"
 
 ATCommand::ATCommand()
 {

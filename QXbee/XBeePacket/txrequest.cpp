@@ -1,6 +1,5 @@
 #include "txrequest.h"
-#include "xbeepacket.h"
-#include "QXbee.h"
+#include "../QXbee.h"
 
 #include <QDebug>
 

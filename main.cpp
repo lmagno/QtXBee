@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include "qtxb.h"
+#include "QXbee/QXbee.h"
 #include <QtSerialPort/QSerialPort>
 #include <QTime>
 
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     serial->setStopBits(QSerialPort::OneStop);
     serial->setFlowControl(QSerialPort::NoFlowControl);
 
-    QTXB *xb = new QTXB(serial);
+	QXbee *xb = new QXbee(serial);
     QObject::connect(xb, SIGNAL(receivedATCommandResponse(ATCommandResponse*)), xb, SLOT(displayATCommandResponse(ATCommandResponse*)));
     QObject::connect(xb, SIGNAL(receivedModemStatus(ModemStatus*)), xb, SLOT(displayModemStatus(ModemStatus*)));
     QObject::connect(xb, SIGNAL(receivedTransmitStatus(TransmitStatus*)), xb, SLOT(displayTransmitStatus(TransmitStatus*)));

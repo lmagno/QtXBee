@@ -1,6 +1,6 @@
 #include "atcommandresponse.h"
-#include "atcommand.h"
-#include "QXbee.h"
+#include "../QXbee.h"
+
 #include <QDebug>
 
 ATCommandResponse::ATCommandResponse()

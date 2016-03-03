@@ -1,6 +1,6 @@
 #include "rxindicator.h"
-#include "xbeepacket.h"
-#include "QXbee.h"
+#include "../QXbee.h"
+
 #include <QDebug>
 
 RXIndicator::RXIndicator()

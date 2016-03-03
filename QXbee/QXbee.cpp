@@ -1,21 +1,5 @@
 #include "QXbee.h"
 
-#include "xbeepacket.h"
-#include "atcommand.h"
-#include "atcommandqueue.h"
-#include "txrequest.h"
-#include "txrequestexplicit.h"
-#include "atcommandremote.h"
-
-#include "atcommandresponse.h"
-#include "modemstatus.h"
-#include "transmitstatus.h"
-#include "rxindicator.h"
-#include "rxindicatorexplicit.h"
-#include "nodeidentificationindicator.h"
-#include "atcommandresponseremote.h"
-
-
 #include <QDebug>
 #include <QList>
 #include <QtSerialPort/QSerialPort>

@@ -1,5 +1,5 @@
 #include "nodeidentificationindicator.h"
-#include "QXbee.h"
+#include "../QXbee.h"
 
 NodeIdentificationIndicator::NodeIdentificationIndicator() {
 }

@@ -1,6 +1,5 @@
 #include "atcommandremote.h"
-#include "atcommand.h"
-#include "QXbee.h"
+#include "../QXbee.h"
 
 ATCommandRemote::ATCommandRemote() {
 	//unsigned char broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
