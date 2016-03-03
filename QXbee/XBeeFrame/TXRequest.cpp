@@ -23,7 +23,7 @@ TXRequest::TXRequest()
 	setFrameID(0x01);
 }
 
-void TXRequest::setFrameID(unsigned char id) {
+void TXRequest::setFrameID(quint8 id) {
 	frameID = id;
 }
 
@@ -50,7 +50,7 @@ void TXRequest::setFrameData(QByteArray data) {
 	qDebug() << data.toHex();
 }
 
-unsigned char TXRequest::getFrameID() {
+quint8 TXRequest::getFrameID() {
 	return frameID;
 }
 

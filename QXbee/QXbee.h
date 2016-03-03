@@ -54,7 +54,7 @@ private slots:
 private:
     QSerialPort *serial;
     bool xbeeFound;
-    unsigned char protocolMode;
+	quint8 protocolMode;
     QByteArray buffer;
     void processPacket(QByteArray packet);
 };

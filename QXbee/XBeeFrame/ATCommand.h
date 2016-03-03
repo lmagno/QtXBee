@@ -8,17 +8,17 @@
 
 class ATCommand : public XBeeFrame
 {
-	unsigned char frameID;
+	quint8 frameID;
     QByteArray atCommand;
 	QByteArray atParameter;
 public:
 	ATCommand();
-	virtual unsigned char getFrameType() const { return pATCommand; }
-	unsigned char getFrameID();
+	virtual quint8 getFrameType() const { return pATCommand; }
+	quint8 getFrameID();
     QByteArray getATCommand();
 	QByteArray getATParameter();
 	virtual QByteArray getFrameData();
-	void setFrameID(unsigned char);
+	void setFrameID(quint8);
 	void setATCommand(QString);
 	void setATParameter(QByteArray array);
 	virtual void setFrameData(QByteArray);

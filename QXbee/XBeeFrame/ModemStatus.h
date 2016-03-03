@@ -7,13 +7,13 @@
 
 class ModemStatus : public XBeeFrame
 {
-	unsigned char status;
+	quint8 status;
 protected:
-	void setStatus(unsigned char);
+	void setStatus(quint8);
 public:
 	ModemStatus();
-	virtual unsigned char getFrameType() const { return pModemStatus; }
-	unsigned char getStatus();
+	virtual quint8 getFrameType() const { return pModemStatus; }
+	quint8 getStatus();
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);
 };

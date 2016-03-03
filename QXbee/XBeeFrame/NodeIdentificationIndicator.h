@@ -9,39 +9,39 @@
 class NodeIdentificationIndicator : public XBeeFrame
 {
 	QByteArray sourceAddress;
-	unsigned char receiveOptions;
+	quint8 receiveOptions;
 	QByteArray remoteAddress;
 	QString niString;
-	unsigned char deviceType;
-	unsigned char sourceEvent;
+	quint8 deviceType;
+	quint8 sourceEvent;
 	QByteArray profileID;
 	QByteArray manufaccturerID;
 	QByteArray ddValue;
-	unsigned char rssiValue;
+	quint8 rssiValue;
 protected:
 	void setSourceAddress(QByteArray);
-	void setReceiveOptions(unsigned char);
+	void setReceiveOptions(quint8);
 	void setRemoteAddress(QByteArray);
 	void setNIString(QString);
-	void setDeviceType(unsigned char);
-	void setSourceEvent(unsigned char);
+	void setDeviceType(quint8);
+	void setSourceEvent(quint8);
 	void setProfileID(QByteArray);
 	void setManufacturerID(QByteArray);
 	void setDDValue(QByteArray);
-	void setRSSI(unsigned char);
+	void setRSSI(quint8);
 public:
-	virtual unsigned char getFrameType() const { return pNodeIdentificationIndicator; }
+	virtual quint8 getFrameType() const { return pNodeIdentificationIndicator; }
 	NodeIdentificationIndicator();
 	QByteArray getSourceAddress();
-	unsigned char getReceiveOptions();
+	quint8 getReceiveOptions();
 	QByteArray getRemoteAddress();
 	QString getNIString();
-	unsigned char getDeviceType();
-	unsigned char getSourceEvent();
+	quint8 getDeviceType();
+	quint8 getSourceEvent();
 	QByteArray getProfileID();
 	QByteArray getManufacturerID();
 	QByteArray getDDValue();
-	unsigned char getRSSI();
+	quint8 getRSSI();
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);
 };

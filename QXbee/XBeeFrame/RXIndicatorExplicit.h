@@ -9,7 +9,7 @@ class RXIndicatorExplicit : public XBeeFrame
 {
 public:
 	RXIndicatorExplicit();
-	virtual unsigned char getFrameType() const { return pRXIndicatorExplicit; }
+	virtual quint8 getFrameType() const { return pRXIndicatorExplicit; }
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);
 };

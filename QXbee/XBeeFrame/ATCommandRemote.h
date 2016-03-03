@@ -8,15 +8,15 @@
 class ATCommandRemote : public ATCommand
 {
 	QByteArray destinationAddress;
-	unsigned char commandOptions;
+	quint8 commandOptions;
 public:
 	ATCommandRemote();
-	virtual unsigned char getFrameType() const { return pATCommandRemote; }
+	virtual quint8 getFrameType() const { return pATCommandRemote; }
 	QByteArray getDestinationAdress();
-	unsigned char getCommandOptions();
+	quint8 getCommandOptions();
 	QByteArray getFrameData();
 	void setDestinationAddress(QByteArray);
-	void setCommandOptions(unsigned char);
+	void setCommandOptions(quint8);
 	void setFrameData(QByteArray);
 };
 

@@ -13,7 +13,7 @@ class RXIndicator : public XBeeFrame
 	QByteArray data;
 public:
 	RXIndicator();
-	virtual unsigned char getFrameType() const { return pRXIndicator; }
+	virtual quint8 getFrameType() const { return pRXIndicator; }
 	QByteArray getSrcAddr64();
 	QByteArray getSrcAddr16();
 	unsigned getReceiveOptions();

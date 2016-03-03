@@ -6,7 +6,7 @@ ATCommandResponse::ATCommandResponse()
 {
 }
 
-unsigned char ATCommandResponse::getFrameID() {
+quint8 ATCommandResponse::getFrameID() {
 	return frameID;
 }
 
@@ -14,7 +14,7 @@ QString ATCommandResponse::getATCommand() {
 	return atCommand;
 }
 
-unsigned char ATCommandResponse::getCommandStatus() {
+quint8 ATCommandResponse::getCommandStatus() {
 	return commandStatus;
 }
 
@@ -32,13 +32,13 @@ QByteArray ATCommandResponse::getFrameData() {
 	return frameData;
 }
 
-void ATCommandResponse::setFrameID(unsigned char id) {
+void ATCommandResponse::setFrameID(quint8 id) {
 	frameID = id;
 }
 void ATCommandResponse::setATCommand(QString command) {
 	atCommand = command.toLocal8Bit();
 }
-void ATCommandResponse::setCommandStatus(unsigned char status) {
+void ATCommandResponse::setCommandStatus(quint8 status) {
 	commandStatus = status;
 }
 void ATCommandResponse::setCommandData(QByteArray data) {

@@ -7,15 +7,15 @@
 
 class TransmitStatus : public XBeeFrame
 {
-	unsigned char deliveryStatus;
-	unsigned char transmitRetryCount;
-	unsigned char discoveryStatus;
+	quint8 deliveryStatus;
+	quint8 transmitRetryCount;
+	quint8 discoveryStatus;
 public:
 	TransmitStatus();
-	virtual unsigned char getFrameType() const { return pTransmitStatus; }
-	unsigned char getDeliveryStatus();
-	unsigned char getTransmitRetryCount();
-	unsigned char getDiscoveryStatus();
+	virtual quint8 getFrameType() const { return pTransmitStatus; }
+	quint8 getDeliveryStatus();
+	quint8 getTransmitRetryCount();
+	quint8 getDiscoveryStatus();
 	QByteArray getFrameData();
 	void setDeliveryStatus(unsigned ds);
 	void setTransmitRetryCount(unsigned trc);

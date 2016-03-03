@@ -13,7 +13,7 @@ class TXRequestExplicit : public TXRequest
 	QByteArray profileID;
 public:
 	TXRequestExplicit();
-	virtual unsigned char getFrameType() const { return pTXRequestExplicit; }
+	virtual quint8 getFrameType() const { return pTXRequestExplicit; }
 };
 
 #endif // TXREQUESTEXPLICIT_H
