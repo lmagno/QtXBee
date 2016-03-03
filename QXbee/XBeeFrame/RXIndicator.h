@@ -5,7 +5,7 @@
 
 #include "XBeeFrame.h"
 
-class RXIndicator : public XBeePacket
+class RXIndicator : public XBeeFrame
 {
 	QByteArray srcAddr64;
 	QByteArray srcAddr16;

@@ -23,33 +23,33 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
 	QXbee/QXbee.cpp \
-    QXbee/XBeePacket/ATCommand.cpp \
-    QXbee/XBeePacket/ATCommandRemote.cpp \
-    QXbee/XBeePacket/ATCommandResponse.cpp \
-    QXbee/XBeePacket/ATCommandResponseRemote.cpp \
-    QXbee/XBeePacket/ModemStatus.cpp \
-    QXbee/XBeePacket/NodeIdentificationIndicator.cpp \
-    QXbee/XBeePacket/RXIndicator.cpp \
-    QXbee/XBeePacket/RXIndicatorExplicit.cpp \
-    QXbee/XBeePacket/TransmitStatus.cpp \
-    QXbee/XBeePacket/TXRequest.cpp \
-    QXbee/XBeePacket/TXRequestExplicit.cpp
+	QXbee/XBeeFrame/ATCommand.cpp \
+	QXbee/XBeeFrame/ATCommandRemote.cpp \
+	QXbee/XBeeFrame/ATCommandResponse.cpp \
+	QXbee/XBeeFrame/ATCommandResponseRemote.cpp \
+	QXbee/XBeeFrame/ModemStatus.cpp \
+	QXbee/XBeeFrame/NodeIdentificationIndicator.cpp \
+	QXbee/XBeeFrame/RXIndicator.cpp \
+	QXbee/XBeeFrame/RXIndicatorExplicit.cpp \
+	QXbee/XBeeFrame/TransmitStatus.cpp \
+	QXbee/XBeeFrame/TXRequest.cpp \
+	QXbee/XBeeFrame/TXRequestExplicit.cpp
 
 HEADERS += \
 	QXbee/QXbee.h \
-    QXbee/XBeePacket/ATCommand.h \
-    QXbee/XBeePacket/ATCommandQueue.h \
-    QXbee/XBeePacket/ATCommandRemote.h \
-    QXbee/XBeePacket/ATCommandResponse.h \
-    QXbee/XBeePacket/ATCommandResponseRemote.h \
-    QXbee/XBeePacket/ModemStatus.h \
-    QXbee/XBeePacket/NodeIdentificationIndicator.h \
-    QXbee/XBeePacket/RXIndicator.h \
-    QXbee/XBeePacket/RXIndicatorExplicit.h \
-    QXbee/XBeePacket/TransmitStatus.h \
-    QXbee/XBeePacket/TXRequest.h \
-    QXbee/XBeePacket/TXRequestExplicit.h \
-    QXbee/XBeePacket/XBeeFrame.h
+	QXbee/XBeeFrame/ATCommand.h \
+	QXbee/XBeeFrame/ATCommandQueue.h \
+	QXbee/XBeeFrame/ATCommandRemote.h \
+	QXbee/XBeeFrame/ATCommandResponse.h \
+	QXbee/XBeeFrame/ATCommandResponseRemote.h \
+	QXbee/XBeeFrame/ModemStatus.h \
+	QXbee/XBeeFrame/NodeIdentificationIndicator.h \
+	QXbee/XBeeFrame/RXIndicator.h \
+	QXbee/XBeeFrame/RXIndicatorExplicit.h \
+	QXbee/XBeeFrame/TransmitStatus.h \
+	QXbee/XBeeFrame/TXRequest.h \
+	QXbee/XBeeFrame/TXRequestExplicit.h \
+	QXbee/XBeeFrame/XBeeFrame.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 

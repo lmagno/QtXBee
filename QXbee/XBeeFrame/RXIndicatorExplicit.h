@@ -5,7 +5,7 @@
 
 #include "XBeeFrame.h"
 
-class RXIndicatorExplicit : public XBeePacket
+class RXIndicatorExplicit : public XBeeFrame
 {
 public:
 	RXIndicatorExplicit();

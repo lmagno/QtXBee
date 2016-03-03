@@ -84,7 +84,7 @@ void QXbee::displayRemoteCommandResponse(ATCommandResponseRemote *digiMeshPacket
 	qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->getFrameData().toHex();
 }
 
-void QXbee::send(XBeePacket *request)
+void QXbee::send(XBeeFrame *request)
 {
 	union {
 		unsigned short value;
@@ -211,43 +211,43 @@ void QXbee::readData()
 
 void QXbee::processPacket(QByteArray packet){
 	switch (packet[0]) {
-	case XBeePacket::pATCommandResponse:{
+	case XBeeFrame::pATCommandResponse:{
 		ATCommandResponse *response = new ATCommandResponse;
 		response->setFrameData(packet);
 		emit receivedATCommandResponse(response);
 		break;
 	}
-	case XBeePacket::pModemStatus:{
+	case XBeeFrame::pModemStatus:{
 		ModemStatus *response = new ModemStatus;
 		response->setFrameData(packet);
 		emit receivedModemStatus(response);
 		break;
 	}
-	case XBeePacket::pTransmitStatus:{
+	case XBeeFrame::pTransmitStatus:{
 		TransmitStatus *response = new TransmitStatus;
 		response->setFrameData(packet);
 		emit receivedTransmitStatus(response);
 		break;
 	}
-	case XBeePacket::pRXIndicator:{
+	case XBeeFrame::pRXIndicator:{
 		RXIndicator *response = new RXIndicator;
 		response->setFrameData(packet);
 		emit receivedRXIndicator(response);
 		break;
 	}
-	case XBeePacket::pRXIndicatorExplicit:{
+	case XBeeFrame::pRXIndicatorExplicit:{
 		RXIndicatorExplicit *response = new RXIndicatorExplicit;
 		response->setFrameData(packet);
 		emit receivedRXIndicatorExplicit(response);
 		break;
 	}
-	case XBeePacket::pNodeIdentificationIndicator:{
+	case XBeeFrame::pNodeIdentificationIndicator:{
 		NodeIdentificationIndicator *response = new NodeIdentificationIndicator;
 		response->setFrameData(packet);
 		emit receivedNodeIdentificationIndicator(response);
 		break;
 	}
-	case XBeePacket::pATCommandResponseRemote:{
+	case XBeeFrame::pATCommandResponseRemote:{
 		ATCommandResponseRemote *response = new ATCommandResponseRemote;
 		response->setFrameData(packet);
 		emit receivedRemoteCommandResponse(response);

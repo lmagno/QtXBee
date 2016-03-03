@@ -6,7 +6,7 @@
 
 #include "XBeeFrame.h"
 
-class NodeIdentificationIndicator : public XBeePacket
+class NodeIdentificationIndicator : public XBeeFrame
 {
 	QByteArray sourceAddress;
 	unsigned char receiveOptions;

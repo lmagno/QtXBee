@@ -5,7 +5,7 @@
 
 #include "XBeeFrame.h"
 
-class TransmitStatus : public XBeePacket
+class TransmitStatus : public XBeeFrame
 {
 	unsigned char deliveryStatus;
 	unsigned char transmitRetryCount;

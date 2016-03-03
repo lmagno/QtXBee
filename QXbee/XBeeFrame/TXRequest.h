@@ -5,7 +5,7 @@
 
 #include "XBeeFrame.h"
 
-class TXRequest : public XBeePacket
+class TXRequest : public XBeeFrame
 {
 	unsigned char frameID;
 	QByteArray destAddr64;

@@ -5,7 +5,7 @@
 
 #include "XBeeFrame.h"
 
-class ModemStatus : public XBeePacket
+class ModemStatus : public XBeeFrame
 {
 	unsigned char status;
 protected:

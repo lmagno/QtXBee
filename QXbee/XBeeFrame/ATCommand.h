@@ -6,7 +6,7 @@
 
 #include "XBeeFrame.h"
 
-class ATCommand : public XBeePacket
+class ATCommand : public XBeeFrame
 {
 	unsigned char frameID;
     QByteArray atCommand;
