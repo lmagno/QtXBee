@@ -5,7 +5,7 @@
 #include <QString>
 
 #include "XBeeFrame.h"
-#include "../typedef.h"
+#include "typedef.h"
 
 class ATCommand : public XBeeFrame
 {

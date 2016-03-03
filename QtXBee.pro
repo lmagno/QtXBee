@@ -20,6 +20,8 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
+INCLUDEPATH += $$PWD/QXbee
+INCLUDEPATH += $$PWD/QXbee/QXbeeFrame
 
 SOURCES += main.cpp \
 	QXbee/QXbee.cpp \
@@ -36,6 +38,7 @@ SOURCES += main.cpp \
 	QXbee/XBeeFrame/TXRequestExplicit.cpp
 
 HEADERS += \
+	QXbee/typedef.h \
 	QXbee/QXbee.h \
 	QXbee/XBeeFrame/ATCommand.h \
 	QXbee/XBeeFrame/ATCommandQueue.h \

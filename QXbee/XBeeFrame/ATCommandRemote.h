@@ -3,7 +3,7 @@
 
 #include <QByteArray>
 
-#include "../typedef.h"
+#include "typedef.h"
 #include "ATCommand.h"
 
 class ATCommandRemote : public ATCommand

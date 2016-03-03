@@ -1,7 +1,7 @@
 #ifndef XBEEFRAME_H
 #define XBEEFRAME_H
 
-#include "../typedef.h"
+#include "typedef.h"
 #include <QByteArray>
 
 class XBeeFrame

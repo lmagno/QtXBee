@@ -3,7 +3,7 @@
 
 #include <QByteArray>
 
-#include "../typedef.h"
+#include "typedef.h"
 #include "XBeeFrame.h"
 
 class RXIndicator : public XBeeFrame
