@@ -4,8 +4,8 @@
 #include <QByteArray>
 #include <QString>
 
-#include "XBeeFrame.h"
 #include "typedef.h"
+#include "XBeeFrame.h"
 
 class ATCommand : public XBeeFrame
 {

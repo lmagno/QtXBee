@@ -87,20 +87,21 @@ void QXbee::displayRemoteCommandResponse(ATCommandResponseRemote *digiMeshPacket
 void QXbee::send(XBeeFrame *request)
 {
 	union {
-		unsigned short value;
-		byte bytes[2];
-	} frameLength;
+		unsigned short i;
+		byte b[2];
+	} dataLength;
 	byte chksm = 0;
-	QByteArray frame;
+	QByteArray frame, data;
 
-	// Assemble frame
+	data = request->getFrameData();
+	dataLength.i = data.length();
+	// Assemble frame (must verify API mode)
 	frame[0] = 0x7E;
-	frame.insert(3, request->getFrameData());
-	frameLength.value = frame.length() + 1;
-	frame[1] = frameLength.bytes[1];
-	frame[2] = frameLength.bytes[0];
+	frame[1] = dataLength.b[1];
+	frame[2] = dataLength.b[0];
+	frame += data;
 	// Calculate checksum
-	for (int i = 3; i < frameLength.value-1; i++) chksm += frame[i];
+	for (int i = 0; i < data.length(); i++) chksm += data[i];
 	chksm = 0xFF - chksm;
 	frame[frame.length()] = chksm;
 
@@ -135,7 +136,7 @@ void QXbee::readData()
 	const char startDelimiter = 0x7E;
 	const char escapeCharacter = 0x7D;
 	int i, frameIndex, frameLength, packetLength;
-	byte chksm;
+	byte chksm, blah;
 	QByteArray frame;
 
 	i = frameIndex = frameLength = packetLength = 0;
@@ -152,20 +153,29 @@ void QXbee::readData()
 
 	while (buffer.size() > 0) {
 
+		frame.clear();
+
 		// Extract frame
 		switch (protocolMode) {
 		case 1:
 			// Calculate frame length
 			frameLength = (int)buffer[1] << 8;
-			frameLength += (int)buffer[2] + 4;
+			frameLength += (int)buffer[2];
 
 			// Leave if we don't have a full frame
-			if(buffer.size() < frameLength) return;
+			if(buffer.size()-4 < frameLength) return;
+
+			// Verify frame checksum
+			chksm = 0;
+			for (i = 3; i < frameLength+3; i++) chksm += buffer[i];
+			chksm = 0xFF - chksm;
 
 			// Save frame
-			frame = buffer.left(frameLength);
-			buffer.remove(0, frameLength);
-
+			blah = buffer[frameLength+3];
+			if (chksm == blah) {
+				frame = buffer.mid(3,frameLength);
+				buffer.remove(0, frameLength+4);
+			}
 			break;
 
 		case 2:
@@ -197,20 +207,15 @@ void QXbee::readData()
 			if (frame.size() != packetLength) return;
 			buffer.remove(0, frameIndex);
 		}
+
+		// Process packet
+		if (!frame.isEmpty()) processPacket(frame);
 	}
-
-	// Verify packet checksum
-	chksm = 0;
-	for (i = 3; i < frameLength-1; i++) chksm += frame[i];
-	chksm = 0xFF - chksm;
-
-	// Process packet
-	if (chksm == (byte)frame[frameLength-1])
-		processPacket(frame);
 }
 
 void QXbee::processPacket(QByteArray packet){
-	switch (packet[0]) {
+	byte blah = (byte)packet[0];
+	switch (blah) {
 	case XBeeFrame::pATCommandResponse:{
 		ATCommandResponse *response = new ATCommandResponse;
 		response->setFrameData(packet);
