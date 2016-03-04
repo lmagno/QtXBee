@@ -23,14 +23,14 @@ QXbee::QXbee(QSerialPort *ser){
 		serial->write("+++");
 
 		// Wait for OK
-		while (serial->waitForReadyRead(2000)) data += serial->readAll();
+		while (serial->waitForReadyRead(1500)) data += serial->readAll();
 
 		if (data.startsWith("OK")) {
 			data.clear();
 			// Request protocol mode
 			serial->write("ATAP\r");
 			// Wait for answer
-			while (serial->waitForReadyRead(2000)) data += serial->readAll();
+			while (serial->waitForReadyRead(100)) data += serial->readAll();
 			if (data.length() > 0) protocolMode = data[0]-'0';
 			qDebug() << "Protocol mode: " << protocolMode;
 			// Exit AT command mode
@@ -63,10 +63,22 @@ QXbee::~QXbee()
 	}
 }
 void QXbee::displayATCommandResponse(ATCommandResponse *packet){
-	qDebug() << "Received ATCommandResponse: " << packet->getFrameData().toHex();
+	QByteArray data = packet->getCommandData();
+	int idx = 0;
+	qDebug() << "Raw data: " << packet->getFrameData().toHex();
+	qDebug() << "Command: " << packet->getATCommand();
+	qDebug() << "Status: " << packet->getCommandStatus();
+	qDebug() << "Remote Address: " << data.mid(2, 8).toHex();
+	idx = data.indexOf((char)0x00, 10);
+	qDebug() << "Name: " << data.mid(10,idx-10);
+	idx += 3;
+	qDebug() << "Device type: " << data[idx];
+	qDebug() << "Profile ID: " << data.mid(idx+2, 2).toHex();
+	qDebug() << "Manufacturer: " << data.mid(idx+4, 2).toHex();
+	qDebug() << "";
 }
 void QXbee::displayModemStatus(ModemStatus *digiMeshPacket){
-	qDebug() << "Received ModemStatus: " << digiMeshPacket->getFrameData().toHex();
+	qDebug() << "Received ModemStatus: " << digiMeshPacket->getFrameData();
 }
 void QXbee::displayTransmitStatus(TransmitStatus *digiMeshPacket){
 	qDebug() << "Received TransmitStatus: " << digiMeshPacket->getFrameData().toHex();
