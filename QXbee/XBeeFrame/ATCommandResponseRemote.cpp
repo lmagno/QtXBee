@@ -23,11 +23,14 @@ QByteArray ATCommandResponseRemote::getRemoteAddress() {
 
 QByteArray ATCommandResponseRemote::getFrameData() {
 	QByteArray frameData;
-	static const byte reserved[] = {0xFF,0xFE};
-	frameData.append(getFrameType());
+	frameData += getFrameType();
 	frameData += getFrameID();
 	frameData += getRemoteAddress();
-	frameData.append((char *)reserved, 2);
+
+	// Reserved bytes
+	frameData += (byte)0xFF;
+	frameData += (byte)0xFE;
+
 	frameData += getATCommand();
 	frameData += getCommandStatus();
 	frameData += getCommandData();

@@ -25,11 +25,14 @@ void ATCommandRemote::setCommandOptions(byte options) {
 
 QByteArray ATCommandRemote::getFrameData() {
 	QByteArray frameData;
-	static const byte reserved[] = {0xFF,0xFE};
-	frameData.append(getFrameType());
+	frameData += getFrameType();
 	frameData += getFrameID();
 	frameData += getDestinationAdress();
-	frameData.append((char *)reserved, 2);
+
+	// Reserved bytes
+	frameData += (byte)0xFF;
+	frameData += (byte)0xFE;
+
 	frameData += getCommandOptions();
 	frameData += getATCommand();
 	frameData += getATParameter();
