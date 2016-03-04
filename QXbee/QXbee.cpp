@@ -72,7 +72,7 @@ void QXbee::displayATCommandResponse(ATCommandResponse *packet){
 	idx = data.indexOf((char)0x00, 10);
 	qDebug() << "Name: " << data.mid(10,idx-10);
 	idx += 3;
-	qDebug() << "Device type: " << data[idx];
+	qDebug() << "Device type: " << (byte)data[idx];
 	qDebug() << "Profile ID: " << data.mid(idx+2, 2).toHex();
 	qDebug() << "Manufacturer: " << data.mid(idx+4, 2).toHex();
 	qDebug() << "";
