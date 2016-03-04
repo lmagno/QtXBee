@@ -1,14 +1,25 @@
 #include <QCoreApplication>
 #include "QXbee/QXbee.h"
 #include <QtSerialPort/QSerialPort>
+#include <QDebug>
 #include <QTime>
+#include <QFile>
+#include <QString>
+#include <QTextStream>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
     QSerialPort *serial = new QSerialPort();
-    serial->setPortName("/dev/tty.usbserial-A600e0VF");
+
+    QFile in("device.cfg");
+    if(!in.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Couldn't open file device.cfg";
+        return 1;
+    }
+    QTextStream device(&in);
+    serial->setPortName(device.readLine());
     serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
