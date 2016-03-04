@@ -4,75 +4,53 @@ RXIndicator::RXIndicator()
 {
 }
 
-QByteArray RXIndicator::getSrcAddr64(){
-	return srcAddr64;
+QByteArray RXIndicator::getSourceAddress(){
+	return sourceAddress;
 }
 
-QByteArray RXIndicator::getSrcAddr16(){
-	return srcAddr16;
-}
 
-unsigned RXIndicator::getReceiveOptions(){
+byte RXIndicator::getReceiveOptions(){
 	return receiveOptions;
 }
 
-QByteArray RXIndicator::getData(){
-	return data;
+QByteArray RXIndicator::getReceivedData(){
+	return receivedData;
 }
 
 QByteArray RXIndicator::getFrameData() {
 	QByteArray frameData;
+
+	frameData += getFrameType();
+	frameData += getSourceAddress();
+
+	// Reserved bytes
+	frameData += (byte)0xFF;
+	frameData += (byte)0xFE;
+
+	frameData += getReceiveOptions();
+	frameData += getReceivedData();
+
 	return frameData;
 }
 
-void RXIndicator::setReceiveOptions(unsigned ro){
+void RXIndicator::setSourceAddress(QByteArray sa){
+	sourceAddress.clear();
+	sourceAddress += sa;
+}
+
+void RXIndicator::setReceiveOptions(byte ro){
 	receiveOptions = ro;
 }
 
-void RXIndicator::setSrcAddr64(QByteArray sa64){
-	srcAddr64.clear();
-	srcAddr64 += sa64;
-}
-void RXIndicator::setSrcAddr16(QByteArray sa16){
-	srcAddr16.clear();
-	srcAddr16 += sa16;
-}
-void RXIndicator::setData(QByteArray d){
-	data.clear();
-	data += d;
+void RXIndicator::setReceivedData(QByteArray rd){
+	receivedData.clear();
+	receivedData += rd;
 }
 
 void RXIndicator::setFrameData(QByteArray data){
-	setReceiveOptions(data[0]);
-/*
-	packet.clear();
-	packet += rx;
-	setStartDelimiter(rx[0]);
-	setLength(rx[2]);
-	if(rx.size() == rx[2]+4 && rx.size() > 15){
-		setFrameType(rx[3]);
-		srcAddr64 += rx[4];
-		srcAddr64 += rx[5];
-		srcAddr64 += rx[6];
-		srcAddr64 += rx[7];
-		srcAddr64 += rx[8];
-		srcAddr64 += rx[9];
-		srcAddr64 += rx[10];
-		srcAddr64 += rx[11];
-		srcAddr16 += rx[12];
-		srcAddr16 += rx[13];
-		setReceiveOptions(rx[14]);
-		int count = 15;
-		while(count < rx.size()-1){
-			data += rx[count];
-			count++;
-		}
-		setChecksum(rx[count]);
-	}else{
+	if (data.size() < 12 && data.at(0) != getFrameType()) return;
 
-		qDebug()<< "Invalid Packet Received!";
-		qDebug()<< packet.toHex();
-		packet.clear();
-	}
-	*/
+	setSourceAddress(data.mid(1, 8));
+	setReceiveOptions(data[11]);
+	if (data.size() > 12) setReceivedData(data.mid(12));
 }

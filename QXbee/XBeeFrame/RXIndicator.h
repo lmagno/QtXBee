@@ -8,24 +8,22 @@
 
 class RXIndicator : public XBeeFrame
 {
-	QByteArray srcAddr64;
-	QByteArray srcAddr16;
-	unsigned receiveOptions;
-	QByteArray data;
+	QByteArray sourceAddress;
+	byte       receiveOptions;
+	QByteArray receivedData;
+protected:
+	void setSourceAddress(QByteArray);
+	void setReceiveOptions(byte);
+	void setReceivedData(QByteArray);
 public:
 	RXIndicator();
 	virtual byte getFrameType() const { return pRXIndicator; }
-	QByteArray getSrcAddr64();
-	QByteArray getSrcAddr16();
-	unsigned getReceiveOptions();
-	QByteArray getData();
-	QByteArray getFrameData();
-	void readPacket(QByteArray rx);
-	void setSrcAddr64(QByteArray sa64);
-	void setSrcAddr16(QByteArray sa16);
-	void setReceiveOptions(unsigned ro);
-	void setData(QByteArray d);
-	void setFrameData(QByteArray);
+	QByteArray   getSourceAddress();
+	byte         getReceiveOptions();
+	QByteArray   getReceivedData();
+
+	virtual QByteArray getFrameData();
+	virtual void 	   setFrameData(QByteArray);
 };
 
 #endif // RXINDICATOR_H
