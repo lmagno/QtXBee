@@ -22,14 +22,14 @@ public:
 	QByteArray		   getDestinationAddress();
 	byte			   getBroadcastRadius();
 	byte			   getTransmitOptions();
-	QByteArray		   getRFData();
+	QByteArray		   getTransmitingData();
 	virtual QByteArray getFrameData();
 
 	void			   setFrameID(byte);
+	void			   setDestinationAddress(QByteArray);
 	void			   setBroadcastRadius(byte);
 	void			   setTransmitOptions(byte);
-	void			   setDestinationAddress(QByteArray);
-	void			   setRFData(QByteArray d);
+	void			   setTransmitingData(QByteArray d);
 	virtual void	   setFrameData(QByteArray);
 };
 

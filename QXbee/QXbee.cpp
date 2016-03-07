@@ -128,14 +128,14 @@ void QXbee::send(XBeeFrame *request)
 void QXbee::broadcast(QString data)
 {
 	TXRequest *request = new TXRequest;
-	request->setRFData(data.toLatin1());
+	request->setTransmitingData(data.toLatin1());
 	send(request);
 }
 
 void QXbee::unicast(QByteArray address, QString data){
 	TXRequest *request = new TXRequest;
 	request->setDestinationAddress(address);
-	request->setRFData(data.toLatin1());
+	request->setTransmitingData(data.toLatin1());
 	send(request);
 }
 

@@ -4,7 +4,7 @@
 
 ATCommand::ATCommand()
 {
-	setFrameID(0);
+	setFrameID(0x01);
 }
 
 byte ATCommand::getFrameID() {

@@ -2,21 +2,11 @@
 
 TXRequest::TXRequest()
 {
-	// Ma HAHAiiiii vai ou não vaiiiii
-    unsigned zero = 0x00;
-    unsigned oxff = 0xFF;
-	destinationAddress += zero;
-	destinationAddress += zero;
-	destinationAddress += zero;
-	destinationAddress += zero;
-	destinationAddress += zero;
-	destinationAddress += zero;
-	destinationAddress += oxff;
-	destinationAddress += oxff;
-
-    broadcastRadius = 1;
-    transmitOptions = 0x00;
+	static const byte broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
 	setFrameID(0x01);
+	setDestinationAddress(QByteArray((char *)broadcast, 8)); // Broadcast by default
+	setBroadcastRadius(1);
+	setTransmitOptions(0x00);
 }
 
 byte TXRequest::getFrameID() {
@@ -35,7 +25,7 @@ byte TXRequest::getTransmitOptions(){
 	return transmitOptions;
 }
 
-QByteArray TXRequest::getRFData(){
+QByteArray TXRequest::getTransmitingData(){
 	return rfData;
 }
 
@@ -49,7 +39,7 @@ QByteArray TXRequest::getFrameData(){
 	frameData += (byte)0xFE;
 	frameData += getBroadcastRadius();
 	frameData += getTransmitOptions();
-	frameData += getRFData();
+	frameData += getTransmitingData();
 	return frameData;
 }
 
@@ -69,7 +59,7 @@ void TXRequest::setDestinationAddress(QByteArray address){
 	destinationAddress = address;
 }
 
-void TXRequest::setRFData(QByteArray data){
+void TXRequest::setTransmitingData(QByteArray data){
 	rfData = data;
 }
 
@@ -79,5 +69,5 @@ void TXRequest::setFrameData(QByteArray data) {
 	setDestinationAddress(data.mid(2,8));
 	setBroadcastRadius(data[12]);
 	setTransmitOptions(data[13]);
-	setRFData(data.mid(14));
+	setTransmitingData(data.mid(14));
 }

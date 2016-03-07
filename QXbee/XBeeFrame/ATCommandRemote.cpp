@@ -2,7 +2,7 @@
 
 ATCommandRemote::ATCommandRemote() {
 	static const byte broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
-	setFrameID(0);
+	setFrameID(0x01);
 	setCommandOptions(0x02);
 	setDestinationAddress(QByteArray((char *)broadcast, 8)); // Broadcast by default
 }
