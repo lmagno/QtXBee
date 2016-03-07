@@ -2,8 +2,9 @@
 #define QXBEE_H
 
 #include <QObject>
+#include <QByteArray>
+#include <QString>
 #include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
 
 #include "typedef.h"
 #include "XBeeFrame/XBeeFrame.h"
@@ -40,6 +41,7 @@ signals:
     void receivedNodeIdentificationIndicator(NodeIdentificationIndicator *response);
 	void receivedRemoteCommandResponse(ATCommandResponseRemote *response);
 
+// Remove public slots on final version
 public slots:
     void displayATCommandResponse(ATCommandResponse *digiMeshPacket);
     void displayModemStatus(ModemStatus *digiMeshPacket);

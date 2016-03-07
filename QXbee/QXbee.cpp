@@ -1,8 +1,4 @@
 #include <QDebug>
-#include <QList>
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
-#include <QCoreApplication>
 
 #include "QXbee.h"
 
