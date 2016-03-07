@@ -15,14 +15,6 @@ byte ATCommandRemote::getCommandOptions() {
 	return commandOptions;
 }
 
-void ATCommandRemote::setDestinationAddress(QByteArray address) {
-	if (address.length() >= 8) destinationAddress = address.left(8);
-}
-
-void ATCommandRemote::setCommandOptions(byte options) {
-	commandOptions = options;
-}
-
 QByteArray ATCommandRemote::getFrameData() {
 	QByteArray frameData;
 	frameData += getFrameType();
@@ -37,6 +29,14 @@ QByteArray ATCommandRemote::getFrameData() {
 	frameData += getATCommand();
 	frameData += getATParameter();
 	return frameData;
+}
+
+void ATCommandRemote::setDestinationAddress(QByteArray address) {
+	if (address.length() >= 8) destinationAddress = address.left(8);
+}
+
+void ATCommandRemote::setCommandOptions(byte options) {
+	commandOptions = options;
 }
 
 void ATCommandRemote::setFrameData(QByteArray data) {

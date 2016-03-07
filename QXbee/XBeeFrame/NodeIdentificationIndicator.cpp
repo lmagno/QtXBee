@@ -88,17 +88,27 @@ void NodeIdentificationIndicator::setRSSI(byte rssi) {
 	rssiValue = rssi;
 }
 
-void NodeIdentificationIndicator::setFrameData(QByteArray) {
-	/*
-	int index = 0;
-	if (!frameData.isEmpty()) {
-		setApiID(frameData[0]);
-		setSourceAddress(frameData.mid(1,8));
-		setReceiveOptions(frameData[11]);
-		setRemoteAddress(frameData.mid(14,8));
-		index = frameData.indexOf((char)0x00, 22);
-		setNIString(frameData.mid(22,index-21));
-		index++;
+void NodeIdentificationIndicator::setFrameData(QByteArray data) {
+	int idx = 0;
+	if (data.size() < 32 && data.at(0) != getFrameType()) return;
+	setSourceAddress(data.mid(1,8));
+	setReceiveOptions(data[11]);
+	setRemoteAddress(data.mid(14,8));
+	idx = data.indexOf((char)0x00, 22);
+	setNIString(data.mid(22,idx-22));
+	idx += 3;
+	setDeviceType(data[idx]);
+	setSourceEvent(data[idx+1]);
+	setProfileID(data.mid(idx+2,2));
+	setManufacturerID(data.mid(idx+4,2));
+	if (data.size() > idx+6) {
+		if (data.size() == idx+7) {
+			setDDValue(data.mid(idx+6,4));
+			setRSSI(data[idx+10]);
+		}
+		else if (data.size() == idx+5)
+			setDDValue(data.mid(idx+6,4));
+		else
+			setRSSI(data[idx+6]);
 	}
-	*/
 }
