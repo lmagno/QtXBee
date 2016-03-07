@@ -2,6 +2,7 @@
 #define ATCOMMANDRESPONSE_H
 
 #include <QByteArray>
+#include <QString>
 
 #include "typedef.h"
 #include "XBeeFrame.h"

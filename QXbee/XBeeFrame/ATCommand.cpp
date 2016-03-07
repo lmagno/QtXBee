@@ -29,7 +29,7 @@ QByteArray ATCommand::getFrameData() {
 }
 
 void ATCommand::setATCommand(QString command){
-	if (command.size() == 2;) atCommand = command;
+	atCommand = command.toLocal8Bit();
 }
 
 void ATCommand::setATParameter(QByteArray parameter){

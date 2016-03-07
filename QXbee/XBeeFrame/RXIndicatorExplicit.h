@@ -4,13 +4,26 @@
 #include <QByteArray>
 
 #include "typedef.h"
-#include "XBeeFrame.h"
+#include "RXIndicator.h"
 
-class RXIndicatorExplicit : public XBeeFrame
+class RXIndicatorExplicit : public RXIndicator
 {
+	byte sourceEndpoint;
+	byte destinationEndpoint;
+	QByteArray clusterID;
+	QByteArray profileID;
+protected:
+	void setSourceEndpoint(byte);
+	void setDestinationEndpoint(byte);
+	void setClusterID(QByteArray);
+	void setProfileID(QByteArray);
 public:
 	RXIndicatorExplicit();
 	virtual byte getFrameType() const { return pRXIndicatorExplicit; }
+	byte getSourceEndpoint();
+	byte getDestinationEndpoint();
+	QByteArray getClusterID();
+	QByteArray getProfileID();
 	QByteArray getFrameData();
 	void setFrameData(QByteArray);
 };
