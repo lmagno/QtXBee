@@ -45,6 +45,26 @@ byte NodeIdentificationIndicator::getRSSI() {
 
 QByteArray NodeIdentificationIndicator::getFrameData() {
 	QByteArray frameData;
+	frameData += getFrameType();
+	frameData += getSourceAddress();
+	// Reserved bytes
+	frameData += (byte)0xFF;
+	frameData += (byte)0xFE;
+	frameData += getReceiveOptions();
+	// Reserved bytes
+	frameData += (byte)0xFF;
+	frameData += (byte)0xFE;
+	frameData += getRemoteAddress();
+	frameData += getNIString();
+	// Reserved bytes
+	frameData += (byte)0xFF;
+	frameData += (byte)0xFE;
+	frameData += getDeviceType();
+	frameData += getSourceEvent();
+	frameData += getProfileID();
+	frameData += getManufacturerID();
+	frameData += getDDValue();
+	frameData += getRSSI();
 	return frameData;
 }
 

@@ -9,7 +9,7 @@ byte ModemStatus::getStatus(){
 
 QByteArray ModemStatus::getFrameData() {
 	QByteArray frameData;
-	frameData.append(getFrameType());
+	frameData += getFrameType();
 	frameData += getStatus();
 	return frameData;
 }

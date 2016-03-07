@@ -50,7 +50,7 @@ QByteArray RXIndicatorExplicit::getProfileID() {
 
 QByteArray RXIndicatorExplicit::getFrameData() {
 	QByteArray frameData;
-	frameData.append(getFrameType());
+	frameData += getFrameType();
 	frameData += getSourceAddress();
 	// Reserved bytes
 	frameData += (byte)0xFF;

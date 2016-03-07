@@ -21,7 +21,7 @@ QByteArray ATCommand::getATParameter(){
 
 QByteArray ATCommand::getFrameData() {
 	QByteArray frameData;
-	frameData.append(getFrameType());
+	frameData += getFrameType();
 	frameData += getFrameID();
 	frameData += getATCommand();
 	frameData += getATParameter();

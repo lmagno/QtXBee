@@ -24,7 +24,7 @@ QByteArray ATCommandResponse::getCommandData() {
 
 QByteArray ATCommandResponse::getFrameData() {
 	QByteArray frameData;
-	frameData.append(getFrameType());
+	frameData += getFrameType();
 	frameData += getFrameID();
 	frameData += getATCommand();
 	frameData += getCommandStatus();
