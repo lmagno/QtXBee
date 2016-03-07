@@ -8,15 +8,19 @@
 
 class ModemStatus : public XBeeFrame
 {
-	byte status;
+	byte		 status;
+
 protected:
-	void setStatus(byte);
+	void		 setStatus(byte);
+
 public:
 	ModemStatus();
+
 	virtual byte getFrameType() const { return pModemStatus; }
-	byte getStatus();
-	QByteArray getFrameData();
-	void setFrameData(QByteArray);
+	byte		 getStatus();
+	QByteArray	 getFrameData();
+
+	void		 setFrameData(QByteArray);
 };
 
 #endif // MODEMSTATUS_H

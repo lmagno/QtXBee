@@ -8,29 +8,29 @@
 
 class TXRequest : public XBeeFrame
 {
-	byte frameID;
-	QByteArray destAddr64;
-	QByteArray destAddr16;
-	unsigned broadcastRadius;
-	unsigned transmitOptions;
-	QByteArray data;
+	byte			   frameID;
+	QByteArray		   destinationAddress;
+	byte			   broadcastRadius;
+	byte			   transmitOptions;
+	QByteArray		   rfData;
+
 public:
 	TXRequest();
-	virtual byte getFrameType() const { return pTXRequest; }
-	byte getFrameID();
-	QByteArray getDestAddr64();
-	QByteArray getDestAddr16();
-	unsigned getBroadcastRadius();
-	unsigned getTransmitOptions();
-	QByteArray getData();
-	QByteArray getFrameData();
-	void setFrameID(byte);
-	void setBroadcastRadius(int rad);
-	void setTransmitOptions(unsigned to);
-	void setDestAddr64(QByteArray da64);
-	void setDestAddr16(QByteArray da16);
-	void setData(QByteArray d);
-	void setFrameData(QByteArray);
+
+	virtual byte	   getFrameType() const { return pTXRequest; }
+	byte			   getFrameID();
+	QByteArray		   getDestinationAddress();
+	byte			   getBroadcastRadius();
+	byte			   getTransmitOptions();
+	QByteArray		   getRFData();
+	virtual QByteArray getFrameData();
+
+	void			   setFrameID(byte);
+	void			   setBroadcastRadius(byte);
+	void			   setTransmitOptions(byte);
+	void			   setDestinationAddress(QByteArray);
+	void			   setRFData(QByteArray d);
+	virtual void	   setFrameData(QByteArray);
 };
 
 #endif // TXREQUEST_H

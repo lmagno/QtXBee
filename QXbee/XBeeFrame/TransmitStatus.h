@@ -8,24 +8,28 @@
 
 class TransmitStatus : public XBeeFrame
 {
-	byte frameID;
-	byte transmitRetryCount;
-	byte deliveryStatus;
-	byte discoveryStatus;
+	byte		 frameID;
+	byte		 transmitRetryCount;
+	byte		 deliveryStatus;
+	byte		 discoveryStatus;
+
+protected:
+	void		 setFrameID(byte fi);
+	void		 setTransmitRetryCount(byte trc);
+	void		 setDeliveryStatus(byte ds);
+	void		 setDiscoveryStatus(byte ds);
+
 public:
 	TransmitStatus();
-	virtual byte getFrameType() const { return pTransmitStatus; }
-	byte 		 getFrameID();
-	byte 		 getTransmitRetryCount();
-	byte 		 getDeliveryStatus();
-	byte 		 getDiscoveryStatus();
-	QByteArray 	 getFrameData();
 
-	void 		 setFrameID(byte fi);
-	void 		 setTransmitRetryCount(byte trc);
-	void 		 setDeliveryStatus(byte ds);
-	void 		 setDiscoveryStatus(byte ds);
-	void 		 setFrameData(QByteArray);
+	virtual byte getFrameType() const { return pTransmitStatus; }
+	byte		 getFrameID();
+	byte		 getTransmitRetryCount();
+	byte		 getDeliveryStatus();
+	byte		 getDiscoveryStatus();
+	QByteArray	 getFrameData();
+
+	void		 setFrameData(QByteArray);
 };
 
 #endif // TRANSMITSTATUS_H

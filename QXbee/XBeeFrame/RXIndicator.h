@@ -8,22 +8,25 @@
 
 class RXIndicator : public XBeeFrame
 {
-	QByteArray sourceAddress;
-	byte       receiveOptions;
-	QByteArray receivedData;
+	QByteArray		   sourceAddress;
+	byte			   receiveOptions;
+	QByteArray		   receivedData;
+
 protected:
-	void setSourceAddress(QByteArray);
-	void setReceiveOptions(byte);
-	void setReceivedData(QByteArray);
+	void			   setSourceAddress(QByteArray);
+	void			   setReceiveOptions(byte);
+	void			   setReceivedData(QByteArray);
+
 public:
 	RXIndicator();
-	virtual byte getFrameType() const { return pRXIndicator; }
-	QByteArray   getSourceAddress();
-	byte         getReceiveOptions();
-	QByteArray   getReceivedData();
 
+	virtual byte	   getFrameType() const { return pRXIndicator; }
+	QByteArray		   getSourceAddress();
+	byte			   getReceiveOptions();
+	QByteArray		   getReceivedData();
 	virtual QByteArray getFrameData();
-	virtual void 	   setFrameData(QByteArray);
+
+	virtual void	   setFrameData(QByteArray);
 };
 
 #endif // RXINDICATOR_H

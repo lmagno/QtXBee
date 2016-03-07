@@ -1,5 +1,3 @@
-#include <QString>
-
 #include "ATCommandResponse.h"
 
 ATCommandResponse::ATCommandResponse()

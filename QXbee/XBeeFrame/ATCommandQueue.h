@@ -7,7 +7,7 @@
 class ATCommandQueue : public ATCommand
 {
 public:
-	virtual byte getFrameType() const { return pATCommandQueue; }
+	virtual byte	   getFrameType() const { return pATCommandQueue; }
 };
 
 #endif // ATCOMMANDQUEUE_H

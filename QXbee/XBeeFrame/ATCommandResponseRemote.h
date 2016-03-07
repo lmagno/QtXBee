@@ -8,15 +8,19 @@
 
 class ATCommandResponseRemote : public ATCommandResponse
 {
-	QByteArray remoteAddress;
+	QByteArray	 remoteAddress;
+
 protected:
-	void setSourceAddress(QByteArray);
+	void		 setSourceAddress(QByteArray);
+
 public:
 	ATCommandResponseRemote();
+
 	virtual byte getFrameType() const { return pATCommandResponseRemote; }
-	QByteArray getSourceAddress();
-	QByteArray getFrameData();
-	void setFrameData(QByteArray);
+	QByteArray	 getSourceAddress();
+	QByteArray	 getFrameData();
+
+	void		 setFrameData(QByteArray);
 };
 
 #endif // ATCOMMANDRESPONSEREMOTE_H
