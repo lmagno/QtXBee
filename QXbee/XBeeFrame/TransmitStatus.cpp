@@ -4,50 +4,60 @@ TransmitStatus::TransmitStatus()
 {
 }
 
-void TransmitStatus::setFrameData(QByteArray data){
-	setDeliveryStatus(data[0]);
-/*	packet.clear();
-	packet += rx;
-	setStartDelimiter(rx[0]);
-	setLength(rx[2]);
-	if(rx.size() == rx[2]+4){
-		setFrameType(rx[3]);
-		setFrameId(rx[4]);
-		reserved += rx[5];
-		reserved += rx[6];
-		setTransmitRetryCount(rx[7]);
-		setDeliveryStatus(rx[8]);
-		setDiscoveryStatus(rx[9]);
-		setChecksum(rx[10]);
-	}else{
+byte TransmitStatus::getFrameID(){
+	return frameID;
+}
 
-		qDebug()<< "Invalid Packet Received!";
-		qDebug()<< packet.toHex();
-		packet.clear();
-	}
-	*/
-}
-void TransmitStatus:: setDeliveryStatus(unsigned ds){
-	deliveryStatus = ds;
-}
-void TransmitStatus:: setTransmitRetryCount(unsigned trc){
-	transmitRetryCount = trc;
-}
-void TransmitStatus:: setDiscoveryStatus(unsigned ds){
-	discoveryStatus = ds;
-}
-byte TransmitStatus:: getDeliveryStatus(){
-	return deliveryStatus;
-}
-byte TransmitStatus:: getTransmitRetryCount(){
+byte TransmitStatus::getTransmitRetryCount(){
 	return transmitRetryCount;
 }
-byte TransmitStatus:: getDiscoveryStatus(){
+
+byte TransmitStatus::getDeliveryStatus(){
+	return deliveryStatus;
+}
+
+byte TransmitStatus::getDiscoveryStatus(){
 	return discoveryStatus;
 }
 
-
 QByteArray TransmitStatus::getFrameData() {
 	QByteArray frameData;
+
+	frameData += getFrameType();
+	frameData += getFrameID();
+
+	// Reserved bytes
+	frameData += (byte)0xFF;
+	frameData += (byte)0xFE;
+
+	frameData += getTransmitRetryCount();
+	frameData += getDeliveryStatus();
+	frameData += getDiscoveryStatus();
+
 	return frameData;
+}
+
+void TransmitStatus::setFrameID(byte fi){
+	frameID = fi;
+}
+
+void TransmitStatus::setTransmitRetryCount(byte trc){
+	transmitRetryCount = trc;
+}
+
+void TransmitStatus::setDeliveryStatus(byte ds){
+	deliveryStatus = ds;
+}
+
+void TransmitStatus::setDiscoveryStatus(byte ds){
+	discoveryStatus = ds;
+}
+
+void TransmitStatus::setFrameData(QByteArray data){
+	if (data.size() != 7 && data.at(0) != getFrameType()) return;
+
+	setFrameID(data[1]);
+	setTransmitRetryCount(data[4]);
+	setDeliveryStatus(data[8]);
+	setDiscoveryStatus(data[9]);
 }
