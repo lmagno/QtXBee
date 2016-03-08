@@ -20,4 +20,5 @@ Makefile
 *-build-*
 
 QXbee
+tests/Test
 device.cfg
