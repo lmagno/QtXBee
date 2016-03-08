@@ -1,5 +1,5 @@
-#ifndef QXBEE_H
-#define QXBEE_H
+#ifndef QXBee_H
+#define QXBee_H
 
 #include <QObject>
 #include <QByteArray>
@@ -21,16 +21,16 @@
 #include "XBeeFrame/NodeIdentificationIndicator.h"
 #include "XBeeFrame/ATCommandResponseRemote.h"
 
-class QXbee : public QObject
+class QXBee : public QObject
 {
     Q_OBJECT
 public:
-	explicit QXbee(QObject *parent = 0);
-	QXbee(QSerialPort *ser);
+    explicit QXBee(QObject *parent = 0);
+    QXBee(QSerialPort *ser);
 	void send(XBeeFrame *request);
     void broadcast(QString data);
     void unicast(QByteArray address, QString data);
-	~QXbee();
+    ~QXBee();
 
 signals:
     void receivedATCommandResponse(ATCommandResponse *response);

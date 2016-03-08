@@ -19,6 +19,6 @@ qrc_*.cpp
 Makefile
 *-build-*
 
-QXbee
+QXBee
 tests/Test
 device.cfg

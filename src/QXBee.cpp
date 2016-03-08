@@ -1,13 +1,13 @@
 #include <QDebug>
 
-#include "QXbee.h"
+#include "QXBee.h"
 
-QXbee::QXbee(QObject *parent) :
+QXBee::QXBee(QObject *parent) :
 	QObject(parent)
 {
 }
 
-QXbee::QXbee(QSerialPort *ser){
+QXBee::QXBee(QSerialPort *ser){
 	xbeeFound = false;
 	serial = ser;
 	QByteArray data;
@@ -50,7 +50,7 @@ QXbee::QXbee(QSerialPort *ser){
 }
 
 
-QXbee::~QXbee()
+QXBee::~QXBee()
 {
 	if(serial->isOpen())
 	{
@@ -58,7 +58,7 @@ QXbee::~QXbee()
 		qDebug() << "XBEE: Serial Port closed successfully";
 	}
 }
-void QXbee::displayATCommandResponse(ATCommandResponse *packet){
+void QXBee::displayATCommandResponse(ATCommandResponse *packet){
 	QByteArray data = packet->getCommandData();
 	int idx = 0;
 	qDebug() << "Raw data: " << packet->getFrameData().toHex();
@@ -73,26 +73,26 @@ void QXbee::displayATCommandResponse(ATCommandResponse *packet){
 	qDebug() << "Manufacturer: " << data.mid(idx+4, 2).toHex();
 	qDebug() << "";
 }
-void QXbee::displayModemStatus(ModemStatus *digiMeshPacket){
+void QXBee::displayModemStatus(ModemStatus *digiMeshPacket){
 	qDebug() << "Received ModemStatus: " << digiMeshPacket->getFrameData();
 }
-void QXbee::displayTransmitStatus(TransmitStatus *digiMeshPacket){
+void QXBee::displayTransmitStatus(TransmitStatus *digiMeshPacket){
 	qDebug() << "Received TransmitStatus: " << digiMeshPacket->getFrameData().toHex();
 }
-void QXbee::displayRXIndicator(RXIndicator *digiMeshPacket){
+void QXBee::displayRXIndicator(RXIndicator *digiMeshPacket){
 	qDebug() << "Received RXIndicator: " << digiMeshPacket->getFrameData().toHex();
 }
-void QXbee::displayRXIndicatorExplicit(RXIndicatorExplicit *digiMeshPacket){
+void QXBee::displayRXIndicatorExplicit(RXIndicatorExplicit *digiMeshPacket){
 	qDebug() << "Received RXIndicatorExplicit: " << digiMeshPacket->getFrameData().toHex();
 }
-void QXbee::displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket){
+void QXBee::displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket){
 	qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->getFrameData().toHex();
 }
-void QXbee::displayRemoteCommandResponse(ATCommandResponseRemote *digiMeshPacket){
+void QXBee::displayRemoteCommandResponse(ATCommandResponseRemote *digiMeshPacket){
 	qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->getFrameData().toHex();
 }
 
-void QXbee::send(XBeeFrame *request)
+void QXBee::send(XBeeFrame *request)
 {
 	union {
 		unsigned short i;
@@ -125,21 +125,21 @@ void QXbee::send(XBeeFrame *request)
 	}
 }
 
-void QXbee::broadcast(QString data)
+void QXBee::broadcast(QString data)
 {
 	TXRequest *request = new TXRequest;
 	request->setTransmitingData(data.toLatin1());
 	send(request);
 }
 
-void QXbee::unicast(QByteArray address, QString data){
+void QXBee::unicast(QByteArray address, QString data){
 	TXRequest *request = new TXRequest;
 	request->setDestinationAddress(address);
 	request->setTransmitingData(data.toLatin1());
 	send(request);
 }
 
-void QXbee::readData()
+void QXBee::readData()
 {
 	const char startDelimiter = 0x7E;
 	const char escapeCharacter = 0x7D;
@@ -221,7 +221,7 @@ void QXbee::readData()
 	}
 }
 
-void QXbee::processPacket(QByteArray packet){
+void QXBee::processPacket(QByteArray packet){
 	byte blah = (byte)packet[0];
 	switch (blah) {
 	case XBeeFrame::pATCommandResponse:{

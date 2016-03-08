@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 
 QT       -= gui
 
-TARGET = QXbee
+TARGET = QXBee
 CONFIG   += console
 
 greaterThan(QT_MAJOR_VERSION, 4): CONFIG += serialport
@@ -21,10 +21,11 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 INCLUDEPATH += $$PWD/src
-INCLUDEPATH += $$PWD/src/QXbeeFrame
+INCLUDEPATH += $$PWD/src/QXBeeFrame
 
-SOURCES += src/main.cpp \
-	src/QXbee.cpp \
+SOURCES += \
+	src/main.cpp \
+	src/QXBee.cpp \
 	src/XBeeFrame/ATCommand.cpp \
 	src/XBeeFrame/ATCommandRemote.cpp \
 	src/XBeeFrame/ATCommandResponse.cpp \
@@ -39,7 +40,7 @@ SOURCES += src/main.cpp \
 
 HEADERS += \
 	src/typedef.h \
-	src/QXbee.h \
+	src/QXBee.h \
 	src/XBeeFrame/ATCommand.h \
 	src/XBeeFrame/ATCommandQueue.h \
 	src/XBeeFrame/ATCommandRemote.h \
