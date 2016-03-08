@@ -11,7 +11,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 
 QT       -= gui
 
-TARGET = Test
+TARGET = ../build/tests/Test
+OBJECTS_DIR = ../build/tests
+MOC_DIR = ../build/tests
+
 CONFIG   += console testcase
 
 greaterThan(QT_MAJOR_VERSION, 4): CONFIG += serialport

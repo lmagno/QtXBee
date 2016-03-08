@@ -22,3 +22,7 @@ Makefile
 QXBee
 tests/Test
 device.cfg
+.qmake.stash
+build
+src/Makefile.QXbee
+tests/Makefile.Test
