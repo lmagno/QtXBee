@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include "QXbee/QXbee.h"
+#include "QXbee.h"
 #include <QtSerialPort/QSerialPort>
 #include <QDebug>
 #include <QTime>

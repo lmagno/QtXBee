@@ -4,14 +4,14 @@
 #
 #-------------------------------------------------
 
-QT       += core 
+QT       += core
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 
 
 QT       -= gui
 
-TARGET = qtxbtest
+TARGET = QXbee
 CONFIG   += console
 
 greaterThan(QT_MAJOR_VERSION, 4): CONFIG += serialport
@@ -20,39 +20,39 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
-INCLUDEPATH += $$PWD/QXbee
-INCLUDEPATH += $$PWD/QXbee/QXbeeFrame
+INCLUDEPATH += $$PWD/src
+INCLUDEPATH += $$PWD/src/QXbeeFrame
 
-SOURCES += main.cpp \
-	QXbee/QXbee.cpp \
-	QXbee/XBeeFrame/ATCommand.cpp \
-	QXbee/XBeeFrame/ATCommandRemote.cpp \
-	QXbee/XBeeFrame/ATCommandResponse.cpp \
-	QXbee/XBeeFrame/ATCommandResponseRemote.cpp \
-	QXbee/XBeeFrame/ModemStatus.cpp \
-	QXbee/XBeeFrame/NodeIdentificationIndicator.cpp \
-	QXbee/XBeeFrame/RXIndicator.cpp \
-	QXbee/XBeeFrame/RXIndicatorExplicit.cpp \
-	QXbee/XBeeFrame/TransmitStatus.cpp \
-	QXbee/XBeeFrame/TXRequest.cpp \
-	QXbee/XBeeFrame/TXRequestExplicit.cpp
+SOURCES += src/main.cpp \
+	src/QXbee.cpp \
+	src/XBeeFrame/ATCommand.cpp \
+	src/XBeeFrame/ATCommandRemote.cpp \
+	src/XBeeFrame/ATCommandResponse.cpp \
+	src/XBeeFrame/ATCommandResponseRemote.cpp \
+	src/XBeeFrame/ModemStatus.cpp \
+	src/XBeeFrame/NodeIdentificationIndicator.cpp \
+	src/XBeeFrame/RXIndicator.cpp \
+	src/XBeeFrame/RXIndicatorExplicit.cpp \
+	src/XBeeFrame/TransmitStatus.cpp \
+	src/XBeeFrame/TXRequest.cpp \
+	src/XBeeFrame/TXRequestExplicit.cpp
 
 HEADERS += \
-	QXbee/typedef.h \
-	QXbee/QXbee.h \
-	QXbee/XBeeFrame/ATCommand.h \
-	QXbee/XBeeFrame/ATCommandQueue.h \
-	QXbee/XBeeFrame/ATCommandRemote.h \
-	QXbee/XBeeFrame/ATCommandResponse.h \
-	QXbee/XBeeFrame/ATCommandResponseRemote.h \
-	QXbee/XBeeFrame/ModemStatus.h \
-	QXbee/XBeeFrame/NodeIdentificationIndicator.h \
-	QXbee/XBeeFrame/RXIndicator.h \
-	QXbee/XBeeFrame/RXIndicatorExplicit.h \
-	QXbee/XBeeFrame/TransmitStatus.h \
-	QXbee/XBeeFrame/TXRequest.h \
-	QXbee/XBeeFrame/TXRequestExplicit.h \
-	QXbee/XBeeFrame/XBeeFrame.h
+	src/typedef.h \
+	src/QXbee.h \
+	src/XBeeFrame/ATCommand.h \
+	src/XBeeFrame/ATCommandQueue.h \
+	src/XBeeFrame/ATCommandRemote.h \
+	src/XBeeFrame/ATCommandResponse.h \
+	src/XBeeFrame/ATCommandResponseRemote.h \
+	src/XBeeFrame/ModemStatus.h \
+	src/XBeeFrame/NodeIdentificationIndicator.h \
+	src/XBeeFrame/RXIndicator.h \
+	src/XBeeFrame/RXIndicatorExplicit.h \
+	src/XBeeFrame/TransmitStatus.h \
+	src/XBeeFrame/TXRequest.h \
+	src/XBeeFrame/TXRequestExplicit.h \
+	src/XBeeFrame/XBeeFrame.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 
