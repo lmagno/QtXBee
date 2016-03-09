@@ -44,9 +44,9 @@ void ATCommandResponse::setCommandData(QByteArray data) {
 }
 
 void ATCommandResponse::setFrameData(QByteArray data) {
-	if (data.size() < 8 && data.at(0) != getFrameType()) return;
+	if (data.size() < 5 && data.at(0) != getFrameType()) return;
 	setFrameID(data[1]);
 	setATCommand(data.mid(2,2));
 	setCommandStatus(data[4]);
-	if (data.size() > 8) setCommandData(data.mid(5));
+	if (data.size() > 5) setCommandData(data.mid(5));
 }

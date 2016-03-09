@@ -40,7 +40,8 @@ SOURCES +=  main.cpp \
         	../src/XBeeFrame/TransmitStatus.cpp \
         	../src/XBeeFrame/TXRequest.cpp \
         	../src/XBeeFrame/TXRequestExplicit.cpp \
-    testATCommandRemote.cpp
+    testATCommandRemote.cpp \
+    testATCommandResponse.cpp
 
 HEADERS +=  Autotest.h \
             testATCommand.h \
@@ -59,7 +60,8 @@ HEADERS +=  Autotest.h \
         	../src/XBeeFrame/TXRequest.h \
         	../src/XBeeFrame/TXRequestExplicit.h \
         	../src/XBeeFrame/XBeeFrame.h \
-    testATCommandRemote.h
+    testATCommandRemote.h \
+    testATCommandResponse.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 
