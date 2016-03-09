@@ -28,7 +28,7 @@ INCLUDEPATH += $$PWD/../src/QXbeeFrame
 
 SOURCES +=  main.cpp \
             testATCommand.cpp \
-        	../src/QXbee.cpp \
+        	../src/QXBee.cpp \
         	../src/XBeeFrame/ATCommand.cpp \
         	../src/XBeeFrame/ATCommandRemote.cpp \
         	../src/XBeeFrame/ATCommandResponse.cpp \
@@ -44,7 +44,7 @@ SOURCES +=  main.cpp \
 HEADERS +=  Autotest.h \
             testATCommand.h \
         	../src/typedef.h \
-        	../src/QXbee.h \
+        	../src/QXBee.h \
         	../src/XBeeFrame/ATCommand.h \
         	../src/XBeeFrame/ATCommandQueue.h \
         	../src/XBeeFrame/ATCommandRemote.h \

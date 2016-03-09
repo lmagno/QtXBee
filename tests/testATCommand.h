@@ -2,7 +2,7 @@
 #define TESTATCOMMAND_H
 
 #include "AutoTest.h"
-#include "QXbee.h"
+#include "QXBee.h"
 
 class TestATCommand : public QObject
 {

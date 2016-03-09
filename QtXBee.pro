@@ -6,4 +6,4 @@
 OBJECTS_DIR = $$PWD/tmp
 
 TEMPLATE = subdirs
-SUBDIRS = src/QXbee.pro tests/Test.pro
+SUBDIRS = src/QXBee.pro tests/Test.pro
