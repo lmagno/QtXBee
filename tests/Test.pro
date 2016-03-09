@@ -39,7 +39,8 @@ SOURCES +=  main.cpp \
         	../src/XBeeFrame/RXIndicatorExplicit.cpp \
         	../src/XBeeFrame/TransmitStatus.cpp \
         	../src/XBeeFrame/TXRequest.cpp \
-        	../src/XBeeFrame/TXRequestExplicit.cpp
+        	../src/XBeeFrame/TXRequestExplicit.cpp \
+    testATCommandRemote.cpp
 
 HEADERS +=  Autotest.h \
             testATCommand.h \
@@ -57,7 +58,8 @@ HEADERS +=  Autotest.h \
         	../src/XBeeFrame/TransmitStatus.h \
         	../src/XBeeFrame/TXRequest.h \
         	../src/XBeeFrame/TXRequestExplicit.h \
-        	../src/XBeeFrame/XBeeFrame.h
+        	../src/XBeeFrame/XBeeFrame.h \
+    testATCommandRemote.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 
