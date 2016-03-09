@@ -42,7 +42,8 @@ SOURCES +=  main.cpp \
         	../src/XBeeFrame/TXRequestExplicit.cpp \
     testATCommandRemote.cpp \
     testATCommandResponse.cpp \
-    testATCommandQueue.cpp
+    testATCommandQueue.cpp \
+    testATCommandResponseRemote.cpp
 
 HEADERS +=  Autotest.h \
             testATCommand.h \
@@ -63,7 +64,8 @@ HEADERS +=  Autotest.h \
         	../src/XBeeFrame/XBeeFrame.h \
     testATCommandRemote.h \
     testATCommandResponse.h \
-    testATCommandQueue.h
+    testATCommandQueue.h \
+    testATCommandResponseRemote.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 
