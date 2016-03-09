@@ -10,8 +10,9 @@ class TestATCommandQueue : public QObject
 
 private slots:
     void frameDataWithoutParameter();
+	void frameDataWithParameter();
 };
 
-DECLARE_TEST(TestATCommand)
+DECLARE_TEST(TestATCommandQueue)
 
-#endif
+#endif // TESTATCOMMANDQUEUE_H

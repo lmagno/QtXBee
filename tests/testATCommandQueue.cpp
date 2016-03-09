@@ -1,10 +1,19 @@
-#include "testATCommand.h"
+#include "testATCommandQueue.h"
 
-void TestATCommand::frame1()
+void TestATCommandQueue::frameDataWithoutParameter()
 {
-    QByteArray frame = QByteArray::fromHex("08014E44");
-    ATCommand at;
+	QByteArray frame = QByteArray::fromHex("09014E44");
+	ATCommandQueue at;
 
-    at.setFrameData(frame);
-    QCOMPARE(at.getFrameData(), frame);
+	at.setFrameData(frame);
+	QCOMPARE(at.getFrameData(), frame);
+}
+
+void TestATCommandQueue::frameDataWithParameter()
+{
+	QByteArray frame = QByteArray::fromHex("09014E446C616C616C616C616C61");
+	ATCommandQueue at;
+
+	at.setFrameData(frame);
+	QCOMPARE(at.getFrameData(), frame);
 }
