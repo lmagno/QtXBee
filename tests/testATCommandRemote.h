@@ -9,7 +9,8 @@ class TestATCommandRemote : public QObject
     Q_OBJECT
 
 private slots:
-    void frameData();
+    void frameDataWithoutParameter();
+    void frameDataWithParameter();
 };
 
 DECLARE_TEST(TestATCommandRemote)
