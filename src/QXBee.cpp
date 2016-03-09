@@ -134,7 +134,7 @@ void QXBee::broadcast(QString data)
 
 void QXBee::unicast(QByteArray address, QString data){
 	TXRequest *request = new TXRequest;
-	request->setDestinationAddress(address);
+	request->setDestinationAddress64(address);
 	request->setTransmitingData(data.toLatin1());
 	send(request);
 }

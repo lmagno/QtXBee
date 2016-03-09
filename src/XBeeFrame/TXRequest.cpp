@@ -3,8 +3,10 @@
 TXRequest::TXRequest()
 {
 	static const byte broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
+	static const byte unknown[] = { 0xFF, 0xFE };
 	setFrameID(0x01);
-	setDestinationAddress(QByteArray((char *)broadcast, 8)); // Broadcast by default
+	setDestinationAddress64(QByteArray((char *)broadcast, 8)); // Broadcast by default
+	setDestinationAddress16(QByteArray((char *)unknown, 2));
 	setBroadcastRadius(1);
 	setTransmitOptions(0x00);
 }
@@ -13,8 +15,12 @@ byte TXRequest::getFrameID() {
 	return frameID;
 }
 
-QByteArray TXRequest::getDestinationAddress(){
-	return destinationAddress;
+QByteArray TXRequest::getDestinationAddress64(){
+	return destinationAddress64;
+}
+
+QByteArray TXRequest::getDestinationAddress16(){
+	return destinationAddress16;
 }
 
 byte TXRequest::getBroadcastRadius(){
@@ -33,10 +39,8 @@ QByteArray TXRequest::getFrameData(){
 	QByteArray frameData;
 	frameData += getFrameType();
 	frameData += getFrameID();
-	frameData += getDestinationAddress();
-	// Reserved bytes
-	frameData += (byte)0xFF;
-	frameData += (byte)0xFE;
+	frameData += getDestinationAddress64();
+	frameData += getDestinationAddress16();
 	frameData += getBroadcastRadius();
 	frameData += getTransmitOptions();
 	frameData += getTransmitingData();
@@ -55,8 +59,12 @@ void TXRequest::setTransmitOptions(byte options){
 	transmitOptions = options;
 }
 
-void TXRequest::setDestinationAddress(QByteArray address){
-	destinationAddress = address;
+void TXRequest::setDestinationAddress64(QByteArray address){
+	destinationAddress64 = address;
+}
+
+void TXRequest::setDestinationAddress16(QByteArray address){
+	destinationAddress16 = address;
 }
 
 void TXRequest::setTransmitingData(QByteArray data){
@@ -64,10 +72,11 @@ void TXRequest::setTransmitingData(QByteArray data){
 }
 
 void TXRequest::setFrameData(QByteArray data) {
-	if ((data.size() < 15) && (data.at(0) != getFrameType())) return;
+	if ((data.size() < 14) && (data.at(0) != getFrameType())) return;
 	setFrameID(data[1]);
-	setDestinationAddress(data.mid(2,8));
+	setDestinationAddress64(data.mid(2,8));
+	setDestinationAddress16(data.mid(10,2));
 	setBroadcastRadius(data[12]);
 	setTransmitOptions(data[13]);
-	setTransmitingData(data.mid(14));
+	if (data.size() > 14) setTransmitingData(data.mid(14));
 }

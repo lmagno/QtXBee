@@ -24,10 +24,8 @@ QByteArray TXRequestExplicit::getFrameData() {
 	QByteArray frameData;
 	frameData += getFrameType();
 	frameData += getFrameID();
-	frameData += getDestinationAddress();
-	// Reserved bytes
-	frameData += (byte)0xFF;
-	frameData += (byte)0xFE;
+	frameData += getDestinationAddress64();
+	frameData += getDestinationAddress16();
 	frameData += getSourceEndpoint();
 	frameData += getDestinationEndpoint();
 	frameData += getClusterID();
@@ -55,10 +53,15 @@ void TXRequestExplicit::setProfileID(QByteArray id) {
 }
 
 void TXRequestExplicit::setFrameData(QByteArray data) {
-	if ((data.size() < 15) && (data.at(0) != getFrameType())) return;
+	if ((data.size() < 20) && (data.at(0) != getFrameType())) return;
 	setFrameID(data[1]);
-	setDestinationAddress(data.mid(2,8));
-	setBroadcastRadius(data[12]);
-	setTransmitOptions(data[13]);
-	setTransmitingData(data.mid(14));
+	setDestinationAddress64(data.mid(2,8));
+	setDestinationAddress16(data.mid(10,2));
+	setSourceEndpoint(data[12]);
+	setDestinationEndpoint(data[13]);
+	setCLusterID(data.mid(14,2));
+	setProfileID(data.mid(16,2));
+	setBroadcastRadius(data[18]);
+	setTransmitOptions(data[19]);
+	if (data.size() > 20) setTransmitingData(data.mid(20));
 }

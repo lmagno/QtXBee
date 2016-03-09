@@ -1,14 +1,20 @@
 #include "ATCommandRemote.h"
 
 ATCommandRemote::ATCommandRemote() {
-	static const byte broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
+	static const byte broadcast[] = { 0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF };
+	static const byte unknown[] = { 0xFF, 0xFE };
 	setFrameID(0x01);
 	setCommandOptions(0x02);
-	setDestinationAddress(QByteArray((char *)broadcast, 8)); // Broadcast by default
+	setDestinationAddress64(QByteArray((char *)broadcast, 8)); // Broadcast by default
+	setDestinationAddress16(QByteArray((char *)unknown, 2));
 }
 
-QByteArray ATCommandRemote::getDestinationAdress() {
-	return destinationAddress;
+QByteArray ATCommandRemote::getDestinationAdress64() {
+	return destinationAddress64;
+}
+
+QByteArray ATCommandRemote::getDestinationAdress16() {
+	return destinationAddress16;
 }
 
 byte ATCommandRemote::getCommandOptions() {
@@ -19,20 +25,20 @@ QByteArray ATCommandRemote::getFrameData() {
 	QByteArray frameData;
 	frameData += getFrameType();
 	frameData += getFrameID();
-	frameData += getDestinationAdress();
-
-	// Reserved bytes
-	frameData += (byte)0xFF;
-	frameData += (byte)0xFE;
-
+	frameData += getDestinationAdress64();
+	frameData += getDestinationAdress16();
 	frameData += getCommandOptions();
 	frameData += getATCommand();
 	frameData += getATParameter();
 	return frameData;
 }
 
-void ATCommandRemote::setDestinationAddress(QByteArray address) {
-	if (address.length() >= 8) destinationAddress = address.left(8);
+void ATCommandRemote::setDestinationAddress64(QByteArray address) {
+	if (address.length() >= 8) destinationAddress64 = address.left(8);
+}
+
+void ATCommandRemote::setDestinationAddress16(QByteArray address) {
+	if (address.length() >= 2) destinationAddress16 = address.left(2);
 }
 
 void ATCommandRemote::setCommandOptions(byte options) {
@@ -42,7 +48,8 @@ void ATCommandRemote::setCommandOptions(byte options) {
 void ATCommandRemote::setFrameData(QByteArray data) {
 	if (data.size() < 15 && data.at(0) != getFrameType()) return;
 	setFrameID(data[1]);
-	setDestinationAddress(data.mid(2,8));
+	setDestinationAddress64(data.mid(2, 8));
+	setDestinationAddress16(data.mid(10, 2));
 	setCommandOptions(data[12]);
 	setATCommand(data.mid(13,2));
 	if (data.size() > 15) setATParameter(data.mid(15));

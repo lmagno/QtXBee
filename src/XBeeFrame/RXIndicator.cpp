@@ -4,10 +4,13 @@ RXIndicator::RXIndicator()
 {
 }
 
-QByteArray RXIndicator::getSourceAddress(){
-	return sourceAddress;
+QByteArray RXIndicator::getSourceAddress64(){
+	return sourceAddress64;
 }
 
+QByteArray RXIndicator::getSourceAddress16(){
+	return sourceAddress16;
+}
 
 byte RXIndicator::getReceiveOptions(){
 	return receiveOptions;
@@ -19,38 +22,34 @@ QByteArray RXIndicator::getReceivedData(){
 
 QByteArray RXIndicator::getFrameData() {
 	QByteArray frameData;
-
 	frameData += getFrameType();
-	frameData += getSourceAddress();
-
-	// Reserved bytes
-	frameData += (byte)0xFF;
-	frameData += (byte)0xFE;
-
+	frameData += getSourceAddress64();
+	frameData += getSourceAddress16();
 	frameData += getReceiveOptions();
 	frameData += getReceivedData();
-
 	return frameData;
 }
 
-void RXIndicator::setSourceAddress(QByteArray sa){
-	sourceAddress.clear();
-	sourceAddress += sa;
+void RXIndicator::setSourceAddress64(QByteArray address){
+	sourceAddress64 = address;
 }
 
-void RXIndicator::setReceiveOptions(byte ro){
-	receiveOptions = ro;
+void RXIndicator::setSourceAddress16(QByteArray address){
+	sourceAddress16 = address;
 }
 
-void RXIndicator::setReceivedData(QByteArray rd){
-	receivedData.clear();
-	receivedData += rd;
+void RXIndicator::setReceiveOptions(byte options){
+	receiveOptions = options;
+}
+
+void RXIndicator::setReceivedData(QByteArray data){
+	receivedData = data;
 }
 
 void RXIndicator::setFrameData(QByteArray data){
 	if (data.size() < 12 && data.at(0) != getFrameType()) return;
-
-	setSourceAddress(data.mid(1, 8));
+	setSourceAddress64(data.mid(1, 8));
+	setSourceAddress16(data.mid(9,2));
 	setReceiveOptions(data[11]);
 	if (data.size() > 12) setReceivedData(data.mid(12));
 }

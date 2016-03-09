@@ -21,7 +21,8 @@ void RXIndicatorExplicit::setProfileID(QByteArray id) {
 
 void RXIndicatorExplicit::setFrameData(QByteArray data) {
 	if ((data.size() < 18) && (data.at(0) != getFrameType())) return;
-	setSourceAddress(data.mid(1,8));
+	setSourceAddress64(data.mid(1,8));
+	setSourceAddress16(data.mid(9,2));
 	setSourceEndpoint(data[11]);
 	setDestinationEndpoint(data[12]);
 	setClusterID(data.mid(13,2));
@@ -49,10 +50,8 @@ QByteArray RXIndicatorExplicit::getProfileID() {
 QByteArray RXIndicatorExplicit::getFrameData() {
 	QByteArray frameData;
 	frameData += getFrameType();
-	frameData += getSourceAddress();
-	// Reserved bytes
-	frameData += (byte)0xFF;
-	frameData += (byte)0xFE;
+	frameData += getSourceAddress64();
+	frameData += getSourceAddress16();
 	frameData += getSourceEndpoint();
 	frameData += getDestinationEndpoint();
 	frameData += getClusterID();
