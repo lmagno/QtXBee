@@ -3,7 +3,6 @@
 
 #include <QByteArray>
 
-#include "typedef.h"
 #include "XBeePacket.h"
 
 class TXRequest : public XBeePacket

@@ -3,7 +3,6 @@
 
 #include <QByteArray>
 
-#include "typedef.h"
 #include "ATCommandResponse.h"
 
 class ATCommandResponseRemote : public ATCommandResponse

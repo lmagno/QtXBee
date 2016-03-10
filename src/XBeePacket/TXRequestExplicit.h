@@ -3,7 +3,6 @@
 
 #include <QByteArray>
 
-#include "typedef.h"
 #include "TXRequest.h"
 
 class TXRequestExplicit : public TXRequest

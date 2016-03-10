@@ -3,7 +3,6 @@
 
 #include <QByteArray>
 
-#include "typedef.h"
 #include "RXIndicator.h"
 
 class RXIndicatorExplicit : public RXIndicator
