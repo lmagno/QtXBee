@@ -126,16 +126,16 @@ void QXBee::send(XBeePacket *request)
 
 void QXBee::broadcast(QString data)
 {
-	TXRequest *request = new TXRequest;
-	request->setTransmitingData(data.toLatin1());
-	send(request);
+	TXRequest request;
+	request.setTransmitingData(data.toLatin1());
+	send(&request);
 }
 
 void QXBee::unicast(QByteArray address, QString data){
-	TXRequest *request = new TXRequest;
-	request->setDestinationAddress64(address);
-	request->setTransmitingData(data.toLatin1());
-	send(request);
+	TXRequest request;
+	request.setDestinationAddress64(address);
+	request.setTransmitingData(data.toLatin1());
+	send(&request);
 }
 
 void QXBee::readData()
