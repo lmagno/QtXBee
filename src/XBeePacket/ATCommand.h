@@ -25,6 +25,7 @@ public:
 	void			   setATCommand(QString);
 	void			   setATParameter(QByteArray array);
 	virtual void	   setFrameData(QByteArray);
+	virtual			   ~ATCommand();
 };
 
 #endif // ATCOMMAND_H

@@ -32,6 +32,7 @@ public:
 	QByteArray	 getFrameData();
 
 	void		 setFrameData(QByteArray);
+	virtual		 ~TransmitStatus();
 };
 
 #endif // TRANSMITSTATUS_H

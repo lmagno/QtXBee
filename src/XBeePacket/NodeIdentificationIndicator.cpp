@@ -153,3 +153,6 @@ void NodeIdentificationIndicator::setFrameData(QByteArray data) {
 			setRSSI(QByteArray(1, data[idx+9]));
 	}
 }
+
+NodeIdentificationIndicator::~NodeIdentificationIndicator(void) {
+}

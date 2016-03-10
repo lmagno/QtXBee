@@ -80,3 +80,6 @@ void TXRequest::setFrameData(QByteArray data) {
 	setTransmitOptions(data[13]);
 	if (data.size() > 14) setTransmitingData(data.mid(14));
 }
+
+TXRequest::~TXRequest() {
+}

@@ -57,6 +57,7 @@ public:
 	QByteArray	 getFrameData();
 
 	void		 setFrameData(QByteArray);
+	virtual		 ~NodeIdentificationIndicator();
 };
 
 #endif // NODEIDENTIFICATIONINDICATOR_H

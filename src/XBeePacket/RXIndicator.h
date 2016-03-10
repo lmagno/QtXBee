@@ -29,6 +29,7 @@ public:
 	virtual QByteArray getFrameData();
 
 	virtual void	   setFrameData(QByteArray);
+	virtual			   ~RXIndicator();
 };
 
 #endif // RXINDICATOR_H

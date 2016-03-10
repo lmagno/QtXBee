@@ -50,3 +50,6 @@ void ATCommandResponse::setFrameData(QByteArray data) {
 	setCommandStatus(data[4]);
 	if (data.size() > 5) setCommandData(data.mid(5));
 }
+
+ATCommandResponse::~ATCommandResponse() {
+}

@@ -63,3 +63,6 @@ void TransmitStatus::setFrameData(QByteArray data){
 	setDeliveryStatus(data[5]);
 	setDiscoveryStatus(data[6]);
 }
+
+TransmitStatus::~TransmitStatus() {
+}

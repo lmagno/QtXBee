@@ -22,3 +22,6 @@ void ModemStatus::setFrameData(QByteArray data) {
 	if ((data.size() < 2) && (data.at(0) != getFrameType())) return;
 	setStatus(data[1]);
 }
+
+ModemStatus::~ModemStatus() {
+}

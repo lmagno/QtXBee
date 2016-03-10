@@ -30,6 +30,7 @@ public:
 	virtual QByteArray getFrameData();
 
 	virtual void	   setFrameData(QByteArray);
+	virtual			   ~ATCommandResponse();
 };
 
 #endif // ATCOMMANDRESPONSE_H

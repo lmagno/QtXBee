@@ -53,3 +53,6 @@ void RXIndicator::setFrameData(QByteArray data){
 	setReceiveOptions(data[11]);
 	if (data.size() > 12) setReceivedData(data.mid(12));
 }
+
+RXIndicator::~RXIndicator() {
+}

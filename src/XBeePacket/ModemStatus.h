@@ -20,6 +20,7 @@ public:
 	QByteArray	 getFrameData();
 
 	void		 setFrameData(QByteArray);
+	virtual		 ~ModemStatus();
 };
 
 #endif // MODEMSTATUS_H

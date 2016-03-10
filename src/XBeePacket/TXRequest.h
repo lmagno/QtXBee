@@ -33,6 +33,7 @@ public:
 	void			   setTransmitOptions(byte);
 	void			   setTransmitingData(QByteArray);
 	virtual void	   setFrameData(QByteArray);
+	virtual			   ~TXRequest();
 };
 
 #endif // TXREQUEST_H

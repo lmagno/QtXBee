@@ -76,6 +76,7 @@ void QXBee::displayData(XBeePacket *packet){
 	} else {
 		qDebug() << "Received Data: " << packet->getFrameData();
 	}
+	delete (packet);
 }
 
 void QXBee::send(XBeePacket *request)

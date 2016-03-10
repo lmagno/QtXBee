@@ -47,3 +47,6 @@ void ATCommand::setFrameData(QByteArray data) {
 	if (data.size() > 4) setATParameter(data.mid(4));
 }
 
+ATCommand::~ATCommand() {
+}
+
