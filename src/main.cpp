@@ -6,11 +6,20 @@
 #include <QFile>
 #include <QString>
 #include <QTextStream>
+#include <signal.h>
+#include <unistd.h>
+#include <functional>
+
+void handler (int sig) {
+    qDebug() << "\nquit the application (user request signal =" << sig << ")\n";
+    QCoreApplication::quit();
+};
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
+    signal(SIGINT, handler);
     QSerialPort *serial = new QSerialPort();
 
     QFile in("device.cfg");
@@ -38,11 +47,5 @@ int main(int argc, char *argv[])
 
     xb->send(teste);
 
-    forever{
-        // xb->broadcast(data);
-        QTime dieTime= QTime::currentTime().addMSecs(500);
-        while( QTime::currentTime() < dieTime )
-            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-    }
     return a.exec();
 }
