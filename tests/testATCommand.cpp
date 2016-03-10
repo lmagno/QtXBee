@@ -1,6 +1,6 @@
 #include "testATCommand.h"
 
-void TestATCommand::frameDataWithoutParameter()
+void TestATCommand::frameData()
 {
 	QByteArray frame = QByteArray::fromHex("08014E44");
 	ATCommand at;

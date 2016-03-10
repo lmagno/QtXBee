@@ -43,7 +43,14 @@ SOURCES +=  main.cpp \
     testATCommandRemote.cpp \
     testATCommandResponse.cpp \
     testATCommandQueue.cpp \
-    testATCommandResponseRemote.cpp
+    testATCommandResponseRemote.cpp \
+    testModemStatus.cpp \
+    testNodeIdentificationIndicator.cpp \
+    testRXIndicator.cpp \
+    testRXIndicatorExplicit.cpp \
+    testTransmitStatus.cpp \
+    testTXRequest.cpp \
+    testTXRequestExplicit.cpp
 
 HEADERS +=  Autotest.h \
             testATCommand.h \
@@ -65,7 +72,14 @@ HEADERS +=  Autotest.h \
     testATCommandRemote.h \
     testATCommandResponse.h \
     testATCommandQueue.h \
-    testATCommandResponseRemote.h
+    testATCommandResponseRemote.h \
+    testModemStatus.h \
+    testNodeIdentificationIndicator.h \
+    testRXIndicator.h \
+    testRXIndicatorExplicit.h \
+    testTransmitStatus.h \
+    testTXRequest.h \
+    testTXRequestExplicit.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 

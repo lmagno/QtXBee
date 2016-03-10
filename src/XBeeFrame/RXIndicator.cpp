@@ -47,7 +47,7 @@ void RXIndicator::setReceivedData(QByteArray data){
 }
 
 void RXIndicator::setFrameData(QByteArray data){
-	if (data.size() < 12 && data.at(0) != getFrameType()) return;
+	if ((data.size() < 12) && (data.at(0) != getFrameType())) return;
 	setSourceAddress64(data.mid(1, 8));
 	setSourceAddress16(data.mid(9,2));
 	setReceiveOptions(data[11]);

@@ -46,7 +46,7 @@ void ATCommandRemote::setCommandOptions(byte options) {
 }
 
 void ATCommandRemote::setFrameData(QByteArray data) {
-	if (data.size() < 15 && data.at(0) != getFrameType()) return;
+	if ((data.size() < 15) && (data.at(0) != getFrameType())) return;
 	setFrameID(data[1]);
 	setDestinationAddress64(data.mid(2, 8));
 	setDestinationAddress16(data.mid(10, 2));

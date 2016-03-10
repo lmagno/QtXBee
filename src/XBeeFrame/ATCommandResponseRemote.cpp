@@ -33,7 +33,7 @@ void ATCommandResponseRemote::setSourceAddress16(QByteArray address) {
 }
 
 void ATCommandResponseRemote::setFrameData(QByteArray data) {
-	if (data.size() < 15 && data.at(0) != getFrameType()) return;
+	if ((data.size() < 15) && (data.at(0) != getFrameType())) return;
 	setFrameID(data[1]);
 	setSourceAddress64(data.mid(2,8));
 	setSourceAddress16(data.mid(10,2));

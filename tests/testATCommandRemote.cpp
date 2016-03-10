@@ -1,6 +1,6 @@
 #include "testATCommandRemote.h"
 
-void TestATCommandRemote::frameDataWithoutParameter()
+void TestATCommandRemote::frameData()
 {
     QByteArray frame = QByteArray::fromHex("1701000000000000FFFFFFFE024E44");
     ATCommandRemote at;

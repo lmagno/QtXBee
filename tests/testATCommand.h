@@ -9,7 +9,7 @@ class TestATCommand : public QObject
     Q_OBJECT
 
 private slots:
-	void frameDataWithoutParameter();
+	void frameData();
 	void frameDataWithParameter();
 };
 

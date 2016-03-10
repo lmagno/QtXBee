@@ -9,7 +9,7 @@ class TestATCommandResponseRemote : public QObject
     Q_OBJECT
 
 private slots:
-	void frameDataWithoutPayload();
+	void frameData();
 	void frameDataWithPayload();
 };
 

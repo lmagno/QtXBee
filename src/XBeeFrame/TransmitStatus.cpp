@@ -56,10 +56,10 @@ void TransmitStatus::setDiscoveryStatus(byte status){
 }
 
 void TransmitStatus::setFrameData(QByteArray data){
-	if (data.size() != 7 && data.at(0) != getFrameType()) return;
+	if ((data.size() < 7) && (data.at(0) != getFrameType())) return;
 	setFrameID(data[1]);
 	setDestinationAddress16(data.mid(2,2));
 	setTransmitRetryCount(data[4]);
-	setDeliveryStatus(data[8]);
-	setDiscoveryStatus(data[9]);
+	setDeliveryStatus(data[5]);
+	setDiscoveryStatus(data[6]);
 }

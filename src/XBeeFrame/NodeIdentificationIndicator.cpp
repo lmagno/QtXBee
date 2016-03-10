@@ -128,7 +128,7 @@ void NodeIdentificationIndicator::setRSSI(byte rssi) {
 
 void NodeIdentificationIndicator::setFrameData(QByteArray data) {
 	int idx = 0;
-	if (data.size() < 32 && data.at(0) != getFrameType()) return;
+	if ((data.size() < 32) && (data.at(0) != getFrameType())) return;
 	setSourceAddress64(data.mid(1,8));
 	setSourceAddress16(data.mid(9,2));
 	setReceiveOptions(data[11]);
