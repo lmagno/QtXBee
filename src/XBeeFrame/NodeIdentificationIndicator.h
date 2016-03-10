@@ -21,7 +21,7 @@ class NodeIdentificationIndicator : public XBeeFrame
 	QByteArray	 profileID;
 	QByteArray	 manufaccturerID;
 	QByteArray	 deviceTypeID;
-	byte		 rssiValue;
+	QByteArray	 rssiValue;
 
 protected:
 	void		 setSourceAddress64(QByteArray);
@@ -36,7 +36,7 @@ protected:
 	void		 setProfileID(QByteArray);
 	void		 setManufacturerID(QByteArray);
 	void		 setDeviceTypeID(QByteArray);
-	void		 setRSSI(byte);
+	void		 setRSSI(QByteArray);
 
 public:
 	NodeIdentificationIndicator();
@@ -54,7 +54,7 @@ public:
 	QByteArray	 getProfileID();
 	QByteArray	 getManufacturerID();
 	QByteArray	 getDeviceTypeID();
-	byte		 getRSSI();
+	QByteArray	 getRSSI();
 	QByteArray	 getFrameData();
 
 	void		 setFrameData(QByteArray);

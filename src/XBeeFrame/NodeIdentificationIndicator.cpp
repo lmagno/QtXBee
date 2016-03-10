@@ -51,7 +51,7 @@ QByteArray NodeIdentificationIndicator::getDeviceTypeID() {
 	return deviceTypeID;
 }
 
-byte NodeIdentificationIndicator::getRSSI() {
+QByteArray NodeIdentificationIndicator::getRSSI() {
 	return rssiValue;
 }
 
@@ -64,6 +64,7 @@ QByteArray NodeIdentificationIndicator::getFrameData() {
 	frameData += getRemoteAddress16();
 	frameData += getRemoteAddress64();
 	frameData += getNIString();
+	frameData.append((char)0x00);
 	frameData += getParentAddress16();
 	frameData += getDeviceType();
 	frameData += getSourceEvent();
@@ -122,13 +123,13 @@ void NodeIdentificationIndicator::setDeviceTypeID(QByteArray id) {
 	deviceTypeID = id;
 }
 
-void NodeIdentificationIndicator::setRSSI(byte rssi) {
+void NodeIdentificationIndicator::setRSSI(QByteArray rssi) {
 	rssiValue = rssi;
 }
 
 void NodeIdentificationIndicator::setFrameData(QByteArray data) {
-	int idx = 0;
-	if ((data.size() < 32) && (data.at(0) != getFrameType())) return;
+	int idx = 0, dataSize = data.size();
+	if ((dataSize < 32) && (data.at(0) != getFrameType())) return;
 	setSourceAddress64(data.mid(1,8));
 	setSourceAddress16(data.mid(9,2));
 	setReceiveOptions(data[11]);
@@ -142,14 +143,14 @@ void NodeIdentificationIndicator::setFrameData(QByteArray data) {
 	setSourceEvent(data[idx+3]);
 	setProfileID(data.mid(idx+4,2));
 	setManufacturerID(data.mid(idx+6,2));
-	if (data.size() > idx+8) {
-		if (data.size() == idx+9) {
+	if (dataSize > idx+8) {
+		if (dataSize == idx+13) {
 			setDeviceTypeID(data.mid(idx+8,4));
-			setRSSI(data[idx+12]);
+			setRSSI(QByteArray(1,data[idx+12]));
 		}
-		else if (data.size() == idx+7)
+		else if (dataSize == idx+12)
 			setDeviceTypeID(data.mid(idx+8,4));
 		else
-			setRSSI(data[idx+8]);
+			setRSSI(QByteArray(1, data[idx+8]));
 	}
 }
