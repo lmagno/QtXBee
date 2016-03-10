@@ -63,10 +63,10 @@ void QXBee::displayData(XBeePacket *packet){
 		case XBeePacket::pATCommandResponse:
 		{
 			int idx = 0;
-			QByteArray data = ((ATCommandResponse *)packet)->getCommandData();
-			qDebug() << "Raw data: " << ((ATCommandResponse *)packet)->getFrameData().toHex();
+			qDebug() << "Raw data: " << packet->getFrameData().toHex();
 			qDebug() << "Command: " << ((ATCommandResponse *)packet)->getATCommand();
 			qDebug() << "Status: " << ((ATCommandResponse *)packet)->getCommandStatus();
+			QByteArray data = ((ATCommandResponse *)packet)->getCommandData();
 			qDebug() << "Remote Address: " << data.mid(2, 8).toHex();
 			idx = data.indexOf((char)0x00, 10);
 			qDebug() << "Name: " << data.mid(10,idx-10);
@@ -79,13 +79,13 @@ void QXBee::displayData(XBeePacket *packet){
 		break;
 		case XBeePacket::pRXIndicator:
 		{
-			qDebug() << "Received Data: " << packet->getFrameData();
+			qDebug() << "Received Data: " << packet->getFrameData().toHex();
 			qDebug() << "Mensagem: " << ((RXIndicator *)packet)->getReceivedData();
 		}
 		break;
 		default:
 		{
-			qDebug() << "Received Data: " << packet->getFrameData();
+			qDebug() << "Received Data: " << packet->getFrameData().toHex();
 		}
 	}
 	delete (packet);
