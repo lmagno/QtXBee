@@ -27,13 +27,7 @@ int main(int argc, char *argv[])
     serial->setFlowControl(QSerialPort::NoFlowControl);
 
     QXBee *xb = new QXBee(serial);
-    QObject::connect(xb, SIGNAL(receivedATCommandResponse(ATCommandResponse*)), xb, SLOT(displayATCommandResponse(ATCommandResponse*)));
-    QObject::connect(xb, SIGNAL(receivedModemStatus(ModemStatus*)), xb, SLOT(displayModemStatus(ModemStatus*)));
-    QObject::connect(xb, SIGNAL(receivedTransmitStatus(TransmitStatus*)), xb, SLOT(displayTransmitStatus(TransmitStatus*)));
-    QObject::connect(xb, SIGNAL(receivedRXIndicator(RXIndicator*)), xb, SLOT(displayRXIndicator(RXIndicator*)));
-    QObject::connect(xb, SIGNAL(receivedRXIndicatorExplicit(RXIndicatorExplicit*)), xb, SLOT(displayRXIndicatorExplicit(RXIndicatorExplicit*)));
-    QObject::connect(xb, SIGNAL(receivedNodeIdentificationIndicator(NodeIdentificationIndicator*)), xb, SLOT(displayNodeIdentificationIndicator(NodeIdentificationIndicator*)));
-	QObject::connect(xb, SIGNAL(receivedRemoteCommandResponse(ATCommandResponseRemote*)), xb, SLOT(displayRemoteCommandResponse(ATCommandResponseRemote*)));
+	QObject::connect(xb, SIGNAL(dataReceived(XBeePacket*)), xb, SLOT(displayData(XBeePacket*)));
 
     // QByteArray address = QByteArray::fromHex("0013a20040a53581");
     // QString data = "Hello World";

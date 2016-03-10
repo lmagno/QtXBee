@@ -24,62 +24,62 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 INCLUDEPATH += $$PWD/../src
-INCLUDEPATH += $$PWD/../src/QXbeeFrame
+INCLUDEPATH += $$PWD/../src/QXBeePacket
 
 SOURCES +=  main.cpp \
-            testATCommand.cpp \
-        	../src/QXBee.cpp \
-        	../src/XBeeFrame/ATCommand.cpp \
-        	../src/XBeeFrame/ATCommandRemote.cpp \
-        	../src/XBeeFrame/ATCommandResponse.cpp \
-        	../src/XBeeFrame/ATCommandResponseRemote.cpp \
-        	../src/XBeeFrame/ModemStatus.cpp \
-        	../src/XBeeFrame/NodeIdentificationIndicator.cpp \
-        	../src/XBeeFrame/RXIndicator.cpp \
-        	../src/XBeeFrame/RXIndicatorExplicit.cpp \
-        	../src/XBeeFrame/TransmitStatus.cpp \
-        	../src/XBeeFrame/TXRequest.cpp \
-        	../src/XBeeFrame/TXRequestExplicit.cpp \
-    testATCommandRemote.cpp \
-    testATCommandResponse.cpp \
-    testATCommandQueue.cpp \
-    testATCommandResponseRemote.cpp \
-    testModemStatus.cpp \
-    testNodeIdentificationIndicator.cpp \
-    testRXIndicator.cpp \
-    testRXIndicatorExplicit.cpp \
-    testTransmitStatus.cpp \
-    testTXRequest.cpp \
-    testTXRequestExplicit.cpp
+	testATCommand.cpp \
+	../src/QXBee.cpp \
+	../src/XBeePacket/ATCommand.cpp \
+	../src/XBeePacket/ATCommandRemote.cpp \
+	../src/XBeePacket/ATCommandResponse.cpp \
+	../src/XBeePacket/ATCommandResponseRemote.cpp \
+	../src/XBeePacket/ModemStatus.cpp \
+	../src/XBeePacket/NodeIdentificationIndicator.cpp \
+	../src/XBeePacket/RXIndicator.cpp \
+	../src/XBeePacket/RXIndicatorExplicit.cpp \
+	../src/XBeePacket/TransmitStatus.cpp \
+	../src/XBeePacket/TXRequest.cpp \
+	../src/XBeePacket/TXRequestExplicit.cpp \
+	testATCommandRemote.cpp \
+	testATCommandResponse.cpp \
+	testATCommandQueue.cpp \
+	testATCommandResponseRemote.cpp \
+	testModemStatus.cpp \
+	testNodeIdentificationIndicator.cpp \
+	testRXIndicator.cpp \
+	testRXIndicatorExplicit.cpp \
+	testTransmitStatus.cpp \
+	testTXRequest.cpp \
+	testTXRequestExplicit.cpp
 
 HEADERS +=  Autotest.h \
-            testATCommand.h \
-        	../src/typedef.h \
-        	../src/QXBee.h \
-        	../src/XBeeFrame/ATCommand.h \
-        	../src/XBeeFrame/ATCommandQueue.h \
-        	../src/XBeeFrame/ATCommandRemote.h \
-        	../src/XBeeFrame/ATCommandResponse.h \
-        	../src/XBeeFrame/ATCommandResponseRemote.h \
-        	../src/XBeeFrame/ModemStatus.h \
-        	../src/XBeeFrame/NodeIdentificationIndicator.h \
-        	../src/XBeeFrame/RXIndicator.h \
-        	../src/XBeeFrame/RXIndicatorExplicit.h \
-        	../src/XBeeFrame/TransmitStatus.h \
-        	../src/XBeeFrame/TXRequest.h \
-        	../src/XBeeFrame/TXRequestExplicit.h \
-        	../src/XBeeFrame/XBeeFrame.h \
-    testATCommandRemote.h \
-    testATCommandResponse.h \
-    testATCommandQueue.h \
-    testATCommandResponseRemote.h \
-    testModemStatus.h \
-    testNodeIdentificationIndicator.h \
-    testRXIndicator.h \
-    testRXIndicatorExplicit.h \
-    testTransmitStatus.h \
-    testTXRequest.h \
-    testTXRequestExplicit.h
+	testATCommand.h \
+	../src/typedef.h \
+	../src/QXBee.h \
+	../src/XBeePacket/ATCommand.h \
+	../src/XBeePacket/ATCommandQueue.h \
+	../src/XBeePacket/ATCommandRemote.h \
+	../src/XBeePacket/ATCommandResponse.h \
+	../src/XBeePacket/ATCommandResponseRemote.h \
+	../src/XBeePacket/ModemStatus.h \
+	../src/XBeePacket/NodeIdentificationIndicator.h \
+	../src/XBeePacket/RXIndicator.h \
+	../src/XBeePacket/RXIndicatorExplicit.h \
+	../src/XBeePacket/TransmitStatus.h \
+	../src/XBeePacket/TXRequest.h \
+	../src/XBeePacket/TXRequestExplicit.h \
+	../src/XBeePacket/XBeePacket.h \
+	testATCommandRemote.h \
+	testATCommandResponse.h \
+	testATCommandQueue.h \
+	testATCommandResponseRemote.h \
+	testModemStatus.h \
+	testNodeIdentificationIndicator.h \
+	testRXIndicator.h \
+	testRXIndicatorExplicit.h \
+	testTransmitStatus.h \
+	testTXRequest.h \
+	testTXRequestExplicit.h
 
 greaterThan(QT_MAJOR_VERSION, 4){
 

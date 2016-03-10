@@ -7,59 +7,47 @@
 #include <QtSerialPort/QSerialPort>
 
 #include "typedef.h"
-#include "XBeeFrame/XBeeFrame.h"
-#include "XBeeFrame/ATCommand.h"
-#include "XBeeFrame/ATCommandQueue.h"
-#include "XBeeFrame/TXRequest.h"
-#include "XBeeFrame/TXRequestExplicit.h"
-#include "XBeeFrame/ATCommandRemote.h"
-#include "XBeeFrame/ATCommandResponse.h"
-#include "XBeeFrame/ModemStatus.h"
-#include "XBeeFrame/TransmitStatus.h"
-#include "XBeeFrame/RXIndicator.h"
-#include "XBeeFrame/RXIndicatorExplicit.h"
-#include "XBeeFrame/NodeIdentificationIndicator.h"
-#include "XBeeFrame/ATCommandResponseRemote.h"
+#include "XBeePacket/XBeePacket.h"
+#include "XBeePacket/ATCommand.h"
+#include "XBeePacket/ATCommandQueue.h"
+#include "XBeePacket/TXRequest.h"
+#include "XBeePacket/TXRequestExplicit.h"
+#include "XBeePacket/ATCommandRemote.h"
+#include "XBeePacket/ATCommandResponse.h"
+#include "XBeePacket/ModemStatus.h"
+#include "XBeePacket/TransmitStatus.h"
+#include "XBeePacket/RXIndicator.h"
+#include "XBeePacket/RXIndicatorExplicit.h"
+#include "XBeePacket/NodeIdentificationIndicator.h"
+#include "XBeePacket/ATCommandResponseRemote.h"
 
 class QXBee : public QObject
 {
     Q_OBJECT
+	QSerialPort *serial;
+	bool xbeeFound;
+	byte protocolMode;
+	QByteArray buffer;
+	void processPacket(QByteArray packet);
+
 public:
     explicit QXBee(QObject *parent = 0);
     QXBee(QSerialPort *ser);
-	void send(XBeeFrame *request);
+	void send(XBeePacket *request);
     void broadcast(QString data);
     void unicast(QByteArray address, QString data);
     ~QXBee();
 
 signals:
-    void receivedATCommandResponse(ATCommandResponse *response);
-    void receivedModemStatus(ModemStatus *response);
-    void receivedTransmitStatus(TransmitStatus *response);
-    void receivedRXIndicator(RXIndicator *response);
-    void receivedRXIndicatorExplicit(RXIndicatorExplicit *response);
-    void receivedNodeIdentificationIndicator(NodeIdentificationIndicator *response);
-	void receivedRemoteCommandResponse(ATCommandResponseRemote *response);
+	void dataReceived(XBeePacket *);
+
+private slots:
+	void readData();
 
 // Remove public slots on final version
 public slots:
-    void displayATCommandResponse(ATCommandResponse *digiMeshPacket);
-    void displayModemStatus(ModemStatus *digiMeshPacket);
-    void displayTransmitStatus(TransmitStatus *digiMeshPacket);
-    void displayRXIndicator(RXIndicator *digiMeshPacket);
-    void displayRXIndicatorExplicit(RXIndicatorExplicit *digiMeshPacket);
-    void displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket);
-	void displayRemoteCommandResponse(ATCommandResponseRemote *digiMeshPacket);
+	void displayData(XBeePacket *);
 
-private slots:
-    void readData();
-
-private:
-    QSerialPort *serial;
-    bool xbeeFound;
-    byte protocolMode;
-    QByteArray buffer;
-    void processPacket(QByteArray packet);
 };
 
 #endif

@@ -4,9 +4,9 @@
 #include <QByteArray>
 
 #include "typedef.h"
-#include "XBeeFrame.h"
+#include "XBeePacket.h"
 
-class RXIndicator : public XBeeFrame
+class RXIndicator : public XBeePacket
 {
 	QByteArray		   sourceAddress64;
 	QByteArray		   sourceAddress16;

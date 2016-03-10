@@ -1,11 +1,11 @@
-#ifndef XBEEFRAME_H
-#define XBEEFRAME_H
+#ifndef XBEEPACKET_H
+#define XBEEPACKET_H
 
 #include <QByteArray>
 
 #include "typedef.h"
 
-class XBeeFrame
+class XBeePacket
 {
 public:
 	// Frame types (API ID)
@@ -27,4 +27,4 @@ public:
 	virtual void	   setFrameData(QByteArray) = 0;
 };
 
-#endif // XBEEFRAME_H
+#endif // XBEEPACKET_H

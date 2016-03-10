@@ -4,9 +4,9 @@
 #include <QByteArray>
 
 #include "typedef.h"
-#include "XBeeFrame.h"
+#include "XBeePacket.h"
 
-class TXRequest : public XBeeFrame
+class TXRequest : public XBeePacket
 {
 	byte			   frameID;
 	QByteArray		   destinationAddress64;

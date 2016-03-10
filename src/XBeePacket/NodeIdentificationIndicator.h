@@ -5,9 +5,9 @@
 #include <QString>
 
 #include "typedef.h"
-#include "XBeeFrame.h"
+#include "XBeePacket.h"
 
-class NodeIdentificationIndicator : public XBeeFrame
+class NodeIdentificationIndicator : public XBeePacket
 {
 	QByteArray	 sourceAddress64;
 	QByteArray	 sourceAddress16;

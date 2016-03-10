@@ -5,9 +5,9 @@
 #include <QString>
 
 #include "typedef.h"
-#include "XBeeFrame.h"
+#include "XBeePacket.h"
 
-class ATCommand : public XBeeFrame
+class ATCommand : public XBeePacket
 {
 	byte			   frameID;
 	QByteArray		   atCommand;

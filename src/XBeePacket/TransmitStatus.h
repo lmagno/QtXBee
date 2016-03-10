@@ -4,9 +4,9 @@
 #include <QByteArray>
 
 #include "typedef.h"
-#include "XBeeFrame.h"
+#include "XBeePacket.h"
 
-class TransmitStatus : public XBeeFrame
+class TransmitStatus : public XBeePacket
 {
 	byte		 frameID;
 	QByteArray	 destinationAddress16;

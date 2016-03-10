@@ -49,7 +49,6 @@ QXBee::QXBee(QSerialPort *ser){
 
 }
 
-
 QXBee::~QXBee()
 {
 	if(serial->isOpen())
@@ -58,41 +57,28 @@ QXBee::~QXBee()
 		qDebug() << "XBEE: Serial Port closed successfully";
 	}
 }
-void QXBee::displayATCommandResponse(ATCommandResponse *packet){
-	QByteArray data = packet->getCommandData();
-	int idx = 0;
-	qDebug() << "Raw data: " << packet->getFrameData().toHex();
-	qDebug() << "Command: " << packet->getATCommand();
-	qDebug() << "Status: " << packet->getCommandStatus();
-	qDebug() << "Remote Address: " << data.mid(2, 8).toHex();
-	idx = data.indexOf((char)0x00, 10);
-	qDebug() << "Name: " << data.mid(10,idx-10);
-	idx += 3;
-	qDebug() << "Device type: " << (byte)data[idx];
-	qDebug() << "Profile ID: " << data.mid(idx+2, 2).toHex();
-	qDebug() << "Manufacturer: " << data.mid(idx+4, 2).toHex();
-	qDebug() << "";
-}
-void QXBee::displayModemStatus(ModemStatus *digiMeshPacket){
-	qDebug() << "Received ModemStatus: " << digiMeshPacket->getFrameData();
-}
-void QXBee::displayTransmitStatus(TransmitStatus *digiMeshPacket){
-	qDebug() << "Received TransmitStatus: " << digiMeshPacket->getFrameData().toHex();
-}
-void QXBee::displayRXIndicator(RXIndicator *digiMeshPacket){
-	qDebug() << "Received RXIndicator: " << digiMeshPacket->getFrameData().toHex();
-}
-void QXBee::displayRXIndicatorExplicit(RXIndicatorExplicit *digiMeshPacket){
-	qDebug() << "Received RXIndicatorExplicit: " << digiMeshPacket->getFrameData().toHex();
-}
-void QXBee::displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket){
-	qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->getFrameData().toHex();
-}
-void QXBee::displayRemoteCommandResponse(ATCommandResponseRemote *digiMeshPacket){
-	qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->getFrameData().toHex();
+void QXBee::displayData(XBeePacket *packet){
+	byte frameType = packet->getFrameType();
+	if (frameType == XBeePacket::pATCommandResponse) {
+		QByteArray data = ((ATCommandResponse *)packet)->getCommandData();
+		int idx = 0;
+		qDebug() << "Raw data: " << ((ATCommandResponse *)packet)->getFrameData().toHex();
+		qDebug() << "Command: " << ((ATCommandResponse *)packet)->getATCommand();
+		qDebug() << "Status: " << ((ATCommandResponse *)packet)->getCommandStatus();
+		qDebug() << "Remote Address: " << data.mid(2, 8).toHex();
+		idx = data.indexOf((char)0x00, 10);
+		qDebug() << "Name: " << data.mid(10,idx-10);
+		idx += 3;
+		qDebug() << "Device type: " << (byte)data[idx];
+		qDebug() << "Profile ID: " << data.mid(idx+2, 2).toHex();
+		qDebug() << "Manufacturer: " << data.mid(idx+4, 2).toHex();
+		qDebug() << "";
+	} else {
+		qDebug() << "Received Data: " << packet->getFrameData();
+	}
 }
 
-void QXBee::send(XBeeFrame *request)
+void QXBee::send(XBeePacket *request)
 {
 	union {
 		unsigned short i;
@@ -221,55 +207,52 @@ void QXBee::readData()
 	}
 }
 
-void QXBee::processPacket(QByteArray packet){
-	byte blah = (byte)packet[0];
-	switch (blah) {
-	case XBeeFrame::pATCommandResponse:{
-		ATCommandResponse *response = new ATCommandResponse;
-		response->setFrameData(packet);
-		emit receivedATCommandResponse(response);
+void QXBee::processPacket(QByteArray frame){
+	XBeePacket *packet = 0;
+	switch ((byte)frame[0]) {
+	case XBeePacket::pATCommandResponse:{
+		packet = new ATCommandResponse;
+		packet->setFrameData(frame);
+		emit dataReceived(packet);
 		break;
 	}
-	case XBeeFrame::pModemStatus:{
-		ModemStatus *response = new ModemStatus;
-		response->setFrameData(packet);
-		emit receivedModemStatus(response);
+	case XBeePacket::pModemStatus:{
+		packet = new ModemStatus;
+		packet->setFrameData(frame);
+		emit dataReceived(packet);
 		break;
 	}
-	case XBeeFrame::pTransmitStatus:{
-		TransmitStatus *response = new TransmitStatus;
-		response->setFrameData(packet);
-		emit receivedTransmitStatus(response);
+	case XBeePacket::pTransmitStatus:{
+		packet = new TransmitStatus;
+		packet->setFrameData(frame);
+		emit dataReceived(packet);
 		break;
 	}
-	case XBeeFrame::pRXIndicator:{
-		RXIndicator *response = new RXIndicator;
-		response->setFrameData(packet);
-		emit receivedRXIndicator(response);
+	case XBeePacket::pRXIndicator:{
+		packet = new RXIndicator;
+		packet->setFrameData(frame);
+		emit dataReceived(packet);
 		break;
 	}
-	case XBeeFrame::pRXIndicatorExplicit:{
-		RXIndicatorExplicit *response = new RXIndicatorExplicit;
-		response->setFrameData(packet);
-		emit receivedRXIndicatorExplicit(response);
+	case XBeePacket::pRXIndicatorExplicit:{
+		packet = new RXIndicatorExplicit;
+		packet->setFrameData(frame);
+		emit dataReceived(packet);
 		break;
 	}
-	case XBeeFrame::pNodeIdentificationIndicator:{
-		NodeIdentificationIndicator *response = new NodeIdentificationIndicator;
-		response->setFrameData(packet);
-		emit receivedNodeIdentificationIndicator(response);
+	case XBeePacket::pNodeIdentificationIndicator:{
+		packet = new NodeIdentificationIndicator;
+		packet->setFrameData(frame);
+		emit dataReceived(packet);
 		break;
 	}
-	case XBeeFrame::pATCommandResponseRemote:{
-		ATCommandResponseRemote *response = new ATCommandResponseRemote;
-		response->setFrameData(packet);
-		emit receivedRemoteCommandResponse(response);
+	case XBeePacket::pATCommandResponseRemote:{
+		packet = new ATCommandResponseRemote;
+		packet->setFrameData(frame);
+		emit dataReceived(packet);
 		break;
 	}
 	default:
-		qDebug() << "Error:  Unknown Packet: " << packet.toHex();
-
-
+		qDebug() << "Error:  Unknown Packet: " << frame.toHex();
 	}
-
 }

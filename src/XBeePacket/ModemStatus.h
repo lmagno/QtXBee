@@ -4,9 +4,9 @@
 #include <QByteArray>
 
 #include "typedef.h"
-#include "XBeeFrame.h"
+#include "XBeePacket.h"
 
-class ModemStatus : public XBeeFrame
+class ModemStatus : public XBeePacket
 {
 	byte		 status;
 
