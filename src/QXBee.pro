@@ -5,29 +5,25 @@
 #-------------------------------------------------
 
 QT       += core
-
+QT       -= gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 
+TARGET = QXBee
+OBJECTS_DIR = ../build/lib
+MOC_DIR = ../build/lib
 
-QT       -= gui
-
-TARGET = ../QXBee
-OBJECTS_DIR = ../build
-MOC_DIR = ../build
-
-CONFIG   += console
-
+CONFIG += staticlib
+CONFIG += console
+CONFIG -= app_bundle
+CONFIG += c++11
 greaterThan(QT_MAJOR_VERSION, 4): CONFIG += serialport
 
-CONFIG   -= app_bundle
-
-TEMPLATE = app
+TEMPLATE = lib
 
 INCLUDEPATH += $$PWD
 INCLUDEPATH += $$PWD/QXBeePacket
 
 SOURCES += \
-	main.cpp \
 	QXBee.cpp \
 	XBeePacket/ATCommand.cpp \
 	XBeePacket/ATCommandRemote.cpp \
@@ -69,4 +65,9 @@ LIBS            += \
 LIBS            += \
                 -L/usr/lib \
                 -lQtSerialPort \
+}
+
+unix {
+    target.path = /usr/local/lib
+    INSTALLS += target
 }
