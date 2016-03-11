@@ -8,9 +8,9 @@ QT       += core
 QT       -= gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 
-TARGET = QXBee
-OBJECTS_DIR = ../build/lib
-MOC_DIR = ../build/lib
+TARGET = ../../QXBee
+OBJECTS_DIR = ../../build/lib
+MOC_DIR = ../../build/lib
 
 CONFIG += staticlib
 CONFIG += console

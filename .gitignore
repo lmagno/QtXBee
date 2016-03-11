@@ -20,7 +20,7 @@ Makefile
 *-build-*
 
 QXBee
-tests/Test
+libQXBee.a
 device.cfg
 .qmake.stash
 build

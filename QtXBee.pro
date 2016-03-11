@@ -1,6 +1,12 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 SUBDIRS = \
-	src/QXBee.pro \
-	tests/Test.pro \
-	sample/QtXBeeSample.pro
+	QXBee \
+	tests \
+	sample
+
+QXBee.subdir  = src/QXBee
+tests.subdir = src/tests
+
+sample.depends = src
+tests.depends = src

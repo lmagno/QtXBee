@@ -10,9 +10,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 
 QT       -= gui
 
-TARGET = ../build/Test
-OBJECTS_DIR = ../build/tests
-MOC_DIR = ../build/tests
+TARGET = ../../build/tests/RunTests
+OBJECTS_DIR = ../../build/tests
+MOC_DIR = ../../build/tests
 
 CONFIG -= app_bundle
 CONFIG += console testcase
@@ -21,9 +21,9 @@ greaterThan(QT_MAJOR_VERSION, 4): CONFIG += serialport
 
 TEMPLATE = app
 
-INCLUDEPATH += $$PWD/../src
-INCLUDEPATH += $$PWD/../src/QXBeePacket
-DEPENDPATH += $$PWD/../src
+INCLUDEPATH += $$PWD/../QXBee
+INCLUDEPATH += $$PWD/../QXBee/QXBeePacket
+DEPENDPATH += $$PWD/../QXBee
 
 SOURCES +=  \
 	testATCommand.cpp \
@@ -68,11 +68,12 @@ LIBS            += \
                 -lQtSerialPort \
 }
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../src/release/ -lQXBee
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../src/debug/ -lQXBee
-else:unix: LIBS += -L$$OUT_PWD/../src/ -lQXBee
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../src/release/libQXBee.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../src/debug/libQXBee.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../src/release/QXBee.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../src/debug/QXBee.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../src/libQXBee.a
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../release/ -lQXBee
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../debug/ -lQXBee
+else:unix: LIBS += -L$$OUT_PWD/../../ -lQXBee
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../release/libQXBee.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../debug/libQXBee.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../release/QXBee.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../debug/QXBee.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../../libQXBee.a
