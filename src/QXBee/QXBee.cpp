@@ -62,9 +62,9 @@ void QXBee::displayData(XBeePacket *packet){
 	switch (frameType) {
 		case XBeePacket::pATCommandResponse:
 		{
-			int idx = 0;
-			qDebug() << "Raw data: " << packet->getFrameData().toHex();
-			qDebug() << "Command: " << ((ATCommandResponse *)packet)->getATCommand();
+			//int idx = 0;
+			//qDebug() << "Raw data: " << packet->getFrameData().toHex();
+			/*qDebug() << "Command: " << ((ATCommandResponse *)packet)->getATCommand();
 			qDebug() << "Status: " << ((ATCommandResponse *)packet)->getCommandStatus();
 			QByteArray data = ((ATCommandResponse *)packet)->getCommandData();
 			qDebug() << "Remote Address: " << data.mid(2, 8).toHex();
@@ -74,7 +74,7 @@ void QXBee::displayData(XBeePacket *packet){
 			qDebug() << "Device type: " << (uint8_t)data[idx];
 			qDebug() << "Profile ID: " << data.mid(idx+2, 2).toHex();
 			qDebug() << "Manufacturer: " << data.mid(idx+4, 2).toHex();
-			qDebug() << "";
+			qDebug() << "";*/
 		}
 		break;
 		case XBeePacket::pRXIndicator:
@@ -140,63 +140,66 @@ void QXBee::unicast(QByteArray address, QString data){
 
 void QXBee::readData()
 {
-	const char startDelimiter = 0x7E;
-	const char escapeCharacter = 0x7D;
+	const uint8_t startDelimiter = 0x7E;
+	const uint8_t escapeCharacter = 0x7D;
 	int i, frameIndex, frameLength, packetLength;
 	uint8_t chksm, blah;
-	QByteArray frame, escapedBuffer;
+	QByteArray frame;
 
 	i = frameIndex = frameLength = packetLength = 0;
 
+	 rawBuffer += serial->readAll();
+
 	// Unescape characters if necessary
-	if (protocolMode == 2) {
-
-		if (!buffer.isEmpty() && (buffer[buffer.size()-1] == escapeCharacter)) {
-			escapedBuffer += escapeCharacter;
-			buffer.remove(buffer.size()-1,1);
+	switch (protocolMode) {
+		case 1:
+			cleanBuffer += rawBuffer;
+		break;
+		case 2:
+		{
+			for (i = 0; i < rawBuffer.size()-1; i++) {
+				if ((uint8_t)rawBuffer[i] != escapeCharacter)
+					cleanBuffer += rawBuffer[i];
+				else {
+					i++;
+					cleanBuffer += rawBuffer[i]^0x20;
+				}
+			}
+			rawBuffer.remove(0, i);
+			if (!rawBuffer.isEmpty() && (uint8_t)rawBuffer[0] != escapeCharacter)
+				cleanBuffer += rawBuffer[0];
 		}
-		escapedBuffer += serial->readAll();
-		for (i = 0; i < escapedBuffer.size()-1; i++) {
-			if (escapedBuffer[i] != escapeCharacter)
-				buffer += escapedBuffer[i];
-			else if (++i < escapedBuffer.size())
-				buffer += escapedBuffer[i]^0x20;
-		}
-		if (i < escapedBuffer.size()) buffer += escapedBuffer[i];
-	} else buffer += serial->readAll();
-
-	// Clean buffer
-	for (i = 0; i < buffer.size(); i++)
-		if (buffer[i] == startDelimiter) break;
-	buffer.remove(0, i);
-
+	}
+	rawBuffer.clear();
+	// Clean Buffer
+	for (i = 0; i < cleanBuffer.size(); i++)
+		if ((uint8_t)cleanBuffer[i] == startDelimiter) break;
+	cleanBuffer.remove(0, i);
 
 	// Leave if we don't have the minimum possible size of one frame.
-	if (buffer.size() < 5) return;
+	if (cleanBuffer.size() < 5) return;
 
-	while (buffer.size() > 0) {
+	while (cleanBuffer.size() > 0) {
 
 		// Calculate frame length
-		frameLength = (int)buffer[1] << 8;
-		frameLength += (int)buffer[2];
+		frameLength = (int)cleanBuffer[1] << 8;
+		frameLength += (int)cleanBuffer[2];
 
 		// Leave if we don't have a full frame
-		if(buffer.size()-4 < frameLength) return;
+		if(cleanBuffer.size()-4 < frameLength) return;
 
 		// Verify frame checksum
 		chksm = 0;
-		for (i = 3; i < frameLength+3; i++) chksm += buffer[i];
+		for (i = 3; i < frameLength+3; i++) chksm += cleanBuffer[i];
 		chksm = 0xFF - chksm;
 
 		// Save frame
-		blah = buffer[frameLength+3];
+		blah = cleanBuffer[frameLength+3];
+		frame = cleanBuffer.mid(3,frameLength);
 		if (chksm == blah) {
-			frame = buffer.mid(3,frameLength);
-			buffer.remove(0, frameLength+4);
-		}
-
-		// Process packet
-		if (!frame.isEmpty()) processPacket(frame);
+			processPacket(frame);
+		} else qDebug() << "Frame pr: " << frame.toHex() << "\n";
+		cleanBuffer.remove(0, frameLength+4);
 	}
 }
 

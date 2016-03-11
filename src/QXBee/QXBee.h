@@ -26,7 +26,7 @@ class QXBee : public QObject
 	QSerialPort *serial;
 	bool xbeeFound;
 	uint8_t protocolMode;
-	QByteArray buffer;
+	QByteArray rawBuffer, cleanBuffer;
 	void processPacket(QByteArray packet);
 
 public:
