@@ -8,38 +8,25 @@ QT       += core testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 
-
 QT       -= gui
 
-TARGET = ../build/tests/Test
+TARGET = ../build/Test
 OBJECTS_DIR = ../build/tests
 MOC_DIR = ../build/tests
 
-CONFIG   += console testcase
-
+CONFIG -= app_bundle
+CONFIG += console testcase
+CONFIG += c++11
 greaterThan(QT_MAJOR_VERSION, 4): CONFIG += serialport
-
-CONFIG   -= app_bundle
 
 TEMPLATE = app
 
 INCLUDEPATH += $$PWD/../src
 INCLUDEPATH += $$PWD/../src/QXBeePacket
+DEPENDPATH += $$PWD/../src
 
-SOURCES +=  main.cpp \
+SOURCES +=  \
 	testATCommand.cpp \
-	../src/QXBee.cpp \
-	../src/XBeePacket/ATCommand.cpp \
-	../src/XBeePacket/ATCommandRemote.cpp \
-	../src/XBeePacket/ATCommandResponse.cpp \
-	../src/XBeePacket/ATCommandResponseRemote.cpp \
-	../src/XBeePacket/ModemStatus.cpp \
-	../src/XBeePacket/NodeIdentificationIndicator.cpp \
-	../src/XBeePacket/RXIndicator.cpp \
-	../src/XBeePacket/RXIndicatorExplicit.cpp \
-	../src/XBeePacket/TransmitStatus.cpp \
-	../src/XBeePacket/TXRequest.cpp \
-	../src/XBeePacket/TXRequestExplicit.cpp \
 	testATCommandRemote.cpp \
 	testATCommandResponse.cpp \
 	testATCommandQueue.cpp \
@@ -50,25 +37,12 @@ SOURCES +=  main.cpp \
 	testRXIndicatorExplicit.cpp \
 	testTransmitStatus.cpp \
 	testTXRequest.cpp \
-	testTXRequestExplicit.cpp
+	testTXRequestExplicit.cpp \
+	main.cpp
 
-HEADERS +=  Autotest.h \
+HEADERS +=  \
+	Autotest.h \
 	testATCommand.h \
-	../src/typedef.h \
-	../src/QXBee.h \
-	../src/XBeePacket/ATCommand.h \
-	../src/XBeePacket/ATCommandQueue.h \
-	../src/XBeePacket/ATCommandRemote.h \
-	../src/XBeePacket/ATCommandResponse.h \
-	../src/XBeePacket/ATCommandResponseRemote.h \
-	../src/XBeePacket/ModemStatus.h \
-	../src/XBeePacket/NodeIdentificationIndicator.h \
-	../src/XBeePacket/RXIndicator.h \
-	../src/XBeePacket/RXIndicatorExplicit.h \
-	../src/XBeePacket/TransmitStatus.h \
-	../src/XBeePacket/TXRequest.h \
-	../src/XBeePacket/TXRequestExplicit.h \
-	../src/XBeePacket/XBeePacket.h \
 	testATCommandRemote.h \
 	testATCommandResponse.h \
 	testATCommandQueue.h \
@@ -93,3 +67,12 @@ LIBS            += \
                 -L/usr/lib \
                 -lQtSerialPort \
 }
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../src/release/ -lQXBee
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../src/debug/ -lQXBee
+else:unix: LIBS += -L$$OUT_PWD/../src/ -lQXBee
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../src/release/libQXBee.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../src/debug/libQXBee.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../src/release/QXBee.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../src/debug/QXBee.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../src/libQXBee.a
