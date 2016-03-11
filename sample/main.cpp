@@ -1,51 +1,41 @@
 #include <QCoreApplication>
-#include "QXBee.h"
 #include <QtSerialPort/QSerialPort>
 #include <QDebug>
-#include <QTime>
 #include <QFile>
-#include <QString>
 #include <QTextStream>
 #include <signal.h>
-#include <unistd.h>
-#include <functional>
 
-void handler (int sig) {
-    qDebug() << "\nquit the application (user request signal =" << sig << ")\n";
-    QCoreApplication::quit();
-};
+#include "QXBee.h"
+
+void handler(int) { QCoreApplication::quit(); }
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+	QCoreApplication a(argc, argv);
+	QSerialPort serial;
+	signal(SIGINT, handler);
 
-    signal(SIGINT, handler);
-    QSerialPort serial;
+	QFile in("device.cfg");
+	if(!in.open(QIODevice::ReadOnly | QIODevice::Text)) {
+		qDebug() << "Couldn't open file device.cfg";
+		return 1;
+	}
+	QTextStream device(&in);
 
-    QFile in("device.cfg");
-    if(!in.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "Couldn't open file device.cfg";
-        return 1;
-    }
-    QTextStream device(&in);
-    serial.setPortName(device.readLine());
-    serial.setBaudRate(QSerialPort::Baud9600);
-    serial.setDataBits(QSerialPort::Data8);
-    serial.setParity(QSerialPort::NoParity);
-    serial.setStopBits(QSerialPort::OneStop);
-    serial.setFlowControl(QSerialPort::NoFlowControl);
+	serial.setPortName(device.readLine());
+	serial.setBaudRate(QSerialPort::Baud9600);
+	serial.setDataBits(QSerialPort::Data8);
+	serial.setParity(QSerialPort::NoParity);
+	serial.setStopBits(QSerialPort::OneStop);
+	serial.setFlowControl(QSerialPort::NoFlowControl);
 
-    QXBee xb(&serial);
+	QXBee xb(&serial);
 	QObject::connect(&xb, SIGNAL(dataReceived(XBeePacket*)), &xb, SLOT(displayData(XBeePacket*)));
 
-    // QByteArray address = QByteArray::fromHex("0013a20040a53581");
-    // QString data = "Hello World";
-
 	ATCommand teste;
-	teste.setFrameID(0x01);
-    teste.setATCommand("ND");
+	teste.setATCommand("ND");
 
-    xb.send(&teste);
+	xb.send(&teste);
 
-    return a.exec();
+	return a.exec();
 }

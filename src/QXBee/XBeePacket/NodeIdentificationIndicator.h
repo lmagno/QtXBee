@@ -10,13 +10,13 @@ class NodeIdentificationIndicator : public XBeePacket
 {
 	QByteArray	 sourceAddress64;
 	QByteArray	 sourceAddress16;
-	byte		 receiveOptions;
+	uint8_t		 receiveOptions;
 	QByteArray	 remoteAddress64;
 	QByteArray	 remoteAddress16;
 	QString		 niString;
 	QByteArray	 parentAddress16;
-	byte		 deviceType;
-	byte		 sourceEvent;
+	uint8_t		 deviceType;
+	uint8_t		 sourceEvent;
 	QByteArray	 profileID;
 	QByteArray	 manufaccturerID;
 	QByteArray	 deviceTypeID;
@@ -25,13 +25,13 @@ class NodeIdentificationIndicator : public XBeePacket
 protected:
 	void		 setSourceAddress64(QByteArray);
 	void		 setSourceAddress16(QByteArray);
-	void		 setReceiveOptions(byte);
+	void		 setReceiveOptions(uint8_t);
 	void		 setRemoteAddress64(QByteArray);
 	void		 setRemoteAddress16(QByteArray);
 	void		 setNIString(QString);
 	void		 setParentAddress16(QByteArray);
-	void		 setDeviceType(byte);
-	void		 setSourceEvent(byte);
+	void		 setDeviceType(uint8_t);
+	void		 setSourceEvent(uint8_t);
 	void		 setProfileID(QByteArray);
 	void		 setManufacturerID(QByteArray);
 	void		 setDeviceTypeID(QByteArray);
@@ -40,16 +40,16 @@ protected:
 public:
 	NodeIdentificationIndicator();
 
-	virtual byte getFrameType() const { return pNodeIdentificationIndicator; }
+	virtual uint8_t getFrameType() const { return pNodeIdentificationIndicator; }
 	QByteArray	 getSourceAddress64();
 	QByteArray	 getSourceAddress16();
-	byte		 getReceiveOptions();
+	uint8_t		 getReceiveOptions();
 	QByteArray	 getRemoteAddress64();
 	QByteArray	 getRemoteAddress16();
 	QString		 getNIString();
 	QByteArray	 getParentAddress16();
-	byte		 getDeviceType();
-	byte		 getSourceEvent();
+	uint8_t		 getDeviceType();
+	uint8_t		 getSourceEvent();
 	QByteArray	 getProfileID();
 	QByteArray	 getManufacturerID();
 	QByteArray	 getDeviceTypeID();

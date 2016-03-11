@@ -7,23 +7,23 @@
 
 class TXRequestExplicit : public TXRequest
 {
-	byte		 sourceEndpoint;
-	byte		 destinationEndpoint;
+	uint8_t		 sourceEndpoint;
+	uint8_t		 destinationEndpoint;
 	QByteArray	 clusterID;
 	QByteArray	 profileID;
 
 public:
 	TXRequestExplicit();
 
-	virtual byte getFrameType() const { return pTXRequestExplicit; }
-	byte		 getSourceEndpoint();
-	byte		 getDestinationEndpoint();
+	virtual uint8_t getFrameType() const { return pTXRequestExplicit; }
+	uint8_t		 getSourceEndpoint();
+	uint8_t		 getDestinationEndpoint();
 	QByteArray	 getClusterID();
 	QByteArray	 getProfileID();
 	QByteArray	 getFrameData();
 
-	void		 setSourceEndpoint(byte);
-	void		 setDestinationEndpoint(byte);
+	void		 setSourceEndpoint(uint8_t);
+	void		 setDestinationEndpoint(uint8_t);
 	void		 setCLusterID(QByteArray);
 	void		 setProfileID(QByteArray);
 	void		 setFrameData(QByteArray);

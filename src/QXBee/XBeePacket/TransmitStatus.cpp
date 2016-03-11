@@ -4,7 +4,7 @@ TransmitStatus::TransmitStatus()
 {
 }
 
-byte TransmitStatus::getFrameID(){
+uint8_t TransmitStatus::getFrameID(){
 	return frameID;
 }
 
@@ -12,15 +12,15 @@ QByteArray TransmitStatus::getDestinationAddress16() {
 	return destinationAddress16;
 }
 
-byte TransmitStatus::getTransmitRetryCount(){
+uint8_t TransmitStatus::getTransmitRetryCount(){
 	return transmitRetryCount;
 }
 
-byte TransmitStatus::getDeliveryStatus(){
+uint8_t TransmitStatus::getDeliveryStatus(){
 	return deliveryStatus;
 }
 
-byte TransmitStatus::getDiscoveryStatus(){
+uint8_t TransmitStatus::getDiscoveryStatus(){
 	return discoveryStatus;
 }
 
@@ -35,7 +35,7 @@ QByteArray TransmitStatus::getFrameData() {
 	return frameData;
 }
 
-void TransmitStatus::setFrameID(byte id){
+void TransmitStatus::setFrameID(uint8_t id){
 	frameID = id;
 }
 
@@ -43,15 +43,15 @@ void TransmitStatus::setDestinationAddress16(QByteArray address) {
 	destinationAddress16 = address;
 }
 
-void TransmitStatus::setTransmitRetryCount(byte count){
+void TransmitStatus::setTransmitRetryCount(uint8_t count){
 	transmitRetryCount = count;
 }
 
-void TransmitStatus::setDeliveryStatus(byte status){
+void TransmitStatus::setDeliveryStatus(uint8_t status){
 	deliveryStatus = status;
 }
 
-void TransmitStatus::setDiscoveryStatus(byte status){
+void TransmitStatus::setDiscoveryStatus(uint8_t status){
 	discoveryStatus = status;
 }
 

@@ -7,28 +7,28 @@
 
 class TransmitStatus : public XBeePacket
 {
-	byte		 frameID;
+	uint8_t		 frameID;
 	QByteArray	 destinationAddress16;
-	byte		 transmitRetryCount;
-	byte		 deliveryStatus;
-	byte		 discoveryStatus;
+	uint8_t		 transmitRetryCount;
+	uint8_t		 deliveryStatus;
+	uint8_t		 discoveryStatus;
 
 protected:
-	void		 setFrameID(byte);
+	void		 setFrameID(uint8_t);
 	void		 setDestinationAddress16(QByteArray);
-	void		 setTransmitRetryCount(byte);
-	void		 setDeliveryStatus(byte);
-	void		 setDiscoveryStatus(byte);
+	void		 setTransmitRetryCount(uint8_t);
+	void		 setDeliveryStatus(uint8_t);
+	void		 setDiscoveryStatus(uint8_t);
 
 public:
 	TransmitStatus();
 
-	virtual byte getFrameType() const { return pTransmitStatus; }
-	byte		 getFrameID();
+	virtual uint8_t getFrameType() const { return pTransmitStatus; }
+	uint8_t		 getFrameID();
 	QByteArray	 getDestinationAddress16();
-	byte		 getTransmitRetryCount();
-	byte		 getDeliveryStatus();
-	byte		 getDiscoveryStatus();
+	uint8_t		 getTransmitRetryCount();
+	uint8_t		 getDeliveryStatus();
+	uint8_t		 getDiscoveryStatus();
 	QByteArray	 getFrameData();
 
 	void		 setFrameData(QByteArray);

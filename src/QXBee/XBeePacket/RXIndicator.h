@@ -9,22 +9,22 @@ class RXIndicator : public XBeePacket
 {
 	QByteArray		   sourceAddress64;
 	QByteArray		   sourceAddress16;
-	byte			   receiveOptions;
+	uint8_t			   receiveOptions;
 	QByteArray		   receivedData;
 
 protected:
 	void			   setSourceAddress64(QByteArray);
 	void			   setSourceAddress16(QByteArray);
-	void			   setReceiveOptions(byte);
+	void			   setReceiveOptions(uint8_t);
 	void			   setReceivedData(QByteArray);
 
 public:
 	RXIndicator();
 
-	virtual byte	   getFrameType() const { return pRXIndicator; }
+	virtual uint8_t	   getFrameType() const { return pRXIndicator; }
 	QByteArray		   getSourceAddress64();
 	QByteArray		   getSourceAddress16();
-	byte			   getReceiveOptions();
+	uint8_t			   getReceiveOptions();
 	QByteArray		   getReceivedData();
 	virtual QByteArray getFrameData();
 

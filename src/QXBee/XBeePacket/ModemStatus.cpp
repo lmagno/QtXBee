@@ -3,7 +3,7 @@
 ModemStatus::ModemStatus() {
 }
 
-byte ModemStatus::getStatus(){
+uint8_t ModemStatus::getStatus(){
 	return status;
 }
 
@@ -14,7 +14,7 @@ QByteArray ModemStatus::getFrameData() {
 	return frameData;
 }
 
-void ModemStatus::setStatus(byte st) {
+void ModemStatus::setStatus(uint8_t st) {
 	status = st;
 }
 

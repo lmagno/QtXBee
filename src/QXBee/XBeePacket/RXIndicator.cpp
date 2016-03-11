@@ -12,7 +12,7 @@ QByteArray RXIndicator::getSourceAddress16(){
 	return sourceAddress16;
 }
 
-byte RXIndicator::getReceiveOptions(){
+uint8_t RXIndicator::getReceiveOptions(){
 	return receiveOptions;
 }
 
@@ -38,7 +38,7 @@ void RXIndicator::setSourceAddress16(QByteArray address){
 	sourceAddress16 = address;
 }
 
-void RXIndicator::setReceiveOptions(byte options){
+void RXIndicator::setReceiveOptions(uint8_t options){
 	receiveOptions = options;
 }
 

@@ -9,20 +9,20 @@ class ATCommandRemote : public ATCommand
 {
 	QByteArray		 destinationAddress64;
 	QByteArray		 destinationAddress16;
-	byte			 commandOptions;
+	uint8_t			 commandOptions;
 
 public:
 	ATCommandRemote();
 
-	virtual byte	 getFrameType() const { return pATCommandRemote; }
+	virtual uint8_t	 getFrameType() const { return pATCommandRemote; }
 	QByteArray		 getDestinationAdress64();
 	QByteArray		 getDestinationAdress16();
-	byte			 getCommandOptions();
+	uint8_t			 getCommandOptions();
 	QByteArray		 getFrameData();
 
 	void			 setDestinationAddress64(QByteArray);
 	void			 setDestinationAddress16(QByteArray);
-	void			 setCommandOptions(byte);
+	void			 setCommandOptions(uint8_t);
 	void			 setFrameData(QByteArray);
 };
 

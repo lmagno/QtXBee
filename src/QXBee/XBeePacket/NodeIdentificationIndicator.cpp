@@ -11,7 +11,7 @@ QByteArray NodeIdentificationIndicator::getSourceAddress16() {
 	return sourceAddress16;
 }
 
-byte NodeIdentificationIndicator::getReceiveOptions() {
+uint8_t NodeIdentificationIndicator::getReceiveOptions() {
 	return receiveOptions;
 }
 
@@ -31,11 +31,11 @@ QByteArray NodeIdentificationIndicator::getParentAddress16() {
 	return parentAddress16;
 }
 
-byte NodeIdentificationIndicator::getDeviceType() {
+uint8_t NodeIdentificationIndicator::getDeviceType() {
 	return deviceType;
 }
 
-byte NodeIdentificationIndicator::getSourceEvent() {
+uint8_t NodeIdentificationIndicator::getSourceEvent() {
 	return sourceEvent;
 }
 
@@ -83,7 +83,7 @@ void NodeIdentificationIndicator::setSourceAddress16(QByteArray address) {
 	sourceAddress16 = address;
 }
 
-void NodeIdentificationIndicator::setReceiveOptions(byte options) {
+void NodeIdentificationIndicator::setReceiveOptions(uint8_t options) {
 	receiveOptions = options;
 }
 
@@ -103,11 +103,11 @@ void NodeIdentificationIndicator::setParentAddress16(QByteArray address) {
 	parentAddress16 = address;
 }
 
-void NodeIdentificationIndicator::setDeviceType(byte type) {
+void NodeIdentificationIndicator::setDeviceType(uint8_t type) {
 	deviceType = type;
 }
 
-void NodeIdentificationIndicator::setSourceEvent(byte event) {
+void NodeIdentificationIndicator::setSourceEvent(uint8_t event) {
 	sourceEvent = event;
 }
 

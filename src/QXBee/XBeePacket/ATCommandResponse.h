@@ -8,24 +8,24 @@
 
 class ATCommandResponse : public XBeePacket
 {
-	byte			   frameID;
+	uint8_t			   frameID;
 	QByteArray		   atCommand;
-	byte			   commandStatus;
+	uint8_t			   commandStatus;
 	QByteArray		   commandData;
 
 protected:
-	void			   setFrameID(byte);
+	void			   setFrameID(uint8_t);
 	void			   setATCommand(QString);
-	void			   setCommandStatus(byte);
+	void			   setCommandStatus(uint8_t);
 	void			   setCommandData(QByteArray);
 
 public:
 	ATCommandResponse();
 
-	virtual byte	   getFrameType() const { return pATCommandResponse; }
-	byte			   getFrameID();
+	virtual uint8_t	   getFrameType() const { return pATCommandResponse; }
+	uint8_t			   getFrameID();
 	QString			   getATCommand();
-	byte			   getCommandStatus();
+	uint8_t			   getCommandStatus();
 	QByteArray		   getCommandData();
 	virtual QByteArray getFrameData();
 

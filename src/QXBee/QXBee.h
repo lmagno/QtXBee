@@ -6,7 +6,6 @@
 #include <QString>
 #include <QtSerialPort/QSerialPort>
 
-#include "typedef.h"
 #include "XBeePacket/XBeePacket.h"
 #include "XBeePacket/ATCommand.h"
 #include "XBeePacket/ATCommandQueue.h"
@@ -26,7 +25,7 @@ class QXBee : public QObject
     Q_OBJECT
 	QSerialPort *serial;
 	bool xbeeFound;
-	byte protocolMode;
+	uint8_t protocolMode;
 	QByteArray buffer;
 	void processPacket(QByteArray packet);
 
@@ -35,7 +34,7 @@ public:
     QXBee(QSerialPort *ser);
 	void send(XBeePacket *request);
     void broadcast(QString data);
-    void unicast(QByteArray address, QString data);
+	void unicast(QByteArray address, QString data);
     ~QXBee();
 
 signals:

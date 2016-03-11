@@ -3,11 +3,11 @@
 RXIndicatorExplicit::RXIndicatorExplicit() {
 }
 
-byte RXIndicatorExplicit::getSourceEndpoint() {
+uint8_t RXIndicatorExplicit::getSourceEndpoint() {
 	return sourceEndpoint;
 }
 
-byte RXIndicatorExplicit::getDestinationEndpoint() {
+uint8_t RXIndicatorExplicit::getDestinationEndpoint() {
 	return destinationEndpoint;
 }
 
@@ -33,11 +33,11 @@ QByteArray RXIndicatorExplicit::getFrameData() {
 	return frameData;
 }
 
-void RXIndicatorExplicit::setSourceEndpoint(byte endpoint) {
+void RXIndicatorExplicit::setSourceEndpoint(uint8_t endpoint) {
 	sourceEndpoint = endpoint;
 }
 
-void RXIndicatorExplicit::setDestinationEndpoint(byte endpoint) {
+void RXIndicatorExplicit::setDestinationEndpoint(uint8_t endpoint) {
 	destinationEndpoint = endpoint;
 }
 

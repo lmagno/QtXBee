@@ -1,8 +1,8 @@
 #include "ATCommandRemote.h"
 
 ATCommandRemote::ATCommandRemote() {
-	static const byte broadcast[] = { 0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF };
-	static const byte unknown[] = { 0xFF, 0xFE };
+	static const uint8_t broadcast[] = { 0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF };
+	static const uint8_t unknown[] = { 0xFF, 0xFE };
 	setFrameID(0x01);
 	setCommandOptions(0x02);
 	setDestinationAddress64(QByteArray((char *)broadcast, 8)); // Broadcast by default
@@ -17,7 +17,7 @@ QByteArray ATCommandRemote::getDestinationAdress16() {
 	return destinationAddress16;
 }
 
-byte ATCommandRemote::getCommandOptions() {
+uint8_t ATCommandRemote::getCommandOptions() {
 	return commandOptions;
 }
 
@@ -41,7 +41,7 @@ void ATCommandRemote::setDestinationAddress16(QByteArray address) {
 	if (address.length() >= 2) destinationAddress16 = address.left(2);
 }
 
-void ATCommandRemote::setCommandOptions(byte options) {
+void ATCommandRemote::setCommandOptions(uint8_t options) {
 	commandOptions = options;
 }
 

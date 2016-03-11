@@ -2,8 +2,8 @@
 
 TXRequest::TXRequest()
 {
-	static const byte broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
-	static const byte unknown[] = { 0xFF, 0xFE };
+	static const uint8_t broadcast[] = {0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF};
+	static const uint8_t unknown[] = { 0xFF, 0xFE };
 	setFrameID(0x01);
 	setDestinationAddress64(QByteArray((char *)broadcast, 8)); // Broadcast by default
 	setDestinationAddress16(QByteArray((char *)unknown, 2));
@@ -11,7 +11,7 @@ TXRequest::TXRequest()
 	setTransmitOptions(0x00);
 }
 
-byte TXRequest::getFrameID() {
+uint8_t TXRequest::getFrameID() {
 	return frameID;
 }
 
@@ -23,11 +23,11 @@ QByteArray TXRequest::getDestinationAddress16(){
 	return destinationAddress16;
 }
 
-byte TXRequest::getBroadcastRadius(){
+uint8_t TXRequest::getBroadcastRadius(){
 	return broadcastRadius;
 }
 
-byte TXRequest::getTransmitOptions(){
+uint8_t TXRequest::getTransmitOptions(){
 	return transmitOptions;
 }
 
@@ -47,15 +47,15 @@ QByteArray TXRequest::getFrameData(){
 	return frameData;
 }
 
-void TXRequest::setFrameID(byte id) {
+void TXRequest::setFrameID(uint8_t id) {
 	frameID = id;
 }
 
-void TXRequest::setBroadcastRadius(byte radius){
+void TXRequest::setBroadcastRadius(uint8_t radius){
 	broadcastRadius = radius;
 }
 
-void TXRequest::setTransmitOptions(byte options){
+void TXRequest::setTransmitOptions(uint8_t options){
 	transmitOptions = options;
 }
 

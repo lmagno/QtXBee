@@ -8,20 +8,20 @@
 
 class ATCommand : public XBeePacket
 {
-	byte			   frameID;
+	uint8_t			   frameID;
 	QByteArray		   atCommand;
 	QByteArray		   atParameter;
 
 public:
 	ATCommand();
 
-	virtual byte	   getFrameType() const { return pATCommand; }
-	byte			   getFrameID();
+	virtual uint8_t	   getFrameType() const { return pATCommand; }
+	uint8_t			   getFrameID();
 	QByteArray		   getATCommand();
 	QByteArray		   getATParameter();
 	virtual QByteArray getFrameData();
 
-	void			   setFrameID(byte);
+	void			   setFrameID(uint8_t);
 	void			   setATCommand(QString);
 	void			   setATParameter(QByteArray array);
 	virtual void	   setFrameData(QByteArray);

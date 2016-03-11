@@ -7,23 +7,23 @@
 
 class RXIndicatorExplicit : public RXIndicator
 {
-	byte		 sourceEndpoint;
-	byte		 destinationEndpoint;
+	uint8_t		 sourceEndpoint;
+	uint8_t		 destinationEndpoint;
 	QByteArray	 clusterID;
 	QByteArray	 profileID;
 
 protected:
-	void		 setSourceEndpoint(byte);
-	void		 setDestinationEndpoint(byte);
+	void		 setSourceEndpoint(uint8_t);
+	void		 setDestinationEndpoint(uint8_t);
 	void		 setClusterID(QByteArray);
 	void		 setProfileID(QByteArray);
 
 public:
 	RXIndicatorExplicit();
 
-	virtual byte getFrameType() const { return pRXIndicatorExplicit; }
-	byte		 getSourceEndpoint();
-	byte		 getDestinationEndpoint();
+	virtual uint8_t getFrameType() const { return pRXIndicatorExplicit; }
+	uint8_t		 getSourceEndpoint();
+	uint8_t		 getDestinationEndpoint();
 	QByteArray	 getClusterID();
 	QByteArray	 getProfileID();
 	QByteArray	 getFrameData();

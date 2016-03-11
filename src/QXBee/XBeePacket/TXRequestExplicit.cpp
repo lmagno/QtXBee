@@ -4,11 +4,11 @@ TXRequestExplicit::TXRequestExplicit()
 {
 }
 
-byte TXRequestExplicit::getSourceEndpoint() {
+uint8_t TXRequestExplicit::getSourceEndpoint() {
 	return sourceEndpoint;
 }
 
-byte TXRequestExplicit::getDestinationEndpoint() {
+uint8_t TXRequestExplicit::getDestinationEndpoint() {
 	return destinationEndpoint;
 }
 
@@ -36,11 +36,11 @@ QByteArray TXRequestExplicit::getFrameData() {
 	return frameData;
 }
 
-void TXRequestExplicit::setSourceEndpoint(byte endpoint) {
+void TXRequestExplicit::setSourceEndpoint(uint8_t endpoint) {
 	sourceEndpoint = endpoint;
 }
 
-void TXRequestExplicit::setDestinationEndpoint(byte endpoint) {
+void TXRequestExplicit::setDestinationEndpoint(uint8_t endpoint) {
 	destinationEndpoint = endpoint;
 }
 

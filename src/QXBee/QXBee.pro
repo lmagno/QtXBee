@@ -38,7 +38,6 @@ SOURCES += \
 	XBeePacket/TXRequestExplicit.cpp
 
 HEADERS += \
-	typedef.h \
 	QXBee.h \
 	XBeePacket/ATCommand.h \
 	XBeePacket/ATCommandQueue.h \
