@@ -63,7 +63,7 @@ void QXBee::displayData(XBeePacket *packet){
 		case XBeePacket::pATCommandResponse:
 		{
 			//int idx = 0;
-			//qDebug() << "Raw data: " << packet->getFrameData().toHex();
+			qDebug() << "Raw data: " << packet->getFrameData().toHex();
 			/*qDebug() << "Command: " << ((ATCommandResponse *)packet)->getATCommand();
 			qDebug() << "Status: " << ((ATCommandResponse *)packet)->getCommandStatus();
 			QByteArray data = ((ATCommandResponse *)packet)->getCommandData();
@@ -148,29 +148,31 @@ void QXBee::readData()
 
 	i = frameIndex = frameLength = packetLength = 0;
 
-	 rawBuffer += serial->readAll();
+	rawBuffer += serial->readAll();
 
 	// Unescape characters if necessary
 	switch (protocolMode) {
 		case 1:
 			cleanBuffer += rawBuffer;
-		break;
+			break;
 		case 2:
-		{
 			for (i = 0; i < rawBuffer.size()-1; i++) {
 				if ((uint8_t)rawBuffer[i] != escapeCharacter)
 					cleanBuffer += rawBuffer[i];
 				else {
-					i++;
-					cleanBuffer += rawBuffer[i]^0x20;
+					blah = rawBuffer[++i];
+					cleanBuffer += blah^0x20;
 				}
+				if ((uint8_t)rawBuffer[i] == 0x13) qDebug() << "Bing!";
 			}
 			rawBuffer.remove(0, i);
-			if (!rawBuffer.isEmpty() && (uint8_t)rawBuffer[0] != escapeCharacter)
+			if (!rawBuffer.isEmpty() && (uint8_t)rawBuffer[0] != escapeCharacter) {
 				cleanBuffer += rawBuffer[0];
-		}
+				rawBuffer.clear();
+			}
+			else
+				qDebug() << "Boing!";
 	}
-	rawBuffer.clear();
 	// Clean Buffer
 	for (i = 0; i < cleanBuffer.size(); i++)
 		if ((uint8_t)cleanBuffer[i] == startDelimiter) break;
