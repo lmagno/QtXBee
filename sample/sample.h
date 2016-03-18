@@ -1,0 +1,22 @@
+#ifndef SAMPLE_H
+#define SAMPLE_H
+
+#include <QObject>
+
+#include "QXBee.h"
+
+class Sample : public QObject
+{
+	Q_OBJECT
+	QXBee *xb;
+	QSerialPort serial;
+public:
+	explicit Sample(QObject *parent = 0);
+	Sample();
+	~Sample();
+public slots:
+	void displayData(XBeePacket *);
+
+};
+
+#endif // SAMPLE_H

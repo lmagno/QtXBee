@@ -2,17 +2,13 @@
 
 #include "QXBee.h"
 
-QXBee::QXBee(QObject *parent) :
-	QObject(parent)
-{
-}
-
 QXBee::QXBee(QSerialPort *ser){
 	xbeeFound = false;
 	serial = ser;
 	QByteArray data;
 	APIMode = 0;
 
+	// Get API mode
 	if (serial->open(QIODevice::ReadWrite) && serial->isOpen())
 	{
 		// Enter AT command mode
@@ -56,39 +52,6 @@ QXBee::~QXBee()
 		serial->close();
 		qDebug() << "XBEE: Serial Port closed successfully";
 	}
-}
-void QXBee::displayData(XBeePacket *packet){
-	static int count = 1;
-	int idx;
-	uint8_t frameType = packet->getFrameType();
-	switch (frameType) {
-		case XBeePacket::pATCommandResponse:
-		{
-			QByteArray data = ((ATCommandResponse *)packet)->getCommandData();
-			idx = data.indexOf((char)0x00, 10);
-			qDebug() << count++ << "Raw data: " << packet->getFrameData().toHex() << " - " << data.mid(2, 8).toHex() << " - " << data.mid(10,idx-10);
-			//qDebug() << "Command: " << ((ATCommandResponse *)packet)->getATCommand();
-			//qDebug() << "Status: " << ((ATCommandResponse *)packet)->getCommandStatus();
-			//qDebug() << "Remote Address: " << data.mid(2, 8).toHex();
-			//idx += 3;
-			//qDebug() << "Device type: " << (uint8_t)data[idx];
-			//qDebug() << "Profile ID: " << data.mid(idx+2, 2).toHex();
-			//qDebug() << "Manufacturer: " << data.mid(idx+4, 2).toHex();
-			//qDebug() << "";
-		}
-		break;
-		case XBeePacket::pRXIndicator:
-		{
-			qDebug() << "Received Data: " << packet->getFrameData().toHex();
-			qDebug() << "Mensagem: " << ((RXIndicator *)packet)->getReceivedData();
-		}
-		break;
-		default:
-		{
-			qDebug() << "Received Data: " << packet->getFrameData().toHex();
-		}
-	}
-	delete (packet);
 }
 
 void QXBee::send(XBeePacket *request)

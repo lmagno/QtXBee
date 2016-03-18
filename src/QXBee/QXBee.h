@@ -30,7 +30,6 @@ class QXBee : public QObject
 	void processPacket(QByteArray packet);
 
 public:
-    explicit QXBee(QObject *parent = 0);
     QXBee(QSerialPort *ser);
 	void send(XBeePacket *request);
     void broadcast(QString data);
@@ -42,10 +41,6 @@ signals:
 
 private slots:
 	void readData();
-
-// Remove public slots on final version
-public slots:
-	void displayData(XBeePacket *);
 
 };
 
