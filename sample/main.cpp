@@ -1,7 +1,7 @@
 #include <QCoreApplication>
 #include <signal.h>
 
-#include "Sample.h"
+#include "sample.h"
 
 void handler(int) { QCoreApplication::quit(); }
 
