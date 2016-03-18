@@ -23,6 +23,7 @@ QXBee
 libQXBee.a
 device.cfg
 .qmake.stash
+.clang_complete
 build
 src/Makefile.QXBee
 tests/Makefile.Test
