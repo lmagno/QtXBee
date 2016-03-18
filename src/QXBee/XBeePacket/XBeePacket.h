@@ -24,6 +24,7 @@ public:
 	virtual QByteArray getFrameData() = 0;
 	virtual void	   setFrameData(QByteArray) = 0;
 	virtual			   ~XBeePacket() {} // Magic
+	virtual operator int() {return getFrameType();}
 };
 
 #endif // XBEEPACKET_H

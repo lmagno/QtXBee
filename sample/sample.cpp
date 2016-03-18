@@ -35,8 +35,8 @@ Sample::Sample(QObject *parent) : QObject(parent)
  void Sample::displayData(XBeePacket *packet){
 	 static int count = 1;
 	 int idx;
-	 uint8_t frameType = packet->getFrameType();
-	 switch (frameType) {
+
+	 switch (*packet) {
 		 case XBeePacket::pATCommandResponse:
 		 {
 			 QByteArray data = ((ATCommandResponse *)packet)->getCommandData();
