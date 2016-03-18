@@ -12,7 +12,6 @@ class Sample : public QObject
 	QSerialPort serial;
 public:
 	explicit Sample(QObject *parent = 0);
-	Sample();
 	~Sample();
 public slots:
 	void displayData(XBeePacket *);

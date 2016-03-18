@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	QCoreApplication a(argc, argv);
 	signal(SIGINT, handler);
 
-	Sample run(0);
+	Sample run;
 
 	return a.exec();
 }
