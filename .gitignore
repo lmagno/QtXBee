@@ -28,3 +28,5 @@ build
 src/Makefile.QXBee
 tests/Makefile.Test
 .DS_Store
+doc/html
+doc/latex
