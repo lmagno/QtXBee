@@ -26,13 +26,13 @@ public:
 	QByteArray		   getTransmitingData();
 	virtual QByteArray getFrameData();
 
-	void			   setFrameID(uint8_t);
-	void			   setDestinationAddress64(QByteArray);
-	void			   setDestinationAddress16(QByteArray);
-	void			   setBroadcastRadius(uint8_t);
-	void			   setTransmitOptions(uint8_t);
-	void			   setTransmitingData(QByteArray);
-	virtual void	   setFrameData(QByteArray);
+	void			   setFrameID(uint8_t id);
+	void			   setDestinationAddress64(QByteArray address);
+	void			   setDestinationAddress16(QByteArray address);
+	void			   setBroadcastRadius(uint8_t radius);
+	void			   setTransmitOptions(uint8_t options);
+	void			   setTransmitingData(QByteArray data);
+	virtual void	   setFrameData(QByteArray data);
 	virtual			   ~TXRequest();
 };
 

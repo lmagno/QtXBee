@@ -22,11 +22,11 @@ public:
 	QByteArray	 getProfileID();
 	QByteArray	 getFrameData();
 
-	void		 setSourceEndpoint(uint8_t);
-	void		 setDestinationEndpoint(uint8_t);
-	void		 setCLusterID(QByteArray);
-	void		 setProfileID(QByteArray);
-	void		 setFrameData(QByteArray);
+	void		 setSourceEndpoint(uint8_t endpoint);
+	void		 setDestinationEndpoint(uint8_t endpoint);
+	void		 setCLusterID(QByteArray id);
+	void		 setProfileID(QByteArray id);
+	void		 setFrameData(QByteArray data);
 };
 
 #endif // TXREQUESTEXPLICIT_H

@@ -14,11 +14,11 @@ class TransmitStatus : public XBeePacket
 	uint8_t		 discoveryStatus;
 
 protected:
-	void		 setFrameID(uint8_t);
-	void		 setDestinationAddress16(QByteArray);
-	void		 setTransmitRetryCount(uint8_t);
-	void		 setDeliveryStatus(uint8_t);
-	void		 setDiscoveryStatus(uint8_t);
+	void		 setFrameID(uint8_t id);
+	void		 setDestinationAddress16(QByteArray address);
+	void		 setTransmitRetryCount(uint8_t count);
+	void		 setDeliveryStatus(uint8_t status);
+	void		 setDiscoveryStatus(uint8_t status);
 
 public:
 	TransmitStatus();
@@ -31,7 +31,7 @@ public:
 	uint8_t		 getDiscoveryStatus();
 	QByteArray	 getFrameData();
 
-	void		 setFrameData(QByteArray);
+	void		 setFrameData(QByteArray data);
 	virtual		 ~TransmitStatus();
 };
 

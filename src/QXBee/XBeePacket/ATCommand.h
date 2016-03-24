@@ -21,10 +21,10 @@ public:
 	QByteArray		   getATParameter();
 	virtual QByteArray getFrameData();
 
-	void			   setFrameID(uint8_t);
-	void			   setATCommand(QString);
-	void			   setATParameter(QByteArray array);
-	virtual void	   setFrameData(QByteArray);
+	void			   setFrameID(uint8_t id);
+	void			   setATCommand(QString command);
+	void			   setATParameter(QByteArray parameter);
+	virtual void	   setFrameData(QByteArray data);
 	virtual			   ~ATCommand();
 };
 

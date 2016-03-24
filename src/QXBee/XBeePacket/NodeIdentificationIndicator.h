@@ -23,19 +23,19 @@ class NodeIdentificationIndicator : public XBeePacket
 	QByteArray	 rssiValue;
 
 protected:
-	void		 setSourceAddress64(QByteArray);
-	void		 setSourceAddress16(QByteArray);
-	void		 setReceiveOptions(uint8_t);
-	void		 setRemoteAddress64(QByteArray);
-	void		 setRemoteAddress16(QByteArray);
-	void		 setNIString(QString);
-	void		 setParentAddress16(QByteArray);
-	void		 setDeviceType(uint8_t);
-	void		 setSourceEvent(uint8_t);
-	void		 setProfileID(QByteArray);
-	void		 setManufacturerID(QByteArray);
-	void		 setDeviceTypeID(QByteArray);
-	void		 setRSSI(QByteArray);
+	void		 setSourceAddress64(QByteArray address);
+	void		 setSourceAddress16(QByteArray address);
+	void		 setReceiveOptions(uint8_t options);
+	void		 setRemoteAddress64(QByteArray address);
+	void		 setRemoteAddress16(QByteArray address);
+	void		 setNIString(QString name);
+	void		 setParentAddress16(QByteArray address);
+	void		 setDeviceType(uint8_t type);
+	void		 setSourceEvent(uint8_t event);
+	void		 setProfileID(QByteArray id);
+	void		 setManufacturerID(QByteArray id);
+	void		 setDeviceTypeID(QByteArray id);
+	void		 setRSSI(QByteArray rssi);
 
 public:
 	NodeIdentificationIndicator();
@@ -56,7 +56,7 @@ public:
 	QByteArray	 getRSSI();
 	QByteArray	 getFrameData();
 
-	void		 setFrameData(QByteArray);
+	void		 setFrameData(QByteArray data);
 	virtual		 ~NodeIdentificationIndicator();
 };
 

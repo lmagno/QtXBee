@@ -11,8 +11,8 @@ class ATCommandResponseRemote : public ATCommandResponse
 	QByteArray	 sourceAddress16;
 
 protected:
-	void		 setSourceAddress64(QByteArray);
-	void		 setSourceAddress16(QByteArray);
+	void		 setSourceAddress64(QByteArray address);
+	void		 setSourceAddress16(QByteArray address);
 
 public:
 	ATCommandResponseRemote();
@@ -22,7 +22,7 @@ public:
 	QByteArray	 getSourceAddress16();
 	QByteArray	 getFrameData();
 
-	void		 setFrameData(QByteArray);
+	void		 setFrameData(QByteArray data);
 };
 
 #endif // ATCOMMANDRESPONSEREMOTE_H

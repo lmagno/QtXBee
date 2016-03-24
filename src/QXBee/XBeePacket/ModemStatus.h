@@ -7,10 +7,10 @@
 
 class ModemStatus : public XBeePacket
 {
-	uint8_t		 status;
+	uint8_t		 statusValue;
 
 protected:
-	void		 setStatus(uint8_t);
+	void		 setStatus(uint8_t status);
 
 public:
 	ModemStatus();
@@ -19,7 +19,7 @@ public:
 	uint8_t		 getStatus();
 	QByteArray	 getFrameData();
 
-	void		 setFrameData(QByteArray);
+	void		 setFrameData(QByteArray data);
 	virtual		 ~ModemStatus();
 };
 

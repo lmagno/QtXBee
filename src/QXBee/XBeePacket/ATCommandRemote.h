@@ -20,10 +20,10 @@ public:
 	uint8_t			 getCommandOptions();
 	QByteArray		 getFrameData();
 
-	void			 setDestinationAddress64(QByteArray);
-	void			 setDestinationAddress16(QByteArray);
-	void			 setCommandOptions(uint8_t);
-	void			 setFrameData(QByteArray);
+	void			 setDestinationAddress64(QByteArray address);
+	void			 setDestinationAddress16(QByteArray address);
+	void			 setCommandOptions(uint8_t options);
+	void			 setFrameData(QByteArray data);
 };
 
 #endif // ATCOMMANDREMOTE_H

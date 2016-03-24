@@ -13,10 +13,10 @@ class RXIndicatorExplicit : public RXIndicator
 	QByteArray	 profileID;
 
 protected:
-	void		 setSourceEndpoint(uint8_t);
-	void		 setDestinationEndpoint(uint8_t);
-	void		 setClusterID(QByteArray);
-	void		 setProfileID(QByteArray);
+	void		 setSourceEndpoint(uint8_t endpoint);
+	void		 setDestinationEndpoint(uint8_t endpoint);
+	void		 setClusterID(QByteArray id);
+	void		 setProfileID(QByteArray id);
 
 public:
 	RXIndicatorExplicit();
@@ -28,7 +28,7 @@ public:
 	QByteArray	 getProfileID();
 	QByteArray	 getFrameData();
 
-	void		 setFrameData(QByteArray);
+	void		 setFrameData(QByteArray data);
 };
 
 #endif // RXINDICATOREXPLICIT_H

@@ -13,10 +13,10 @@ class RXIndicator : public XBeePacket
 	QByteArray		   receivedData;
 
 protected:
-	void			   setSourceAddress64(QByteArray);
-	void			   setSourceAddress16(QByteArray);
-	void			   setReceiveOptions(uint8_t);
-	void			   setReceivedData(QByteArray);
+	void			   setSourceAddress64(QByteArray address);
+	void			   setSourceAddress16(QByteArray address);
+	void			   setReceiveOptions(uint8_t options);
+	void			   setReceivedData(QByteArray data);
 
 public:
 	RXIndicator();
@@ -28,7 +28,7 @@ public:
 	QByteArray		   getReceivedData();
 	virtual QByteArray getFrameData();
 
-	virtual void	   setFrameData(QByteArray);
+	virtual void	   setFrameData(QByteArray data);
 	virtual			   ~RXIndicator();
 };
 

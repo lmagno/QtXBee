@@ -95,8 +95,8 @@ void NodeIdentificationIndicator::setRemoteAddress16(QByteArray address) {
 	remoteAddress16 = address;
 }
 
-void NodeIdentificationIndicator::setNIString(QString ni) {
-	niString = ni;
+void NodeIdentificationIndicator::setNIString(QString name) {
+	niString = name;
 }
 
 void NodeIdentificationIndicator::setParentAddress16(QByteArray address) {

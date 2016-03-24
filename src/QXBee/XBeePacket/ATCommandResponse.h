@@ -14,10 +14,10 @@ class ATCommandResponse : public XBeePacket
 	QByteArray		   commandData;
 
 protected:
-	void			   setFrameID(uint8_t);
-	void			   setATCommand(QString);
-	void			   setCommandStatus(uint8_t);
-	void			   setCommandData(QByteArray);
+	void			   setFrameID(uint8_t id);
+	void			   setATCommand(QString command);
+	void			   setCommandStatus(uint8_t status);
+	void			   setCommandData(QByteArray data);
 
 public:
 	ATCommandResponse();
@@ -29,7 +29,7 @@ public:
 	QByteArray		   getCommandData();
 	virtual QByteArray getFrameData();
 
-	virtual void	   setFrameData(QByteArray);
+	virtual void	   setFrameData(QByteArray data);
 	virtual			   ~ATCommandResponse();
 };
 
