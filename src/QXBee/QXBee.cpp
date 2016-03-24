@@ -161,52 +161,50 @@ void QXBee::readData()
 }
 
 void QXBee::processPacket(QByteArray frame){
-	XBeePacket *packet = 0;
 	switch ((uint8_t)frame[0]) {
 	case XBeePacket::pATCommandResponse:{
-		packet = new ATCommandResponse;
-		packet->setFrameData(frame);
+		ATCommandResponse packet;
+		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
 	case XBeePacket::pModemStatus:{
-		packet = new ModemStatus;
-		packet->setFrameData(frame);
+		ModemStatus packet;
+		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
 	case XBeePacket::pTransmitStatus:{
-		packet = new TransmitStatus;
-		packet->setFrameData(frame);
+		TransmitStatus packet;
+		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
 	case XBeePacket::pRXIndicator:{
-		packet = new RXIndicator;
-		packet->setFrameData(frame);
+		RXIndicator packet;
+		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
 	case XBeePacket::pRXIndicatorExplicit:{
-		packet = new RXIndicatorExplicit;
-		packet->setFrameData(frame);
+		RXIndicatorExplicit packet;
+		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
 	case XBeePacket::pNodeIdentificationIndicator:{
-		packet = new NodeIdentificationIndicator;
-		packet->setFrameData(frame);
+		NodeIdentificationIndicator packet;
+		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
 	case XBeePacket::pATCommandResponseRemote:{
-		packet = new ATCommandResponseRemote;
-		packet->setFrameData(frame);
+		ATCommandResponseRemote packet;
+		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
 	default:
 		qDebug() << "Error:  Unknown Packet: " << frame.toHex();
 	}
-	if (packet != 0) delete packet;
 }

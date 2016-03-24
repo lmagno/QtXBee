@@ -24,7 +24,7 @@ Sample::Sample(QObject *parent) : QObject(parent)
 	 serial.setFlowControl(QSerialPort::NoFlowControl);
 
 	 xb = new QXBee(&serial);
-	 QObject::connect(xb, SIGNAL(dataReceived(XBeePacket * const)), this, SLOT(displayData(XBeePacket * const)));
+	 QObject::connect(xb, &QXBee::dataReceived, this, &Sample::displayData);
 
 	 ATCommand teste;
 	 teste.setATCommand("ND");
@@ -32,16 +32,16 @@ Sample::Sample(QObject *parent) : QObject(parent)
 	 xb->send(&teste);
  }
 
- void Sample::displayData(XBeePacket * const packet){
+ void Sample::displayData(XBeePacket & packet){
 	 static int count = 1;
 	 int idx;
 
-	 switch (*packet) {
+	 switch (packet) {
 		 case XBeePacket::pATCommandResponse:
 		 {
-			 QByteArray data = ((ATCommandResponse *)packet)->getCommandData();
+			 QByteArray data = ((ATCommandResponse &)packet).getCommandData();
 			 idx = data.indexOf((char)0x00, 10);
-			 qDebug() << count++ << "Raw data: " << packet->getFrameData().toHex() << " - " << data.mid(2, 8).toHex() << " - " << data.mid(10,idx-10);
+			 qDebug() << count++ << "Raw data: " << packet.getFrameData().toHex() << " - " << data.mid(2, 8).toHex() << " - " << data.mid(10,idx-10);
 			 //qDebug() << "Command: " << ((ATCommandResponse *)packet)->getATCommand();
 			 //qDebug() << "Status: " << ((ATCommandResponse *)packet)->getCommandStatus();
 			 //qDebug() << "Remote Address: " << data.mid(2, 8).toHex();
@@ -54,13 +54,13 @@ Sample::Sample(QObject *parent) : QObject(parent)
 		 break;
 		 case XBeePacket::pRXIndicator:
 		 {
-			 qDebug() << "Received Data: " << packet->getFrameData().toHex();
-			 qDebug() << "Mensagem: " << ((RXIndicator *)packet)->getReceivedData();
+			 qDebug() << "Received Data: " << packet.getFrameData().toHex();
+			 qDebug() << "Mensagem: " << ((RXIndicator &)packet).getReceivedData();
 		 }
 		 break;
 		 default:
 		 {
-			 qDebug() << "Received Data: " << packet->getFrameData().toHex();
+			 qDebug() << "Received Data: " << packet.getFrameData().toHex();
 		 }
 	 }
  }
