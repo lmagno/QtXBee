@@ -14,7 +14,7 @@ class ATCommandRemote : public ATCommand
 public:
 	ATCommandRemote();
 
-	virtual uint8_t	 getFrameType() const { return pATCommandRemote; }
+	virtual uint8_t	 getFrameType() const { return FrameType::ATCommandRemote; }
 	QByteArray		 getDestinationAdress64();
 	QByteArray		 getDestinationAdress16();
 	uint8_t			 getCommandOptions();

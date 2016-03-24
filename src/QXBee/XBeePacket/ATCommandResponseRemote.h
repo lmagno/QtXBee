@@ -17,7 +17,7 @@ protected:
 public:
 	ATCommandResponseRemote();
 
-	virtual uint8_t getFrameType() const { return pATCommandResponseRemote; }
+	virtual uint8_t getFrameType() const { return FrameType::ATCommandResponseRemote; }
 	QByteArray	 getSourceAddress64();
 	QByteArray	 getSourceAddress16();
 	QByteArray	 getFrameData();

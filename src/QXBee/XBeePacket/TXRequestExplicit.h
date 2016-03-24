@@ -15,7 +15,7 @@ class TXRequestExplicit : public TXRequest
 public:
 	TXRequestExplicit();
 
-	virtual uint8_t getFrameType() const { return pTXRequestExplicit; }
+	virtual uint8_t getFrameType() const { return FrameType::TXRequestExplicit; }
 	uint8_t		 getSourceEndpoint();
 	uint8_t		 getDestinationEndpoint();
 	QByteArray	 getClusterID();

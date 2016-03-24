@@ -15,7 +15,7 @@ class ATCommand : public XBeePacket
 public:
 	ATCommand();
 
-	virtual uint8_t	   getFrameType() const { return pATCommand; }
+	virtual uint8_t	   getFrameType() const { return FrameType::ATCommand; }
 	uint8_t			   getFrameID();
 	QByteArray		   getATCommand();
 	QByteArray		   getATParameter();

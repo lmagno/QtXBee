@@ -21,7 +21,7 @@ protected:
 public:
 	RXIndicator();
 
-	virtual uint8_t	   getFrameType() const { return pRXIndicator; }
+	virtual uint8_t	   getFrameType() const { return FrameType::RXIndicator; }
 	QByteArray		   getSourceAddress64();
 	QByteArray		   getSourceAddress16();
 	uint8_t			   getReceiveOptions();

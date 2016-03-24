@@ -40,7 +40,7 @@ protected:
 public:
 	NodeIdentificationIndicator();
 
-	virtual uint8_t getFrameType() const { return pNodeIdentificationIndicator; }
+	virtual uint8_t getFrameType() const { return FrameType::NodeIdentificationIndicator; }
 	QByteArray	 getSourceAddress64();
 	QByteArray	 getSourceAddress16();
 	uint8_t		 getReceiveOptions();

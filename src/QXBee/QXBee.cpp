@@ -2,9 +2,9 @@
 
 #include "QXBee.h"
 
-QXBee::QXBee(QSerialPort& ser){
+QXBee::QXBee(QSerialPort& port){
 	xbeeFound = false;
-	serial = &ser;
+	serial = &port;
 	QByteArray data;
 	APIMode = 0;
 
@@ -54,7 +54,7 @@ QXBee::~QXBee()
 	}
 }
 
-void QXBee::send(XBeePacket &request)
+void QXBee::send(XBeePacket &packet)
 {
 	union {
 		uint16_t i;
@@ -63,7 +63,7 @@ void QXBee::send(XBeePacket &request)
 	uint8_t chksm = 0;
 	QByteArray frame, data;
 
-	data = request.getFrameData();
+	data = packet.getFrameData();
 	dataLength.i = data.length();
 	// Assemble frame (must verify API mode)
 	frame[0] = 0x7E;
@@ -89,16 +89,16 @@ void QXBee::send(XBeePacket &request)
 
 void QXBee::broadcast(QString data)
 {
-	TXRequest request;
-	request.setTransmitingData(data.toLatin1());
-	send(request);
+	TXRequest packet;
+	packet.setTransmitingData(data.toLatin1());
+	send(packet);
 }
 
 void QXBee::unicast(QByteArray address, QString data){
-	TXRequest request;
-	request.setDestinationAddress64(address);
-	request.setTransmitingData(data.toLatin1());
-	send(request);
+	TXRequest packet;
+	packet.setDestinationAddress64(address);
+	packet.setTransmitingData(data.toLatin1());
+	send(packet);
 }
 
 void QXBee::readData()
@@ -162,43 +162,43 @@ void QXBee::readData()
 
 void QXBee::processPacket(QByteArray frame){
 	switch ((uint8_t)frame[0]) {
-	case XBeePacket::pATCommandResponse:{
+	case XBeePacket::ATCommandResponse:{
 		ATCommandResponse packet;
 		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
-	case XBeePacket::pModemStatus:{
+	case XBeePacket::ModemStatus:{
 		ModemStatus packet;
 		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
-	case XBeePacket::pTransmitStatus:{
+	case XBeePacket::TransmitStatus:{
 		TransmitStatus packet;
 		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
-	case XBeePacket::pRXIndicator:{
+	case XBeePacket::RXIndicator:{
 		RXIndicator packet;
 		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
-	case XBeePacket::pRXIndicatorExplicit:{
+	case XBeePacket::RXIndicatorExplicit:{
 		RXIndicatorExplicit packet;
 		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
-	case XBeePacket::pNodeIdentificationIndicator:{
+	case XBeePacket::NodeIdentificationIndicator:{
 		NodeIdentificationIndicator packet;
 		packet.setFrameData(frame);
 		emit dataReceived(packet);
 		break;
 	}
-	case XBeePacket::pATCommandResponseRemote:{
+	case XBeePacket::ATCommandResponseRemote:{
 		ATCommandResponseRemote packet;
 		packet.setFrameData(frame);
 		emit dataReceived(packet);

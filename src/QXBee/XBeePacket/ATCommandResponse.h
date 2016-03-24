@@ -22,7 +22,7 @@ protected:
 public:
 	ATCommandResponse();
 
-	virtual uint8_t	   getFrameType() const { return pATCommandResponse; }
+	virtual uint8_t	   getFrameType() const { return FrameType::ATCommandResponse; }
 	uint8_t			   getFrameID();
 	QString			   getATCommand();
 	uint8_t			   getCommandStatus();

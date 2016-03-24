@@ -6,7 +6,7 @@
 class ATCommandQueue : public ATCommand
 {
 public:
-	virtual uint8_t	   getFrameType() const { return pATCommandQueue; }
+	virtual uint8_t	   getFrameType() const { return FrameType::ATCommandQueue; }
 };
 
 #endif // ATCOMMANDQUEUE_H

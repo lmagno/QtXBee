@@ -23,7 +23,7 @@ protected:
 public:
 	TransmitStatus();
 
-	virtual uint8_t getFrameType() const { return pTransmitStatus; }
+	virtual uint8_t getFrameType() const { return FrameType::TransmitStatus; }
 	uint8_t		 getFrameID();
 	QByteArray	 getDestinationAddress16();
 	uint8_t		 getTransmitRetryCount();

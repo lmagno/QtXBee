@@ -15,7 +15,7 @@ protected:
 public:
 	ModemStatus();
 
-	virtual uint8_t getFrameType() const { return pModemStatus; }
+	virtual uint8_t getFrameType() const { return FrameType::ModemStatus; }
 	uint8_t		 getStatus();
 	QByteArray	 getFrameData();
 

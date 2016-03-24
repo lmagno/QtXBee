@@ -21,7 +21,7 @@ protected:
 public:
 	RXIndicatorExplicit();
 
-	virtual uint8_t getFrameType() const { return pRXIndicatorExplicit; }
+	virtual uint8_t getFrameType() const { return FrameType::RXIndicatorExplicit; }
 	uint8_t		 getSourceEndpoint();
 	uint8_t		 getDestinationEndpoint();
 	QByteArray	 getClusterID();

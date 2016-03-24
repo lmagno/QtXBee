@@ -17,7 +17,7 @@ class TXRequest : public XBeePacket
 public:
 	TXRequest();
 
-	virtual uint8_t	   getFrameType() const { return pTXRequest; }
+	virtual uint8_t	   getFrameType() const { return FrameType::TXRequest; }
 	uint8_t			   getFrameID();
 	QByteArray		   getDestinationAddress64();
 	QByteArray		   getDestinationAddress16();

@@ -51,14 +51,14 @@ class QXBee : public QObject
 	void processPacket(QByteArray);
 
 public:
-	QXBee(QSerialPort&);
-	void send(XBeePacket&);					///< @brief This function sends a packet to the XBee module.
-	void broadcast(QString);				///< @brief This function broadcasts a string to any acessible XBee device.
-	void unicast(QByteArray, QString);		///< @brief This function sends a string to a single XBee device specified by it's address.
+	QXBee(QSerialPort& port);
+	void send(XBeePacket& packet);						///< @brief This function sends a packet to the XBee module.
+	void broadcast(QString data);						///< @brief This function broadcasts a string to any acessible XBee device.
+	void unicast(QByteArray address, QString data);		///< @brief This function sends a string to a single XBee device specified by it's address.
     ~QXBee();
 
 signals:
-	void dataReceived(XBeePacket&);			///< @brief This signal is emited whenever a packet arrives.
+	void dataReceived(XBeePacket&);						///< @brief This signal is emited whenever a packet arrives.
 
 private slots:
 	void readData();

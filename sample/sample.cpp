@@ -36,7 +36,7 @@ Sample::Sample(QObject *parent) : QObject(parent)
 	 int idx;
 
 	 switch (packet) {
-		 case XBeePacket::pATCommandResponse:
+		 case XBeePacket::ATCommandResponse:
 		 {
 			 QByteArray data = ((ATCommandResponse &)packet).getCommandData();
 			 idx = data.indexOf((char)0x00, 10);
@@ -51,7 +51,7 @@ Sample::Sample(QObject *parent) : QObject(parent)
 			 //qDebug() << "";
 		 }
 		 break;
-		 case XBeePacket::pRXIndicator:
+		 case XBeePacket::RXIndicator:
 		 {
 			 qDebug() << "Received Data: " << packet.getFrameData().toHex();
 			 qDebug() << "Mensagem: " << ((RXIndicator &)packet).getReceivedData();
