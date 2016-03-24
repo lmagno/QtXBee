@@ -208,4 +208,5 @@ void QXBee::processPacket(QByteArray frame){
 	default:
 		qDebug() << "Error:  Unknown Packet: " << frame.toHex();
 	}
+	if (packet != 0) delete packet;
 }

@@ -24,7 +24,7 @@ Sample::Sample(QObject *parent) : QObject(parent)
 	 serial.setFlowControl(QSerialPort::NoFlowControl);
 
 	 xb = new QXBee(&serial);
-	 QObject::connect(xb, SIGNAL(dataReceived(XBeePacket*)), this, SLOT(displayData(XBeePacket*)));
+	 QObject::connect(xb, SIGNAL(dataReceived(XBeePacket * const)), this, SLOT(displayData(XBeePacket * const)));
 
 	 ATCommand teste;
 	 teste.setATCommand("ND");
@@ -32,7 +32,7 @@ Sample::Sample(QObject *parent) : QObject(parent)
 	 xb->send(&teste);
  }
 
- void Sample::displayData(XBeePacket *packet){
+ void Sample::displayData(XBeePacket * const packet){
 	 static int count = 1;
 	 int idx;
 
@@ -63,7 +63,6 @@ Sample::Sample(QObject *parent) : QObject(parent)
 			 qDebug() << "Received Data: " << packet->getFrameData().toHex();
 		 }
 	 }
-	 delete (packet);
  }
 
  Sample::~Sample() {

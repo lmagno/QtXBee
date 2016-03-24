@@ -20,6 +20,27 @@
 #include "XBeePacket/NodeIdentificationIndicator.h"
 #include "XBeePacket/ATCommandResponseRemote.h"
 
+/** @brief The QXBee class provides bi-directional communication with a XBee device thru serial port.
+ *
+ * This class can send and receive data using Digi's XBee API protocol mode 1 or 2.
+ * There are also included two helper functions, that can easily unicast or broadcast data to XBee devices.
+ * This class uses QObject signals and slots, and emits a signal whenever a new packet arrive, it also needs a previously setup QSerialPort for communication.
+ *
+ * Example:
+ * @code
+ * QSerialPort serial;
+ * serial.setPortName("/dev/ttyUSB1");
+ * serial.setBaudRate(QSerialPort::Baud9600);
+ * serial.setDataBits(QSerialPort::Data8);
+ * serial.setParity(QSerialPort::NoParity);
+ * serial.setStopBits(QSerialPort::OneStop);
+ * serial.setFlowControl(QSerialPort::NoFlowControl);
+ *
+ * xbee = new QXBee(&serial);
+ * xbee.broadcast("Hello World!");
+ *
+ * @endcode
+ */
 class QXBee : public QObject
 {
     Q_OBJECT
@@ -31,13 +52,13 @@ class QXBee : public QObject
 
 public:
     QXBee(QSerialPort *ser);
-	void send(XBeePacket *request);
-    void broadcast(QString data);
-	void unicast(QByteArray address, QString data);
+	void send(XBeePacket *request);						///< @brief This function sends a packet to the XBee module.
+	void broadcast(QString data);						///< @brief This function broadcasts a string to any acessible XBee device.
+	void unicast(QByteArray address, QString data);		///< @brief This function sends a string to a single XBee device specified by it's address.
     ~QXBee();
 
 signals:
-	void dataReceived(XBeePacket *);
+	void dataReceived(XBeePacket * const);				///< @brief This signal is emited whenever a packet arrives.
 
 private slots:
 	void readData();
