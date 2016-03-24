@@ -2,9 +2,9 @@
 
 #include "QXBee.h"
 
-QXBee::QXBee(QSerialPort *ser){
+QXBee::QXBee(QSerialPort& ser){
 	xbeeFound = false;
-	serial = ser;
+	serial = &ser;
 	QByteArray data;
 	APIMode = 0;
 
@@ -54,7 +54,7 @@ QXBee::~QXBee()
 	}
 }
 
-void QXBee::send(XBeePacket *request)
+void QXBee::send(XBeePacket &request)
 {
 	union {
 		uint16_t i;
@@ -63,7 +63,7 @@ void QXBee::send(XBeePacket *request)
 	uint8_t chksm = 0;
 	QByteArray frame, data;
 
-	data = request->getFrameData();
+	data = request.getFrameData();
 	dataLength.i = data.length();
 	// Assemble frame (must verify API mode)
 	frame[0] = 0x7E;
@@ -91,14 +91,14 @@ void QXBee::broadcast(QString data)
 {
 	TXRequest request;
 	request.setTransmitingData(data.toLatin1());
-	send(&request);
+	send(request);
 }
 
 void QXBee::unicast(QByteArray address, QString data){
 	TXRequest request;
 	request.setDestinationAddress64(address);
 	request.setTransmitingData(data.toLatin1());
-	send(&request);
+	send(request);
 }
 
 void QXBee::readData()

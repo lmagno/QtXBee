@@ -36,7 +36,7 @@
  * serial.setStopBits(QSerialPort::OneStop);
  * serial.setFlowControl(QSerialPort::NoFlowControl);
  *
- * xbee = new QXBee(&serial);
+ * QXBee xbee(serial);
  * xbee.broadcast("Hello World!");
  *
  * @endcode
@@ -48,17 +48,17 @@ class QXBee : public QObject
 	bool xbeeFound;
 	uint8_t APIMode;
 	QByteArray rawBuffer, cleanBuffer;
-	void processPacket(QByteArray packet);
+	void processPacket(QByteArray);
 
 public:
-    QXBee(QSerialPort *ser);
-	void send(XBeePacket *request);						///< @brief This function sends a packet to the XBee module.
-	void broadcast(QString data);						///< @brief This function broadcasts a string to any acessible XBee device.
-	void unicast(QByteArray address, QString data);		///< @brief This function sends a string to a single XBee device specified by it's address.
+	QXBee(QSerialPort&);
+	void send(XBeePacket&);					///< @brief This function sends a packet to the XBee module.
+	void broadcast(QString);				///< @brief This function broadcasts a string to any acessible XBee device.
+	void unicast(QByteArray, QString);		///< @brief This function sends a string to a single XBee device specified by it's address.
     ~QXBee();
 
 signals:
-	void dataReceived(XBeePacket &);				///< @brief This signal is emited whenever a packet arrives.
+	void dataReceived(XBeePacket&);			///< @brief This signal is emited whenever a packet arrives.
 
 private slots:
 	void readData();

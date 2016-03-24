@@ -23,16 +23,15 @@ Sample::Sample(QObject *parent) : QObject(parent)
 	 serial.setStopBits(QSerialPort::OneStop);
 	 serial.setFlowControl(QSerialPort::NoFlowControl);
 
-	 xb = new QXBee(&serial);
+	 xb = new QXBee(serial);
 	 QObject::connect(xb, &QXBee::dataReceived, this, &Sample::displayData);
 
 	 ATCommand teste;
 	 teste.setATCommand("ND");
-
-	 xb->send(&teste);
+	 xb->send(teste);
  }
 
- void Sample::displayData(XBeePacket & packet){
+ void Sample::displayData(XBeePacket& packet){
 	 static int count = 1;
 	 int idx;
 

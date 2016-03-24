@@ -14,7 +14,7 @@ public:
 	explicit Sample(QObject *parent = 0);
 	~Sample();
 public slots:
-	void displayData(XBeePacket &);
+	void displayData(XBeePacket&);
 
 };
 
