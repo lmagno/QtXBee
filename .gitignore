@@ -28,5 +28,11 @@ build
 src/Makefile.QXBee
 tests/Makefile.Test
 .DS_Store
-doc/html
+
+doc/html/*
+!doc/html/doxy-boot.js
+!doc/html/header.html
+!doc/html/footer.html
+!doc/html/customdoxygen.css
+
 doc/latex
