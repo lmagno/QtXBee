@@ -58,10 +58,10 @@ public:
     ~QXBee();
 
 signals:
-	void dataReceived(XBeePacket&);						///< @brief This signal is emited whenever a packet arrives.
+	void dataReceived(XBeePacket&);						///< @brief This signal is emitted whenever a packet arrives.
 
 private slots:
-	void readData();
+	void readData();                                   ///< @brief This slot reads available packets from serial port when a readyRead() signal is emitted.
 
 };
 
