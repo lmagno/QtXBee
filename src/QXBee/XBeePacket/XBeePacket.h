@@ -1,3 +1,10 @@
+/**
+ * @class XBeePacket
+ * @defgroup XBeePacket XBeePacket
+ *
+ * Pure virtual class, base for all packet types.
+ */
+
 #ifndef XBEEPACKET_H
 #define XBEEPACKET_H
 

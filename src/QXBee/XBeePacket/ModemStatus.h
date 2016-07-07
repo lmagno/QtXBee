@@ -1,3 +1,12 @@
+/**
+ * @class ModemStatus
+ * @ingroup XBeePacket
+ *
+ * Represents an AT Command packet
+ *
+ * Test...
+ */
+
 #ifndef MODEMSTATUS_H
 #define MODEMSTATUS_H
 

@@ -1,3 +1,12 @@
+/**
+ * @class NodeIdentificationIndicator
+ * @ingroup XBeePacket
+ *
+ * Represents an AT Command packet
+ *
+ * Test...
+ */
+
 #ifndef NODEIDENTIFICATIONINDICATOR_H
 #define NODEIDENTIFICATIONINDICATOR_H
 

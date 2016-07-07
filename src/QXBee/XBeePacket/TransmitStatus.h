@@ -1,3 +1,12 @@
+/**
+ * @class TransmitStatus
+ * @ingroup XBeePacket
+ *
+ * Represents an AT Command packet
+ *
+ * Test...
+ */
+
 #ifndef TRANSMITSTATUS_H
 #define TRANSMITSTATUS_H
 

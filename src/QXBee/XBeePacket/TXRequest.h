@@ -1,3 +1,12 @@
+/**
+ * @class TXRequest
+ * @ingroup XBeePacket
+ *
+ * Represents an AT Command packet
+ *
+ * Test...
+ */
+
 #ifndef TXREQUEST_H
 #define TXREQUEST_H
 

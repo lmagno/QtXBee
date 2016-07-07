@@ -1,3 +1,12 @@
+/**
+ * @class ATCommand
+ * @ingroup XBeePacket
+ *
+ * Represents an AT Command packet
+ *
+ * Test...
+ */
+
 #ifndef ATCOMMAND_H
 #define ATCOMMAND_H
 

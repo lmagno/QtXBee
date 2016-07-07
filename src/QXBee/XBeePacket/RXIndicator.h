@@ -1,3 +1,12 @@
+/**
+ * @class RXIndicator
+ * @ingroup XBeePacket
+ *
+ * Represents an AT Command packet
+ *
+ * Test...
+ */
+
 #ifndef RXINDICATOR_H
 #define RXINDICATOR_H
 
