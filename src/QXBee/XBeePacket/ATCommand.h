@@ -12,15 +12,40 @@
 
 #include <QByteArray>
 #include <QString>
+#include <QHash>
 
 #include "XBeePacket.h"
 
+typedef enum {
+    Special,
+    MACPHYLevel,
+    Diagnostics,
+    Network,
+    Addressing,
+    AddressingDiscoveryConfiguration,
+    Security,
+    SerialInterfacing,
+    IOSettings,
+    IOSampling,
+    Sleep,
+    SleepDiagnostics,
+    ATCommandOptions,
+    FirmwareOptions
+} ATCommandGroup;
+
+typedef struct {
+    ATCommandGroup group;
+    QString name;
+} ATCommandInfo;
+
 class ATCommand : public XBeePacket
 {
-	uint8_t			   frameID;
-	QByteArray		   atCommand;
-	QByteArray		   atParameter;
+    uint8_t                       frameID;
+    QByteArray                    atCommand;
+    QByteArray                    atParameter;
+    QHash<QString, ATCommandInfo> atTypes;
 
+    void               loadTypes();
 public:
 	ATCommand();
 
