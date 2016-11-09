@@ -27,6 +27,7 @@ device.cfg
 build
 src/Makefile.QXBee
 tests/Makefile.Test
+target_wrapper.sh
 .DS_Store
 
 doc/html/*
