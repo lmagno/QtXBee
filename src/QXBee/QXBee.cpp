@@ -24,7 +24,7 @@ QXBee::QXBee(QSerialPort& port){
 			// Wait for answer
 			while (serial->waitForReadyRead(100)) data += serial->readAll();
 			if (data.length() > 0) APIMode = data[0]-'0';
-			qDebug() << "Protocol mode: " << APIMode;
+            qInfo() << "QXBee: Protocol mode: " << APIMode;
 			// Exit AT command mode
 			serial->write("ATCN\r");
 		}
@@ -32,15 +32,15 @@ QXBee::QXBee(QSerialPort& port){
 		if (APIMode > 0) {
 			xbeeFound = true;
 			connect(serial, SIGNAL(readyRead()), SLOT(readData()));
-			qDebug() << "XBEE: Connected successfully";
-			qDebug() << "XBEE: Serial Port Name: " << serial->portName();
+            qInfo() << "QXBee: Connected successfully.";
+            qDebug() << "QXBee: Serial Port Name: " << serial->portName();
 		} else {
-			qDebug() << "XBEE: Device not in API protocol mode";
+            qWarning() << "QXBee: Warning - Device not in API protocol mode.";
 		}
 	}
 	else
 	{
-		qDebug() << "XBEE: Serial Port could not be opened";
+        qCritical() << "QXBee: Error - Serial Port could not be opened.";
 	}
 
 }
@@ -50,7 +50,7 @@ QXBee::~QXBee()
 	if(serial->isOpen())
 	{
 		serial->close();
-		qDebug() << "XBEE: Serial Port closed successfully";
+        qInfo() << "QXbee: Serial Port closed successfully.";
 	}
 }
 
@@ -77,13 +77,13 @@ void QXBee::send(XBeePacket &packet)
 
 	if(xbeeFound && serial->isOpen())
 	{
-		qDebug() << "Transmit: " << frame.toHex();
+        qDebug() << "QXBee: Transmit: " << frame.toHex();
 		serial->write(frame);
 		serial->flush();
 	}
 	else
 	{
-		qDebug() << "XBEE: Cannot write to Serial Port - closed";
+        qWarning() << "QXBee: Warning - Could not write to Serial Port.";
 	}
 }
 
@@ -155,7 +155,7 @@ void QXBee::readData()
 		// Save frame
 		if (chksm == (uint8_t)cleanBuffer[frameLength.i+3]) {
 			processPacket(cleanBuffer.mid(3,frameLength.i));
-		} else qDebug() << "Checksum Error: " << cleanBuffer.mid(3,frameLength.i).toHex();
+        } else qDebug() << "QXBee: Frame checksum Error: " << cleanBuffer.mid(3,frameLength.i).toHex();
 		cleanBuffer.remove(0, frameLength.i+4);
 	}
 }
@@ -205,6 +205,6 @@ void QXBee::processPacket(QByteArray frame){
 		break;
 	}
 	default:
-		qDebug() << "Error:  Unknown Packet: " << frame.toHex();
+        qDebug() << "QXBee: Unknown Packet: " << frame.toHex();
 	}
 }
