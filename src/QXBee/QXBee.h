@@ -67,7 +67,8 @@ signals:
 
 private slots:
 	void readData();                                   ///< @brief This slot reads available packets from serial port when a readyRead() signal is emitted.
-
+    QByteArray escape(uint8_t);                        ///< @brief This functions escapes specific frame data bytes when using api mode 2.
+    QByteArray escape(QByteArray);                     ///< @brief Overload of function "QByteArray escape(uint8_t)".
 };
 
 #endif

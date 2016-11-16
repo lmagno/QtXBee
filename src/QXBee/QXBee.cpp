@@ -65,15 +65,23 @@ void QXBee::send(XBeePacket &packet)
 
 	data = packet.getFrameData();
 	dataLength.i = data.length();
-	// Assemble frame (must verify API mode)
+    // Calculate checksum
+    for (int i = 0; i < data.length(); i++) chksm += data[i];
+    chksm = 0xFF - chksm;
+
+    // Assemble frame
 	frame[0] = 0x7E;
-	frame[1] = dataLength.b[1];
-	frame[2] = dataLength.b[0];
-	frame += data;
-	// Calculate checksum
-	for (int i = 0; i < data.length(); i++) chksm += data[i];
-	chksm = 0xFF - chksm;
-	frame[frame.length()] = chksm;
+    if (APIMode == 2) {
+        frame.append(escape(dataLength.b[1]));
+        frame.append(escape(dataLength.b[0]));
+        frame.append(escape(data));
+        frame.append(escape(chksm));
+    } else {
+        frame.append(dataLength.b[1]);
+        frame.append(dataLength.b[0]);
+        frame.append(data);
+        frame.append(chksm);
+    }
 
 	if(xbeeFound && serial->isOpen())
 	{
@@ -207,4 +215,38 @@ void QXBee::processPacket(QByteArray frame){
 	default:
         qDebug() << "QXBee: Unknown Packet: " << frame.toHex();
 	}
+}
+
+QByteArray QXBee::escape(uint8_t data) {
+    const uint8_t startDelimiter = 0x7E;
+    const uint8_t escapeCharacter = 0x7D;
+    const uint8_t XONCharacter = 0x11;
+    const uint8_t XOFFCharacter = 0x13;
+    QByteArray escapedData;
+
+    if (data == startDelimiter || data == escapeCharacter || data == XONCharacter || data == XOFFCharacter) {
+        escapedData[0] = escapeCharacter;
+        escapedData[1] = data^0x20;
+    } else {
+        escapedData[0] = data;
+    }
+    return escapedData;
+}
+
+QByteArray QXBee::escape(QByteArray data) {
+    const uint8_t startDelimiter = 0x7E;
+    const uint8_t escapeCharacter = 0x7D;
+    const uint8_t XONCharacter = 0x11;
+    const uint8_t XOFFCharacter = 0x13;
+    QByteArray escapedData;
+
+    for (int i = 0; i < data.length(); i++) {
+        if ((uint8_t)data[i] == startDelimiter || (uint8_t)data[i] == escapeCharacter || (uint8_t)data[i] == XONCharacter || (uint8_t)data[i] == XOFFCharacter) {
+            escapedData.append(escapeCharacter);
+            escapedData.append(data[i]^0x20);
+        } else {
+            escapedData.append(data[i]);
+        }
+    }
+    return escapedData;
 }
