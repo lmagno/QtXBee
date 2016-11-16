@@ -47,40 +47,41 @@ QXBee::QXBee(QSerialPort& port){
 
 QXBee::~QXBee()
 {
-	if(serial->isOpen())
-	{
-		serial->close();
+    if(serial->isOpen())
+    {
+        serial->close();
         qInfo() << "QXbee: Serial Port closed successfully.";
-	}
+    }
 }
 
 void QXBee::send(XBeePacket &packet)
 {
-	union {
-		uint16_t i;
-		uint8_t b[2];
-	} dataLength;
-	uint8_t chksm = 0;
-	QByteArray frame, data;
+    union {
+        uint16_t i;
+        uint8_t b[2];
+    } dataLength;
+    uint8_t chksm = 0;
+    QByteArray frame, data;
 
-	data = packet.getFrameData();
-	dataLength.i = data.length();
+    data = packet.getFrameData();
+    dataLength.i = data.length();
+
     // Calculate checksum
     for (int i = 0; i < data.length(); i++) chksm += data[i];
     chksm = 0xFF - chksm;
 
     // Assemble frame
-	frame[0] = 0x7E;
+    frame += startDelimiter;
     if (APIMode == 2) {
-        frame.append(escape(dataLength.b[1]));
-        frame.append(escape(dataLength.b[0]));
-        frame.append(escape(data));
-        frame.append(escape(chksm));
+        frame += escape(dataLength.b[1]);
+        frame += escape(dataLength.b[0]);
+        frame += escape(data);
+        frame += escape(chksm);
     } else {
-        frame.append(dataLength.b[1]);
-        frame.append(dataLength.b[0]);
-        frame.append(data);
-        frame.append(chksm);
+        frame += dataLength.b[1];
+        frame += dataLength.b[0];
+        frame += data;
+        frame += chksm;
     }
 
 	if(xbeeFound && serial->isOpen())
@@ -111,8 +112,6 @@ void QXBee::unicast(QByteArray address, QString data){
 
 void QXBee::readData()
 {
-	const uint8_t startDelimiter = 0x7E;
-	const uint8_t escapeCharacter = 0x7D;
 	int i;
 	uint8_t chksm;
 	union {
@@ -121,9 +120,9 @@ void QXBee::readData()
 	} frameLength;
 
 	// Read serial data and unescape if necessary.
-	switch (APIMode) {
-		case 1:
-			cleanBuffer += serial->readAll();
+    switch (APIMode) {
+        case 1:
+            cleanBuffer += serial->readAll();
 			break;
 		case 2:
 			rawBuffer += serial->readAll();
@@ -134,7 +133,7 @@ void QXBee::readData()
 					cleanBuffer += rawBuffer[++i]^0x20;
 				else break;
 			}
-			rawBuffer.remove(0, i);
+            rawBuffer.remove(0, i);
 	}
 
 	// Ignore any bytes not belonging to a frame.
@@ -217,27 +216,7 @@ void QXBee::processPacket(QByteArray frame){
 	}
 }
 
-QByteArray QXBee::escape(uint8_t data) {
-    const uint8_t startDelimiter = 0x7E;
-    const uint8_t escapeCharacter = 0x7D;
-    const uint8_t XONCharacter = 0x11;
-    const uint8_t XOFFCharacter = 0x13;
-    QByteArray escapedData;
-
-    if (data == startDelimiter || data == escapeCharacter || data == XONCharacter || data == XOFFCharacter) {
-        escapedData[0] = escapeCharacter;
-        escapedData[1] = data^0x20;
-    } else {
-        escapedData[0] = data;
-    }
-    return escapedData;
-}
-
 QByteArray QXBee::escape(QByteArray data) {
-    const uint8_t startDelimiter = 0x7E;
-    const uint8_t escapeCharacter = 0x7D;
-    const uint8_t XONCharacter = 0x11;
-    const uint8_t XOFFCharacter = 0x13;
     QByteArray escapedData;
 
     for (int i = 0; i < data.length(); i++) {
@@ -249,4 +228,10 @@ QByteArray QXBee::escape(QByteArray data) {
         }
     }
     return escapedData;
+}
+
+QByteArray QXBee::escape(uint8_t data) {
+    QByteArray escapedData;
+    escapedData += data;
+    return escape(escapedData);
 }

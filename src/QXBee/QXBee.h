@@ -53,7 +53,17 @@ class QXBee : public QObject
 	bool xbeeFound;
 	uint8_t APIMode;
 	QByteArray rawBuffer, cleanBuffer;
-	void processPacket(QByteArray);
+
+    enum {
+        startDelimiter = 0x7E,
+        escapeCharacter = 0x7D,
+        XONCharacter = 0x11,
+        XOFFCharacter = 0x13
+    };
+
+    QByteArray escape(QByteArray);                     ///< @brief This functions escapes specific frame data bytes when using api mode 2.
+    QByteArray escape(uint8_t);                        ///< @brief Overload of function QByteArray escape(QByteArray).
+    void processPacket(QByteArray);
 
 public:
 	QXBee(QSerialPort& port);
@@ -67,8 +77,6 @@ signals:
 
 private slots:
 	void readData();                                   ///< @brief This slot reads available packets from serial port when a readyRead() signal is emitted.
-    QByteArray escape(uint8_t);                        ///< @brief This functions escapes specific frame data bytes when using api mode 2.
-    QByteArray escape(QByteArray);                     ///< @brief Overload of function "QByteArray escape(uint8_t)".
 };
 
 #endif
