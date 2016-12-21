@@ -24,7 +24,7 @@ QXBee::QXBee(QSerialPort& port){
 			// Wait for answer
 			while (serial->waitForReadyRead(100)) data += serial->readAll();
 			if (data.length() > 0) APIMode = data[0]-'0';
-            qInfo() << "QXBee: Protocol mode: " << APIMode;
+            qDebug() << "QXBee: Protocol mode: " << APIMode;
 			// Exit AT command mode
 			serial->write("ATCN\r");
 		}
@@ -32,7 +32,7 @@ QXBee::QXBee(QSerialPort& port){
 		if (APIMode > 0) {
 			xbeeFound = true;
 			connect(serial, SIGNAL(readyRead()), SLOT(readData()));
-            qInfo() << "QXBee: Connected successfully.";
+            qDebug() << "QXBee: Connected successfully.";
             qDebug() << "QXBee: Serial Port Name: " << serial->portName();
 		} else {
             qWarning() << "QXBee: Warning - Device not in API protocol mode.";
@@ -50,7 +50,7 @@ QXBee::~QXBee()
     if(serial->isOpen())
     {
         serial->close();
-        qInfo() << "QXbee: Serial Port closed successfully.";
+        qDebug() << "QXbee: Serial Port closed successfully.";
     }
 }
 
